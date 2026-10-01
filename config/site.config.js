@@ -29,14 +29,14 @@ module.exports = {
     nom: "Mauricio",
     // Nom affiché dans le logo, le titre du site et les textes. Peut être
     // le nom de la personne ("Claire Martin") ou un nom commercial.
-    nomCommercial: "Essentiel Service Charente",
+    nomCommercial: "Essentiel Services Charente",
     // Accroche courte affichée sous le logo et dans les titres de pages.
     slogan: "Services à domicile, avec soin et confiance",
     // Titre de la page d'accueil (grand titre du bandeau).
     titreAccueil: "Un coup de main fiable, chez vous, quand vous en avez besoin",
     // Sous-titre du bandeau d'accueil.
     sousTitreAccueil:
-      "Ménage, garde d'enfants, soutien scolaire et accompagnement dans vos déplacements : " +
+      "Ménage et repassage, aide aux seniors et garde d'enfants : " +
       "une interlocutrice unique, disponible et à l'écoute, près de chez vous.",
     // Statut juridique affiché dans les mentions légales et le pied de page.
     statut: "Entrepreneure individuelle (micro-entreprise)",
@@ -51,7 +51,7 @@ module.exports = {
     // Texte de présentation de la page « À propos » (plusieurs paragraphes).
     presentation: [
       "Je m'appelle Elisanah et j'accompagne les familles et les particuliers de la région depuis plus de huit ans. Après plusieurs années comme assistante maternelle puis auxiliaire de vie, j'ai choisi de travailler à mon compte pour offrir un service plus personnel, plus souple et plus proche des gens.",
-      "Ménage, garde d'enfants, aide aux devoirs ou accompagnement lors de vos déplacements : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos enfants.",
+      "Ménage et repassage, présence auprès de vos parents âgés ou garde de vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
       "Ponctualité, discrétion et bonne humeur sont les trois choses que mes clients citent le plus souvent. C'est ce que je m'engage à vous apporter, à chaque visite."
     ],
     // Valeurs affichées sur la page « À propos ».
@@ -103,8 +103,8 @@ module.exports = {
     ],
     // Réseaux sociaux (laisser "" pour masquer une icône).
     reseaux: {
-      facebook: "https://www.facebook.com/",
-      instagram: "https://www.instagram.com/",
+      facebook: "",
+      instagram: "",
       linkedin: ""
     },
     /**
@@ -131,12 +131,12 @@ module.exports = {
     // Sert aux balises SEO, au sitemap.xml et aux liens de partage.
     url: "https://www.essentielservicescharente.fr",
     // Titre par défaut (onglet du navigateur, moteurs de recherche).
-    titre: "Essentiel Services Charente – Ménage, garde d'enfants, soutien scolaire et déplacements",
+    titre: "Essentiel Services Charente – Ménage, repassage, aide aux seniors et garde d'enfants",
     // Description pour les moteurs de recherche (150 à 160 caractères).
     description:
-      "Services à domicile à Angoulême et alentours : ménage, garde d'enfants, soutien scolaire, accompagnement dans vos déplacements. Devis gratuit, interlocutrice unique.",
+      "Services à domicile à Angoulême et alentours : ménage et repassage, aide aux seniors, garde d'enfants. Devis gratuit, interlocutrice unique.",
     // Mots-clés (optionnel, peu utilisé par Google mais sans inconvénient).
-    motsCles: "ménage à domicile, garde d'enfants, soutien scolaire, aide aux devoirs, accompagnement déplacements, services à la personne, Angoulême, Charente",
+    motsCles: "ménage à domicile, repassage, aide aux seniors, aide aux personnes âgées, garde d'enfants, services à domicile, Angoulême, Charente",
     langue: "fr",
     // Texte du bouton d'appel à l'action principal.
     ctaPrincipal: "Demander un devis gratuit",
@@ -154,18 +154,18 @@ module.exports = {
     {
       slug: "menage",
       icone: "menage",
-      titre: "Ménage & entretien",
-      titreCourt: "Ménage",
-      accroche: "Un intérieur propre et agréable, entretenu avec soin et régularité.",
+      titre: "Ménage & repassage",
+      titreCourt: "Ménage & repassage",
+      accroche: "Un intérieur propre et du linge impeccable, entretenus avec soin et régularité.",
       description:
-        "Vous manquez de temps ou d'énergie pour l'entretien de votre logement ? Je prends le relais, ponctuellement ou chaque semaine, avec vos produits ou les miens, selon vos préférences. Chaque intervention est adaptée à votre logement et à vos priorités.",
+        "Vous manquez de temps ou d'énergie pour l'entretien de votre logement et de votre linge ? Je prends le relais, ponctuellement ou chaque semaine, avec vos produits ou les miens, selon vos préférences. Chaque intervention est adaptée à votre logement et à vos priorités.",
       prestations: [
         "Dépoussiérage, aspiration et lavage des sols",
         "Nettoyage de la cuisine et des sanitaires",
-        "Changement des draps, entretien du linge et repassage",
+        "Repassage et pliage du linge, rangement dans les armoires",
+        "Lavage du linge et changement des draps",
         "Vitres intérieures et surfaces vitrées accessibles",
-        "Grand ménage de printemps, avant ou après déménagement",
-        "Remise en état après travaux ou réception"
+        "Grand ménage de printemps, avant ou après déménagement"
       ],
       pourQui: [
         "Actifs et familles qui souhaitent gagner du temps",
@@ -177,6 +177,33 @@ module.exports = {
       note: "Intervention minimale de 2 heures. Forfaits dégressifs pour un entretien hebdomadaire."
     },
     {
+      slug: "aide-seniors",
+      icone: "coeur",
+      titre: "Aide aux seniors",
+      titreCourt: "Aide aux seniors",
+      accroche: "Une présence attentive et un coup de main au quotidien pour bien vivre chez soi.",
+      description:
+        "Vos parents souhaitent rester chez eux, mais certaines tâches deviennent difficiles ? Je viens régulièrement les aider dans leur quotidien : entretien du logement, repas, courses, petits papiers, et surtout un moment d'échange et de compagnie. Je vous tiens informé(e) après chaque visite si vous le souhaitez.",
+      // IMPORTANT : l'aide aux actes essentiels (toilette, lever, habillage),
+      // la conduite et l'accompagnement hors du domicile des personnes âgées
+      // nécessitent une autorisation du Conseil départemental. Ne pas les
+      // ajouter ici sans cette autorisation.
+      prestations: [
+        "Entretien du logement et du linge, au rythme de la personne",
+        "Préparation des repas à domicile, courses comprises",
+        "Aide au courrier et aux petites démarches administratives",
+        "Présence et compagnie : conversation, lecture, jeux",
+        "Petit compte rendu à la famille après chaque visite"
+      ],
+      pourQui: [
+        "Seniors vivant seuls qui souhaitent rester chez eux",
+        "Familles éloignées qui veulent une présence régulière auprès d'un parent",
+        "Personnes en convalescence après une hospitalisation"
+      ],
+      // Pas de tarif renseigné : la grille affiche « Sur devis ».
+      note: "Pas d'aide à la toilette ni de soins médicaux : pour ces besoins, je vous oriente vers les services spécialisés."
+    },
+    {
       slug: "garde-enfants",
       icone: "enfant",
       titre: "Garde d'enfants",
@@ -185,7 +212,7 @@ module.exports = {
       description:
         "Sortie d'école, mercredi, soirée, vacances scolaires ou garde partagée : je m'occupe de vos enfants chez vous, dans leur environnement, en respectant vos règles et leur rythme. Jeux, activités créatives, aide au bain et au repas : je veille à ce qu'ils passent un bon moment en toute sécurité.",
       prestations: [
-        "Sorties d'école et de crèche, trajets vers les activités",
+        "Sorties d'école et trajets à pied vers les activités",
         "Garde en soirée et le week-end",
         "Garde à la journée pendant les vacances scolaires",
         "Repas, bain, coucher et routines du soir",
@@ -198,55 +225,8 @@ module.exports = {
         "Parents en télétravail qui ont besoin de calme"
       ],
       tarif: { montant: 14, unite: "h", precision: "Majoration de 25 % après 21h et le dimanche" },
-      note: "Enfants de 3 mois à 12 ans. Premier rendez-vous de présentation offert."
-    },
-    {
-      slug: "soutien-scolaire",
-      icone: "ecole",
-      titre: "Soutien scolaire",
-      titreCourt: "Soutien scolaire",
-      accroche: "Aide aux devoirs et accompagnement personnalisé, du CP à la 3e.",
-      description:
-        "Un enfant qui décroche, des devoirs qui virent à la dispute chaque soir, un contrôle à préparer ? Je propose un accompagnement bienveillant et structuré à domicile : méthodes de travail, reprise des notions mal comprises, organisation et confiance en soi. L'objectif est que votre enfant redevienne autonome.",
-      prestations: [
-        "Aide aux devoirs quotidienne ou hebdomadaire",
-        "Remise à niveau en français et en mathématiques",
-        "Méthodologie : organisation, apprentissage des leçons, mémorisation",
-        "Préparation aux évaluations et au brevet",
-        "Lecture et expression écrite pour les plus jeunes",
-        "Point régulier avec les parents sur les progrès"
-      ],
-      pourQui: [
-        "Élèves du primaire (CP à CM2)",
-        "Collégiens (6e à 3e)",
-        "Enfants ayant besoin d'un cadre rassurant pour travailler"
-      ],
-      tarif: { montant: 20, unite: "h", precision: "Séances de 1h ou 1h30" },
-      note: "Bilan initial gratuit de 30 minutes pour définir les objectifs ensemble."
-    },
-    {
-      slug: "deplacements",
-      icone: "voiture",
-      titre: "Accompagnement & déplacements",
-      titreCourt: "Déplacements",
-      accroche: "Je vous conduis et vous accompagne : rendez-vous, courses, démarches.",
-      description:
-        "Vous ne conduisez pas, ou plus, et vous avez besoin d'être accompagné(e) à un rendez-vous médical, pour faire vos courses ou pour une démarche administrative ? Je viens vous chercher, je vous accompagne sur place et je vous raccompagne, à votre rythme. Je peux aussi assurer les trajets des enfants vers l'école ou leurs activités.",
-      prestations: [
-        "Accompagnement aux rendez-vous médicaux et paramédicaux",
-        "Courses et achats, avec ou sans vous",
-        "Démarches administratives (mairie, poste, banque…)",
-        "Trajets des enfants : école, sport, musique",
-        "Visites à des proches, sorties et promenades",
-        "Aide au portage et à l'installation à domicile"
-      ],
-      pourQui: [
-        "Personnes âgées ou en convalescence",
-        "Personnes sans véhicule ou ne pouvant plus conduire",
-        "Parents qui ne peuvent pas assurer tous les trajets"
-      ],
-      tarif: { montant: 24, unite: "h", precision: "Frais kilométriques : 0,50 €/km au-delà de 10 km" },
-      note: "Véhicule personnel assuré pour le transport de tiers. Siège auto fourni sur demande."
+      // La garde des enfants de moins de 3 ans exige un agrément de l'État.
+      note: "Enfants de 3 à 12 ans. Premier rendez-vous de présentation offert."
     }
   ],
 
@@ -258,7 +238,7 @@ module.exports = {
       "Des tarifs simples et transparents, sans frais cachés. Chaque devis est gratuit et établi après un premier échange, en fonction de vos besoins réels.",
     conditions: [
       "Devis gratuit et sans engagement, établi sous 48 h.",
-      "Paiement par virement, chèque, espèces ou CESU préfinancé.",
+      "Paiement par virement, chèque ou espèces.",
       "Facture remise après chaque intervention ou en fin de mois.",
       "Annulation gratuite jusqu'à 24 h avant l'intervention.",
       "Tarifs indicatifs, révisés une fois par an et communiqués à l'avance."
@@ -267,10 +247,10 @@ module.exports = {
     // Mettre  actif: false  pour le masquer (par ex. si l'activité n'est pas
     // déclarée auprès de l'État au titre des services à la personne).
     creditImpot: {
-      actif: true,
+      actif: false,
       titre: "Jusqu'à 50 % de crédit d'impôt",
       texte:
-        "Les prestations de services à la personne réalisées à votre domicile (ménage, garde d'enfants, soutien scolaire, accompagnement) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
+        "Les prestations de services à la personne réalisées à votre domicile (ménage, repassage, aide aux seniors, garde d'enfants) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
     }
   },
 
@@ -280,27 +260,8 @@ module.exports = {
    *  l'accord des personnes citées (prénom + initiale suffisent).
    * ------------------------------------------------------------------------ */
   temoignages: [
-    {
-      auteur: "Sophie R.",
-      ville: "Soyaux",
-      service: "Garde d'enfants",
-      note: 5,
-      texte: "Elisanah garde nos deux enfants trois soirs par semaine depuis un an. Ils l'adorent, et nous, nous sommes enfin sereins. Toujours ponctuelle, toujours de bonne humeur."
-    },
-    {
-      auteur: "Jean-Pierre L.",
-      ville: "Angoulême",
-      service: "Déplacements",
-      note: 5,
-      texte: "Depuis que je ne conduis plus, Elisanah m'emmène à mes rendez-vous et faire mes courses. Elle est patiente, attentionnée et d'une grande gentillesse. Je recommande sans hésiter."
-    },
-    {
-      auteur: "Nadia B.",
-      ville: "La Couronne",
-      service: "Soutien scolaire",
-      note: 5,
-      texte: "Mon fils a repris confiance en lui en maths en quelques semaines. Elisanah sait expliquer simplement et le motiver. Les devoirs ne sont plus une bataille !"
-    }
+    // Ajouter ici de vrais avis clients, avec leur accord. Exemple :
+    // { auteur: "Prénom N.", ville: "Soyaux", service: "Garde d'enfants", note: 5, texte: "…" }
   ],
 
   /* --------------------------------------------------------------------------
@@ -308,8 +269,8 @@ module.exports = {
    * ------------------------------------------------------------------------ */
   chiffres: [
     { valeur: "8", suffixe: "ans", label: "d'expérience" },
-    { valeur: "60", suffixe: "+", label: "familles accompagnées" },
-    { valeur: "100", suffixe: "%", label: "de clients satisfaits" },
+    { valeur: "25", suffixe: "km", label: "de rayon d'intervention" },
+    { valeur: "6", suffixe: "j/7", label: "du lundi au samedi" },
     { valeur: "48", suffixe: "h", label: "pour recevoir votre devis" }
   ],
 
@@ -341,6 +302,6 @@ module.exports = {
     // Numéro de TVA intracommunautaire ("" si non assujettie – franchise en base).
     tva: "",
     // Nom de l'assureur RC Pro et couverture géographique (optionnel).
-    assurance: { nom: "Compagnie d'assurance Exemple", couverture: "France" }
+    assurance: { nom: "", couverture: "" }
   }
 };

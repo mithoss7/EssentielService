@@ -363,6 +363,7 @@ strong { font-weight: 750; }
   padding: 0.5rem 0.75rem; border-radius: 999px;
 }
 .header-phone:hover { background: var(--navy-100); }
+.nav__link, .header-phone, .header-actions .btn { white-space: nowrap; }
 .header-phone .icon { color: var(--aqua-700); }
 
 .burger {
@@ -416,6 +417,10 @@ body.menu-open { overflow: hidden; }
   .header-actions { display: inline-flex; }
   .burger { display: none; }
   .mobile-menu { display: none; }
+}
+/* Écrans moyens : le numéro reste visible dans le bandeau d'accueil et le pied de page */
+@media (min-width: 960px) and (max-width: 1239px) {
+  .header-phone { display: none; }
 }
 
 /* Bandeau « en construction » */
