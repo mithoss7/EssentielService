@@ -1,11 +1,12 @@
 ---
+fond: contact
 titre: Contact
 description: Contactez-moi pour un devis gratuit : ménage et repassage, aide aux seniors ou garde d'enfants. Réponse sous 48 h.
 section: contact
 priorite: 0.9
 bodyClass: page-contact
 ---
-<section class="page-hero">
+<section class="page-hero{{#if page.fond}} page-hero--image{{/if}}"{{#if page.fond}} style="background-image: url('{{page.fond}}')"{{/if}}>
   <div class="container">
     <ol class="breadcrumb" aria-label="Fil d'Ariane">
       <li><a href="{{root}}index.html">Accueil</a></li>

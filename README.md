@@ -125,6 +125,29 @@ initiales), `manifest.webmanifest` et les données structurées *schema.org Loca
 
 ---
 
+## 4 bis. Images de fond
+
+Chaque page peut avoir une photo en fond de son bandeau de titre. Il suffit de déposer le
+fichier dans **`src/assets/img/fonds/`** avec le bon nom, puis de relancer `npm run build` :
+
+| Fichier | Page |
+|---|---|
+| `accueil.jpg` | Accueil |
+| `services.jpg` | Liste des services |
+| `menage.jpg`, `aide-seniors.jpg`, `garde-enfants.jpg` | Page de chaque service (nom = `slug` du service) |
+| `a-propos.jpg` | À propos |
+| `tarifs.jpg` | Tarifs |
+| `contact.jpg` | Contact |
+
+- Formats acceptés : `.webp`, `.jpg`, `.jpeg`, `.png`.
+- Taille conseillée : **1920 px de large, moins de 400 Ko** (sinon le site ralentit sur mobile).
+- Sans fichier, la page garde son fond habituel ; le build indique les images manquantes.
+- Un voile coloré est appliqué automatiquement pour que le texte reste lisible (réglable dans
+  `style.css`, section « Images de fond »).
+- Pour changer la clé d'une page : ligne `fond:` de son front matter.
+
+---
+
 ## 5. Formulaire de contact
 
 Le site est 100 % statique (pas de serveur), il ne peut donc pas envoyer d'e-mail seul.

@@ -1,11 +1,12 @@
 ---
+fond: a-propos
 titre: À propos
 description: Qui suis-je ? Parcours, valeurs et garanties d'une professionnelle indépendante des services à domicile, à votre écoute.
 section: a-propos
 priorite: 0.8
 bodyClass: page-a-propos
 ---
-<section class="section">
+<section class="section{{#if page.fond}} section--image{{/if}}"{{#if page.fond}} style="background-image: url('{{page.fond}}')"{{/if}}>
   <div class="container about-hero">
     <div class="portrait reveal">
       {{#if identite.photo}}

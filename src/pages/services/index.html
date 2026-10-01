@@ -1,11 +1,12 @@
 ---
+fond: services
 titre: Mes services
 description: Ménage et repassage, aide aux seniors et garde d'enfants : découvrez toutes les prestations proposées à domicile.
 section: services
 priorite: 0.9
 bodyClass: page-services
 ---
-<section class="page-hero">
+<section class="page-hero{{#if page.fond}} page-hero--image{{/if}}"{{#if page.fond}} style="background-image: url('{{page.fond}}')"{{/if}}>
   <div class="container">
     <ol class="breadcrumb" aria-label="Fil d'Ariane">
       <li><a href="{{root}}index.html">Accueil</a></li>

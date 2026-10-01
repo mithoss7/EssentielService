@@ -467,6 +467,18 @@ function build() {
 
   const pages = []; // { outputPath, url, priority, changefreq }
 
+  // Images de fond : src/assets/img/fonds/<clé>.(webp|jpg|jpeg|png)
+  // La clé vient du front matter (fond: tarifs) ou du slug du service.
+  const FONDS = path.join(SRC, 'assets', 'img', 'fonds');
+  const fondsAttendus = new Map(); // clé -> fichier trouvé ('' si absent)
+  function trouverFond(cle) {
+    if (!fondsAttendus.has(cle)) {
+      const ext = ['webp', 'jpg', 'jpeg', 'png'].find((e) => fs.existsSync(path.join(FONDS, `${cle}.${e}`)));
+      fondsAttendus.set(cle, ext ? `${cle}.${ext}` : '');
+    }
+    return fondsAttendus.get(cle);
+  }
+
   /** Rend une page complète (contenu + layout) et l'écrit dans dist/. */
   function renderPage({ body, meta, outputRel, extra = {} }) {
     const depth = outputRel.split('/').length - 1;
@@ -474,6 +486,8 @@ function build() {
     // front matter (root: /) pour les pages servies à n'importe quelle adresse (404).
     const root = meta.root !== undefined ? String(meta.root) : (depth === 0 ? '' : '../'.repeat(depth));
     const urlPath = outputRel === 'index.html' ? '' : outputRel.replace(/\/index\.html$/, '/');
+    const cleFond = meta.fond || (extra.service ? extra.service.slug : '');
+    const fichierFond = cleFond ? trouverFond(cleFond) : '';
     const page = {
       ...meta,
       root,
@@ -482,7 +496,8 @@ function build() {
       titreComplet: meta.titre ? `${meta.titre} – ${cfg.identite.nomCommercial}` : cfg.site.titre,
       description: meta.description || cfg.site.description,
       isHome: outputRel === 'index.html',
-      section: meta.section || ''
+      section: meta.section || '',
+      fond: fichierFond ? `${root}assets/img/fonds/${fichierFond}` : ''
     };
     const nav = [
       { label: 'Accueil', href: `${root}index.html`, section: 'accueil' },
@@ -565,6 +580,9 @@ function build() {
   // Rapport
   const ms = Date.now() - started;
   console.log(`✔ Site généré dans dist/ (${pages.length} pages, ${ms} ms)`);
+  const fondsManquants = [...fondsAttendus].filter(([, f]) => !f).map(([cle]) => `${cle}.jpg`);
+  console.log(`  Images de fond : ${fondsAttendus.size - fondsManquants.length}/${fondsAttendus.size}` +
+    (fondsManquants.length ? ` (absentes dans src/assets/img/fonds/ : ${fondsManquants.join(', ')})` : ''));
   const warnings = checkConfig(cfg);
   if (warnings.length) {
     console.log('\nAvertissements de configuration :');
