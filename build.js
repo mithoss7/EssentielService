@@ -368,6 +368,14 @@ function enrichConfig(raw) {
     initiales: String(t.auteur || '?').split(/\s+/).map((w) => w[0]).join('').replace(/[^A-Za-zÀ-ÿ]/g, '').slice(0, 2).toUpperCase()
   }));
 
+  // Mentions légales : valeurs dérivées
+  cfg.identite.nomEI = `${cfg.identite.nomComplet} EI`;
+  cfg.legal.adresseEditeurAffichee = cfg.legal.adresseEditeur ||
+    [a.rue, a.villeComplete].filter(Boolean).join(', ');
+  cfg.legal.tvaMention = cfg.legal.tva
+    ? `TVA intracommunautaire : ${cfg.legal.tva}`
+    : 'TVA non applicable, article 293 B du Code général des impôts';
+
   // Dates
   cfg.anneeCourante = now.getFullYear();
   const debut = Number(cfg.legal.anneeCreation) || cfg.anneeCourante;
@@ -419,6 +427,14 @@ function checkConfig(cfg) {
   if (!/^https?:\/\//.test(cfg.site.url)) warnings.push('site.url doit commencer par https:// (ex. https://www.mon-domaine.fr).');
   if (cfg.site.description && cfg.site.description.length > 165) warnings.push(`site.description est longue (${cfg.site.description.length} caractères, 160 conseillés).`);
   if (!cfg.contact.formulaire.endpoint) warnings.push('contact.formulaire.endpoint est vide : le formulaire ouvrira la messagerie du visiteur (mailto). Voir README.');
+  const l = cfg.legal || {};
+  if (!(l.mediateur && l.mediateur.nom && l.mediateur.site)) warnings.push('OBLIGATOIRE – legal.mediateur : médiateur de la consommation à désigner et à afficher (art. L.616-1 du Code de la consommation).');
+  if (!(l.assurance && l.assurance.nom)) warnings.push('legal.assurance : assureur RC Pro non renseigné alors que le site annonce une assurance (art. R.111-2 du Code de la consommation).');
+  if (!cfg.legal.adresseEditeur && !cfg.contact.adresse.rue) warnings.push('OBLIGATOIRE – adresse de l\'éditrice absente des mentions légales (legal.adresseEditeur ou contact.adresse.rue).');
+  if (/ovh/i.test((l.hebergeur && l.hebergeur.nom) || '')) warnings.push('legal.hebergeur : valeur par défaut (OVH). À remplacer par l\'hébergeur réel si différent.');
+  if (!cfg.identite.numeroSAP) warnings.push('identite.numeroSAP vide : activité non déclarée « services à la personne » (le crédit d\'impôt doit rester désactivé).');
+  if (!l.registre) warnings.push('legal.registre vide : reporter la mention d\'immatriculation figurant sur l\'extrait officiel (RCS, répertoire des métiers…) ou la laisser vide si aucune.');
+  if (cfg.contact.formulaire.endpoint && !(cfg.contact.formulaire.prestataire && cfg.contact.formulaire.prestataire.nom)) warnings.push('contact.formulaire.prestataire : nommer le service tiers du formulaire (RGPD).');
   if (!cfg.services.length) warnings.push('Aucun service défini.');
   return warnings;
 }

@@ -41,7 +41,7 @@ site-services-domicile/
 ├── src/
 │   ├── layouts/base.html    ← squelette HTML commun (head, header, footer)
 │   ├── partials/            ← blocs réutilisables (header, footer, témoignages, bandeau CTA…)
-│   ├── pages/               ← une page = un fichier (index, à propos, tarifs, contact, mentions légales, 404)
+│   ├── pages/               ← une page = un fichier (index, à propos, tarifs, contact, mentions légales, conditions générales, 404)
 │   ├── templates/service.html ← modèle utilisé pour générer une page par service
 │   ├── static/.htaccess     ← fichiers copiés tels quels à la racine du site
 │   └── assets/
@@ -247,7 +247,44 @@ navigateur (F12 → icône « appareil mobile »).
 
 ---
 
-## 9. Check-list avant mise en ligne de la cliente
+## 9. Conformité légale (France)
+
+Le site fournit : mentions légales (LCEN, RGPD, médiation), conditions générales de prestation
+(avec modèle de formulaire de rétractation), mention de TVA près des prix, mention « EI ».
+Le build (`node build.js`) affiche des avertissements `OBLIGATOIRE` tant qu'une information
+légale manque dans `config/site.config.js` (section `legal`).
+
+À faire par la prestataire (le site ne peut pas le faire à sa place) :
+
+- [ ] **Médiateur de la consommation** : adhérer à un médiateur référencé (liste CECMC sur
+      economie.gouv.fr), puis renseigner `legal.mediateur` (nom, adresse, site).
+- [ ] **Assurance RC Pro** : souscrire (avec garde d'enfants couverte) puis renseigner `legal.assurance`.
+- [ ] **Adresse de l'éditrice** : vérifier l'adresse publiée (`legal.adresseEditeur`, sinon rue + ville) ;
+      domiciliation possible pour ne pas exposer le domicile. Elle doit correspondre à l'adresse déclarée.
+- [ ] **Concordance avec l'inscription officielle** (extrait SIRENE / guichet unique) : nom, nom
+      commercial, adresse, code APE ; renseigner `legal.registre` et `legal.codeAPE`.
+- [ ] **Déclaration « services à la personne »** sur NOVA (nova.entreprises.gouv.fr) → `identite.numeroSAP`.
+      Seulement après : passer `tarifs.creditImpot.actif` à `true`. L'aide aux actes essentiels des
+      seniors (toilette, lever, habillage) exige une autorisation du Conseil départemental ; la garde
+      des moins de 3 ans, un agrément.
+- [ ] **Modèles de devis / contrat** reprenant les mentions des conditions générales (rétractation
+      14 jours, demande d'exécution anticipée signée, TVA non applicable art. 293 B, « EI », SIRET,
+      assureur, médiateur) ; à remettre avant tout paiement.
+- [ ] **Preuves** des affirmations du site : 8 ans d'expérience, CAP AEPE, PSC1 à jour, extrait de
+      casier vierge, permis et véhicule assuré. Retirer toute ligne qui ne serait pas exacte.
+- [ ] **Hébergeur** : remplacer la valeur par défaut (OVH) par l'hébergeur réel si différent.
+- [ ] **HTTPS** : activer le certificat SSL et décommenter la redirection dans `.htaccess`
+      (les mentions légales annoncent des échanges chiffrés).
+- [ ] **Formulaire** : si un service tiers est branché (Formspree…), renseigner
+      `contact.formulaire.prestataire` (nom, pays).
+- [ ] **Nom commercial** : vérifier l'absence d'antériorité (base INPI, recherche web) avant de
+      réserver le domaine.
+- [ ] Relecture finale des conditions générales (en particulier la clause d'annulation tardive) par
+      un professionnel (juriste, CMA, chambre de commerce) : le texte fourni est un modèle.
+
+---
+
+## 10. Check-list avant mise en ligne de la cliente
 
 - [ ] Toutes les valeurs de `config/site.config.js` remplacées (le build n'affiche plus d'avertissement)
 - [ ] Numéro SIRET et statut exacts ; numéro de déclaration *Services à la personne* si obtenu

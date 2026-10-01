@@ -1,0 +1,90 @@
+---
+titre: Conditions générales de prestation
+description: Conditions générales de prestation de services à domicile : devis, tarifs, paiement, droit de rétractation, annulation, assurance et médiation.
+section: legal
+priorite: 0.3
+frequence: yearly
+bodyClass: page-legal
+---
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb" aria-label="Fil d'Ariane">
+      <li><a href="{{root}}index.html">Accueil</a></li>
+      <li aria-current="page">Conditions générales</li>
+    </ol>
+    <h1>Conditions générales de prestation</h1>
+    <p class="lead">Les règles qui s'appliquent entre {{identite.nomCommercial}} et ses clients particuliers. Elles sont remises avec chaque devis.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container prose">
+    <p class="meta">Dernière mise à jour : {{dateMiseAJour}}</p>
+
+    <h2 id="objet">1. Objet</h2>
+    <p>Les présentes conditions régissent les prestations de services à domicile (<em>{{#each services}}{{#unless @first}}, {{/unless}}{{titre}}{{/each}}</em>) fournies par <strong>{{identite.nomEI}}</strong>, {{identite.statut}}, SIRET {{identite.siret}}, {{legal.adresseEditeurAffichee}}, ci-après « la Prestataire », à toute personne physique agissant à des fins non professionnelles, ci-après « le Client ». Elles complètent le devis, qui précise la nature, la durée, la fréquence et le prix de la prestation.</p>
+
+    <h2 id="devis">2. Devis et formation du contrat</h2>
+    <p>Le devis est gratuit et sans engagement. Il est établi par écrit après un premier échange (téléphone, e-mail ou rendez-vous au domicile du Client) et reste valable le temps indiqué sur le document. Le contrat est formé lorsque le Client retourne le devis daté et signé, ou l'accepte par écrit (e-mail). Toute modification de la prestation fait l'objet d'un nouveau devis ou d'un avenant écrit.</p>
+
+    <h2 id="prestations">3. Prestations</h2>
+    <p>La Prestataire réalise uniquement les prestations décrites dans le devis. En particulier :</p>
+    <ul>
+      <li><strong>Aide aux seniors :</strong> entretien du logement, repas, courses, aide aux démarches courantes, présence et compagnie. Les soins médicaux et paramédicaux, ainsi que l'aide à la toilette, au lever, au coucher et à l'habillage, ne font pas partie des prestations.</li>
+      <li><strong>Garde d'enfants :</strong> enfants de 3 à 12 ans, au domicile des parents, sous l'autorité et la responsabilité éducative de ces derniers. La Prestataire n'administre aucun médicament sans ordonnance et autorisation écrite d'un parent.</li>
+      <li><strong>Ménage et repassage :</strong> selon la liste des tâches convenue ; les produits sont fournis par le Client, ou par la Prestataire sur demande, avec le supplément indiqué au devis.</li>
+    </ul>
+
+    <h2 id="tarifs">4. Tarifs et paiement</h2>
+    <p>Les prix sont indiqués en euros, nets de taxe : {{legal.tvaMention}}. Le tarif applicable est celui du devis ; les tarifs publiés sur le site sont indicatifs.</p>
+    <p>Le paiement s'effectue par virement, chèque ou espèces, à l'issue de chaque intervention ou à réception de la facture, remise après chaque intervention ou en fin de mois. Le paiement en espèces est limité à 1 000 € par opération, conformément à la réglementation. En cas de retard de paiement, la Prestataire peut suspendre les interventions jusqu'au règlement des sommes dues.</p>
+
+    <h2 id="retractation">5. Droit de rétractation</h2>
+    <p>Lorsque le contrat est conclu à distance (téléphone, e-mail, site) ou hors établissement (notamment au domicile du Client), le Client dispose d'un délai de <strong>14 jours</strong>, à compter de la conclusion du contrat, pour se rétracter sans avoir à justifier de motif ni à payer de pénalités (articles L.221-18 et suivants du Code de la consommation).</p>
+    <p>Pour exercer ce droit, le Client notifie sa décision à la Prestataire (<a href="{{contact.emailLien}}">{{contact.email}}</a> ou par courrier) au moyen du modèle de formulaire ci-dessous ou de toute déclaration dénuée d'ambiguïté.</p>
+    <p>Si le Client demande expressément que la prestation commence avant la fin du délai de rétractation, par écrit (devis signé comportant cette demande), il devra payer le montant correspondant aux heures déjà réalisées au moment où il a informé la Prestataire de sa rétractation. Aucun paiement ne peut être exigé avant l'expiration d'un délai de 7 jours à compter de la conclusion d'un contrat hors établissement, sauf cas prévus par la loi.</p>
+
+    <h2 id="annulation">6. Annulation ou report d'une intervention</h2>
+    <p>Le Client peut annuler ou reporter une intervention sans frais jusqu'à 24 heures avant l'heure prévue, par téléphone, SMS ou e-mail. Passé ce délai, l'intervention prévue pourra être facturée dans la limite de la durée minimale d'intervention indiquée au devis, sauf cas de force majeure.</p>
+    <p>En cas d'empêchement, la Prestataire prévient le Client dès que possible et propose un report ; aucune pénalité n'est due par le Client dans ce cas.</p>
+
+    <h2 id="obligations">7. Obligations du Client</h2>
+    <ul>
+      <li>Permettre l'accès au domicile aux horaires convenus et mettre à disposition l'eau, l'électricité et le matériel nécessaires.</li>
+      <li>Signaler à l'avance tout élément utile à la sécurité : animaux, zones fragiles, allergies ou consignes particulières pour un enfant ou une personne âgée.</li>
+      <li>Pour la garde d'enfants, être joignable pendant l'intervention ou désigner une personne de confiance, et communiquer les coordonnées des personnes à contacter en cas d'urgence.</li>
+      <li>Ne pas confier à la Prestataire de tâches étrangères à la prestation convenue ni de tâches nécessitant une qualification particulière.</li>
+    </ul>
+
+    <h2 id="responsabilite">8. Responsabilité et assurance</h2>
+    <p>La Prestataire est responsable des dommages causés par sa faute dans l'exécution de la prestation.{{#if legal.assurance.nom}} Elle est couverte par une assurance de responsabilité civile professionnelle souscrite auprès de {{legal.assurance.nom}}{{#if legal.assurance.adresse}} ({{legal.assurance.adresse}}){{/if}}{{#if legal.assurance.couverture}}, couverture géographique : {{legal.assurance.couverture}}{{/if}}.{{/if}} Tout dommage doit être signalé sans délai, de préférence dans les 48 heures, afin de permettre la déclaration auprès de l'assureur.</p>
+
+    <h2 id="confidentialite">9. Confidentialité et données personnelles</h2>
+    <p>La Prestataire est tenue à la discrétion sur tout ce qu'elle voit ou entend au domicile du Client. Le traitement des données personnelles est décrit dans les <a href="{{root}}mentions-legales.html#donnees">mentions légales</a>.</p>
+
+    <h2 id="reclamations">10. Réclamations et médiation</h2>
+    <p>Toute réclamation peut être adressée à <a href="{{contact.emailLien}}">{{contact.email}}</a> ; la Prestataire s'engage à répondre dans les meilleurs délais.</p>
+    {{#if legal.mediateur.nom}}
+    <p>À défaut de solution amiable, le Client peut recourir gratuitement au médiateur de la consommation : <strong>{{legal.mediateur.nom}}</strong>{{#if legal.mediateur.adresse}}, {{legal.mediateur.adresse}}{{/if}}{{#if legal.mediateur.site}}, <a href="{{legal.mediateur.site}}" target="_blank" rel="noopener">{{legal.mediateur.site}}</a>{{/if}}.</p>
+    {{else}}
+    <p>À défaut de solution amiable, le Client peut recourir gratuitement à un médiateur de la consommation, dont les coordonnées sont communiquées sur simple demande.</p>
+    {{/if}}
+
+    <h2 id="droit">11. Droit applicable et litiges</h2>
+    <p>Le contrat est soumis au droit français. À défaut de résolution amiable, le litige relève des tribunaux compétents ; le Client consommateur peut saisir, à son choix, la juridiction du lieu où il demeure ou celle du lieu où le dommage est survenu.</p>
+
+    <h2 id="formulaire">Annexe – Modèle de formulaire de rétractation</h2>
+    <p><em>(À compléter et à renvoyer uniquement si vous souhaitez vous rétracter du contrat.)</em></p>
+    <blockquote>
+      <p>À l'attention de {{identite.nomEI}}, {{legal.adresseEditeurAffichee}}, {{contact.email}} :</p>
+      <p>Je vous notifie par la présente ma rétractation du contrat portant sur la prestation de services ci-dessous :</p>
+      <ul>
+        <li>Prestation commandée le : ………………………</li>
+        <li>Nom du Client : ………………………</li>
+        <li>Adresse du Client : ………………………</li>
+        <li>Signature du Client (uniquement en cas de notification sur papier) : ………………………</li>
+        <li>Date : ………………………</li>
+      </ul>
+    </blockquote>
+  </div>
+</section>

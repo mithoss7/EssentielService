@@ -71,6 +71,7 @@ bodyClass: page-service
         <h3>Tarif indicatif</h3>
         <div class="price-card__amount">{{service.tarif.montantAffiche}} <small>/ {{service.tarif.unite}}</small></div>
         {{#if service.tarif.precision}}<p>{{service.tarif.precision}}</p>{{/if}}
+        <p style="font-size:0.85rem;opacity:0.8">Prix nets – {{legal.tvaMention}}.</p>
         {{#if tarifs.creditImpot.actif}}<p class="pill pill--aqua mt-2">{{icon "pourcent"}} Éligible au crédit d'impôt 50 %*</p>{{/if}}
         <a class="link-arrow mt-3" href="{{root}}tarifs.html" style="color:#7FC8BC">Voir tous les tarifs {{icon "fleche"}}</a>
       </div>

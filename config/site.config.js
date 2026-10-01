@@ -39,7 +39,7 @@ module.exports = {
       "Ménage et repassage, aide aux seniors et garde d'enfants : " +
       "une interlocutrice unique, disponible et à l'écoute, près de chez vous.",
     // Statut juridique affiché dans les mentions légales et le pied de page.
-    statut: "Entrepreneure individuelle (micro-entreprise)",
+    statut: "Entrepreneure individuelle (EI) – micro-entrepreneure",
     siret: "130 192 503 00014",
     // Numéro de déclaration « Services à la personne » (optionnel).
     numeroSAP: "",
@@ -52,7 +52,7 @@ module.exports = {
     presentation: [
       "Je m'appelle Elisanah et j'accompagne les familles et les particuliers de la région depuis plus de huit ans. Après plusieurs années comme assistante maternelle puis auxiliaire de vie, j'ai choisi de travailler à mon compte pour offrir un service plus personnel, plus souple et plus proche des gens.",
       "Ménage et repassage, présence auprès de vos parents âgés ou garde de vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
-      "Ponctualité, discrétion et bonne humeur sont les trois choses que mes clients citent le plus souvent. C'est ce que je m'engage à vous apporter, à chaque visite."
+      "Ponctualité, discrétion et bonne humeur : ce sont les trois engagements que je prends auprès de chaque famille, à chaque visite."
     ],
     // Valeurs affichées sur la page « À propos ».
     valeurs: [
@@ -119,7 +119,11 @@ module.exports = {
      * de messagerie du visiteur avec le message pré-rempli (mailto:).
      */
     formulaire: {
-      endpoint: ""
+      endpoint: "",
+      // Si un service tiers est utilisé (endpoint renseigné), l'indiquer ici :
+      // il est cité dans les mentions légales (RGPD). Ex. : nom "Formspree",
+      // pays "États-Unis (clauses contractuelles types / Data Privacy Framework)".
+      prestataire: { nom: "", pays: "" }
     }
   },
 
@@ -238,7 +242,7 @@ module.exports = {
       "Des tarifs simples et transparents, sans frais cachés. Chaque devis est gratuit et établi après un premier échange, en fonction de vos besoins réels.",
     conditions: [
       "Devis gratuit et sans engagement, établi sous 48 h.",
-      "Paiement par virement, chèque ou espèces.",
+      "Paiement par virement, chèque ou espèces (dans la limite légale de 1 000 € en espèces).",
       "Facture remise après chaque intervention ou en fin de mois.",
       "Annulation gratuite jusqu'à 24 h avant l'intervention.",
       "Tarifs indicatifs, révisés une fois par an et communiqués à l'avance."
@@ -301,7 +305,25 @@ module.exports = {
     anneeCreation: 2026,
     // Numéro de TVA intracommunautaire ("" si non assujettie – franchise en base).
     tva: "",
-    // Nom de l'assureur RC Pro et couverture géographique (optionnel).
-    assurance: { nom: "", couverture: "" }
+    // Assurance responsabilité civile professionnelle : nom, adresse de
+    // l'assureur et couverture géographique (information due au client,
+    // art. R.111-2 du Code de la consommation).
+    assurance: { nom: "", adresse: "", couverture: "" },
+    // Adresse de l'éditrice publiée dans les mentions légales (OBLIGATOIRE,
+    // LCEN art. 6-III). Laisser "" pour utiliser l'adresse postale de
+    // contact.adresse (rue + code postal + ville), même si afficherRue est
+    // false. Pour ne pas exposer un domicile, indiquer ici une adresse de
+    // domiciliation déclarée à l'administration.
+    adresseEditeur: "",
+    // Inscription au registre, telle qu'elle figure sur l'extrait officiel
+    // (SIRENE / guichet unique). Ex. : "Immatriculée au RCS d'Angoulême",
+    // "Inscrite au répertoire des métiers", ou "" si aucune mention.
+    registre: "",
+    // Code APE/NAF de l'activité (optionnel). Ex. : "81.21Z".
+    codeAPE: "",
+    // Médiateur de la consommation (OBLIGATOIRE, art. L.612-1 et L.616-1 du
+    // Code de la consommation) : adhérer à un médiateur référencé (liste de
+    // la CECMC sur economie.gouv.fr) puis renseigner ses coordonnées.
+    mediateur: { nom: "", adresse: "", site: "", email: "" }
   }
 };
