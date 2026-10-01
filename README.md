@@ -146,6 +146,23 @@ fichier dans **`src/assets/img/fonds/`** avec le bon nom, puis de relancer `npm 
   `style.css`, section « Images de fond »).
 - Pour changer la clé d'une page : ligne `fond:` de son front matter.
 
+**Crédits photos** (toutes sous [licence Unsplash](https://unsplash.com/license) : usage libre et
+gratuit, y compris commercial ; la mention n'est pas obligatoire, elle est donnée par courtoisie) :
+
+| Fichier | Auteur | Source |
+|---|---|---|
+| `accueil.jpg` | Clay Banks | <https://unsplash.com/photos/7pvC_d2iXSE> |
+| `services.jpg` | Aaron Huber | <https://unsplash.com/photos/G7sE2S4Lab4> |
+| `menage.jpg` | Greg Rosenke | <https://unsplash.com/photos/KMcOLSZuTe0> |
+| `aide-seniors.jpg` | Jaime Maldonado | <https://unsplash.com/photos/0l-73OKmRXc> |
+| `garde-enfants.jpg` | Susan Holt Simpson | <https://unsplash.com/photos/GQ327RPuxhI> |
+| `a-propos.jpg` | Emilipothèse | <https://unsplash.com/photos/3k4VzLaQ53s> |
+| `tarifs.jpg` | charlesdeluvio | <https://unsplash.com/photos/GlavtG-umzE> |
+| `contact.jpg` | Quino Al | <https://unsplash.com/photos/8gWEAAXJjtI> |
+
+Retouches : redimensionnement à 1920 px et compression JPEG (qualité 78) ; `tarifs.jpg` recadrée
+en paysage ; `contact.jpg` retournée horizontalement pour dégager la zone de texte à gauche.
+
 ---
 
 ## 5. Formulaire de contact
