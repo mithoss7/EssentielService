@@ -1,0 +1,65 @@
+---
+titre: Tarifs
+description: Tarifs indicatifs des prestations à domicile (ménage, garde d'enfants, soutien scolaire, déplacements). Devis gratuit, paiement CESU accepté, crédit d'impôt.
+section: tarifs
+priorite: 0.8
+bodyClass: page-tarifs
+---
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb" aria-label="Fil d'Ariane">
+      <li><a href="{{root}}index.html">Accueil</a></li>
+      <li aria-current="page">Tarifs</li>
+    </ol>
+    <h1>Des tarifs clairs, sans surprise</h1>
+    <p class="lead">{{tarifs.introduction}}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container flow">
+    <div class="reveal">
+      <table class="price-table">
+        <caption class="visually-hidden">Grille tarifaire par service</caption>
+        <thead>
+          <tr>
+            <th scope="col">Service</th>
+            <th scope="col">Tarif indicatif</th>
+            <th scope="col">Précisions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each services}}
+          <tr>
+            <td><a class="price-table__service" href="{{root}}{{url}}"><span class="icon-badge" aria-hidden="true">{{icon icone}}</span>{{titre}}</a></td>
+            <td>{{#if tarif}}<span class="price-table__amount">{{tarif.montantAffiche}} <small>/ {{tarif.unite}}</small></span>{{else}}Sur devis{{/if}}</td>
+            <td class="price-table__detail">{{#if tarif.precision}}{{tarif.precision}}{{/if}}{{#if note}}<br>{{note}}{{/if}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid grid--2">
+      <div class="card reveal">
+        <span class="icon-badge mb-2" aria-hidden="true">{{icon "check-circle"}}</span>
+        <h2 style="font-size:1.6rem">Conditions</h2>
+        <ul class="checklist mt-2">
+          {{#each tarifs.conditions}}
+          <li>{{icon "check"}}<span>{{this}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="card price-card reveal" data-delay="1">
+        <span class="icon-badge mb-2" style="background:rgba(255,255,255,0.12);color:#7FC8BC" aria-hidden="true">{{icon "calendrier"}}</span>
+        <h3>Besoin d'un devis personnalisé ?</h3>
+        <p>Chaque situation est différente : nombre d'heures, fréquence, nombre d'enfants, distance… Décrivez-moi votre besoin et je vous réponds sous 48 h avec une proposition précise.</p>
+        <a class="btn btn--accent btn--block mt-3" href="{{root}}contact.html">{{site.ctaPrincipal}}</a>
+      </div>
+    </div>
+
+    {{> tax-box}}
+  </div>
+</section>
+
+{{> cta-band}}

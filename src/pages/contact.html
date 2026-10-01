@@ -1,0 +1,117 @@
+---
+titre: Contact
+description: Contactez-moi pour un devis gratuit : ménage, garde d'enfants, soutien scolaire ou accompagnement dans vos déplacements. Réponse sous 48 h.
+section: contact
+priorite: 0.9
+bodyClass: page-contact
+---
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb" aria-label="Fil d'Ariane">
+      <li><a href="{{root}}index.html">Accueil</a></li>
+      <li aria-current="page">Contact</li>
+    </ol>
+    <h1>Parlons de vos besoins</h1>
+    <p class="lead">Décrivez-moi votre situation en quelques lignes : je vous rappelle ou vous réponds par e-mail sous 48 h, avec un devis gratuit et sans engagement.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-layout">
+    <div class="card reveal">
+      <h2 style="font-size:1.6rem">Demande de devis ou d'information</h2>
+      <p class="text-muted">Les champs marqués d'un <span style="color:var(--danger)">*</span> sont obligatoires.</p>
+
+      <form class="form mt-3" id="formulaire-contact" method="POST"
+            action="{{#if contact.formulaire.endpoint}}{{contact.formulaire.endpoint}}{{else}}#{{/if}}"
+            data-endpoint="{{contact.formulaire.endpoint}}"
+            data-mailto="{{contact.email}}"
+            novalidate>
+
+        <div class="form__row">
+          <div>
+            <label for="f-nom">Votre nom <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-nom" name="nom" type="text" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="f-tel">Téléphone</label>
+            <input id="f-tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel">
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div>
+            <label for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label for="f-service">Service souhaité</label>
+            <select id="f-service" name="service">
+              <option value="">— Choisir —</option>
+              {{#each services}}
+              <option value="{{slug}}">{{titre}}</option>
+              {{/each}}
+              <option value="autre">Autre / plusieurs services</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="f-message">Votre message <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" required placeholder="Ex. : je cherche une garde pour deux enfants (4 et 7 ans) les mardis et jeudis de 16h30 à 19h, à {{contact.adresse.ville}}."></textarea>
+        </div>
+
+        <!-- Champ anti-robots : invisible pour les humains, rempli par les robots -->
+        <div class="form__honeypot" aria-hidden="true">
+          <label for="f-site">Ne pas remplir ce champ</label>
+          <input id="f-site" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="_subject" value="Nouvelle demande via {{site.domaine}}">
+
+        <div class="form__consent">
+          <input id="f-consent" name="consentement" type="checkbox" required>
+          <label for="f-consent">J'accepte que les informations saisies soient utilisées pour me recontacter dans le cadre de ma demande. Elles ne sont ni partagées, ni utilisées à d'autres fins. <a href="{{root}}mentions-legales.html#donnees">En savoir plus</a>. <span class="req" aria-hidden="true">*</span></label>
+        </div>
+
+        <div class="form__status" role="status" aria-live="polite" id="form-status"></div>
+
+        <button class="btn btn--primary btn--lg" type="submit">{{icon "envoyer"}} Envoyer ma demande</button>
+        {{#unless contact.formulaire.endpoint}}
+        <p class="form__help">Le bouton ouvrira votre logiciel de messagerie avec le message pré-rempli. Vous pouvez aussi m'écrire directement à <a href="{{contact.emailLien}}">{{contact.email}}</a>.</p>
+        {{/unless}}
+      </form>
+    </div>
+
+    <div class="flow reveal" data-delay="1">
+      {{> contact-card}}
+
+      <div class="card">
+        <h3>Horaires</h3>
+        <ul class="hours">
+          {{#each contact.horaires}}
+          <li><span>{{jours}}</span><span>{{heures}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Zone d'intervention</h3>
+        <p class="text-muted" style="font-size:0.95rem">Rayon d'environ {{contact.zone.rayonKm}} km autour de {{contact.adresse.ville}} :</p>
+        <ul class="chips">
+          {{#each contact.zone.villes}}<li>{{this}}</li>{{/each}}
+        </ul>
+      </div>
+
+      {{#if contact.reseauxListe}}
+      <div class="card">
+        <h3>Réseaux sociaux</h3>
+        <ul class="contact-card__list">
+          {{#each contact.reseauxListe}}
+          <li>{{icon "lien-externe"}}<a href="{{url}}" target="_blank" rel="noopener">{{label}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+# ---------------------------------------------------------------------------
+#  Configuration Apache (hébergements mutualisés : OVH, o2switch, Ionos…)
+#  Ce fichier est copié tel quel à la racine de dist/.
+# ---------------------------------------------------------------------------
+
+# Page d'erreur personnalisée
+ErrorDocument 404 /404.html
+
+# Encodage par défaut
+AddDefaultCharset UTF-8
+
+# Types MIME utiles
+AddType image/svg+xml .svg
+AddType font/woff2 .woff2
+AddType application/manifest+json .webmanifest
+
+# Redirection HTTP → HTTPS et www (décommenter après activation du certificat SSL)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# Mise en cache navigateur
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+</IfModule>
+
+# En-têtes de sécurité
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Masquer les fichiers sensibles
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>

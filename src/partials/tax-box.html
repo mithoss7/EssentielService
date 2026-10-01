@@ -1,0 +1,10 @@
+{{#if tarifs.creditImpot.actif}}
+<div class="tax-box reveal">
+  <div class="tax-box__badge" aria-hidden="true">50<small>%</small></div>
+  <div>
+    <h3>{{tarifs.creditImpot.titre}}</h3>
+    <p>{{tarifs.creditImpot.texte}}</p>
+  </div>
+  <a class="btn btn--ghost" href="{{root}}contact.html">Poser une question</a>
+</div>
+{{/if}}

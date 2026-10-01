@@ -1,0 +1,17 @@
+{
+  "name": "site-services-domicile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site vitrine statique pour une prestataire de services à domicile (ménage, garde d'enfants, soutien scolaire, déplacements). Aucune dépendance : Node.js suffit.",
+  "scripts": {
+    "build": "node build.js",
+    "watch": "node build.js --watch",
+    "serve": "node serve.js",
+    "dev": "node scripts/dev.js",
+    "check": "node scripts/check.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

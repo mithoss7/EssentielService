@@ -1,0 +1,74 @@
+---
+titre: Mentions légales
+description: Mentions légales, hébergement et politique de protection des données personnelles du site.
+section: legal
+priorite: 0.3
+frequence: yearly
+bodyClass: page-legal
+---
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb" aria-label="Fil d'Ariane">
+      <li><a href="{{root}}index.html">Accueil</a></li>
+      <li aria-current="page">Mentions légales</li>
+    </ol>
+    <h1>Mentions légales</h1>
+    <p class="lead">Informations légales relatives au site {{site.domaine}}, conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container prose">
+    <p class="meta">Dernière mise à jour : {{dateMiseAJour}}</p>
+
+    <h2 id="editeur">1. Éditeur du site</h2>
+    <address>
+      <strong>{{identite.nomComplet}}</strong><br>
+      {{identite.statut}}<br>
+      {{#if contact.adresse.afficherRue}}{{contact.adresse.rue}}<br>{{/if}}
+      {{contact.adresse.villeComplete}}, France<br>
+      SIRET : {{identite.siret}}<br>
+      {{#if legal.tva}}TVA intracommunautaire : {{legal.tva}}<br>{{else}}TVA non applicable, article 293 B du Code général des impôts<br>{{/if}}
+      {{#if identite.numeroSAP}}Déclaration « Services à la personne » n° {{identite.numeroSAP}}<br>{{/if}}
+      Téléphone : <a href="{{contact.telephoneLien}}">{{contact.telephone}}</a><br>
+      E-mail : <a href="{{contact.emailLien}}">{{contact.email}}</a>
+    </address>
+    <p>Directrice de la publication : {{legal.directeurPublication}}.</p>
+
+    <h2 id="hebergement">2. Hébergement</h2>
+    <address>
+      <strong>{{legal.hebergeur.nom}}</strong><br>
+      {{legal.hebergeur.adresse}}<br>
+      {{#if legal.hebergeur.telephone}}Téléphone : {{legal.hebergeur.telephone}}<br>{{/if}}
+      {{#if legal.hebergeur.site}}<a href="{{legal.hebergeur.site}}" target="_blank" rel="noopener">{{legal.hebergeur.site}}</a>{{/if}}
+    </address>
+
+    <h2 id="activite">3. Activité</h2>
+    <p>{{identite.nomComplet}} exerce une activité de services à la personne à domicile : {{#each services}}{{#unless @first}}, {{/unless}}{{titre}}{{/each}}. Les prestations sont réalisées dans le cadre d'un contrat de prestation de services établi sur devis.</p>
+    {{#if legal.assurance.nom}}
+    <p>Assurance responsabilité civile professionnelle souscrite auprès de {{legal.assurance.nom}}{{#if legal.assurance.couverture}}, couverture géographique : {{legal.assurance.couverture}}{{/if}}.</p>
+    {{/if}}
+
+    <h2 id="propriete">4. Propriété intellectuelle</h2>
+    <p>L'ensemble des contenus de ce site (textes, illustrations, logo, structure) est la propriété de {{identite.nomComplet}}, sauf mention contraire. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite et constituerait une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
+    <p>Les polices de caractères utilisées (DM Serif Display, Nunito Sans) sont distribuées sous licence SIL Open Font License.</p>
+
+    <h2 id="donnees">5. Données personnelles (RGPD)</h2>
+    <p>Les informations que vous transmettez via le formulaire de contact (nom, e-mail, téléphone, message) sont utilisées exclusivement pour répondre à votre demande et établir un devis. Elles sont destinées à {{identite.nomComplet}} uniquement et ne sont ni vendues, ni transmises à des tiers, à l'exception du prestataire technique assurant l'acheminement des messages du formulaire.</p>
+    <ul>
+      <li><strong>Base légale :</strong> votre consentement et l'exécution de mesures précontractuelles.</li>
+      <li><strong>Durée de conservation :</strong> 3 ans à compter du dernier contact, ou la durée légale de conservation des documents comptables pour les clients.</li>
+      <li><strong>Vos droits :</strong> conformément au Règlement (UE) 2016/679 et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Pour l'exercer, écrivez à <a href="{{contact.emailLien}}">{{contact.email}}</a>.</li>
+      <li><strong>Réclamation :</strong> vous pouvez saisir la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>) si vous estimez que vos droits ne sont pas respectés.</li>
+    </ul>
+
+    <h2 id="cookies">6. Cookies</h2>
+    <p>Ce site n'utilise aucun cookie de suivi, aucun outil de mesure d'audience et ne charge aucune ressource externe (polices, scripts) susceptible de collecter des données de navigation. Aucun bandeau de consentement n'est donc nécessaire.</p>
+
+    <h2 id="responsabilite">7. Responsabilité</h2>
+    <p>Les informations publiées sur ce site sont fournies à titre indicatif et peuvent être modifiées à tout moment. Les tarifs affichés sont indicatifs ; seul un devis signé fait foi. {{identite.nomComplet}} ne saurait être tenue responsable des dommages directs ou indirects résultant de l'accès au site ou de l'utilisation des informations qu'il contient.</p>
+
+    <h2 id="mediation">8. Médiation de la consommation</h2>
+    <p>Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige non résolu à l'amiable, le consommateur peut recourir gratuitement à un médiateur de la consommation. Les coordonnées du médiateur compétent sont communiquées sur simple demande à <a href="{{contact.emailLien}}">{{contact.email}}</a>.</p>
+  </div>
+</section>

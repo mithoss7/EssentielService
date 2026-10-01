@@ -1,0 +1,59 @@
+<header class="site-header" id="header">
+  <div class="container site-header__inner">
+    <a class="brand" href="{{root}}index.html" aria-label="{{identite.nomCommercial}} – accueil">
+      <span class="brand__mark" aria-hidden="true">{{identite.initiales}}</span>
+      <span class="brand__text">
+        <span class="brand__name">{{identite.nomCommercial}}</span>
+        <span class="brand__tagline">Services à domicile</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav__list">
+        {{#each nav}}
+        <li class="nav__item">
+          {{#if sousMenu}}
+          <button class="nav__link{{#if actif}} is-active{{/if}}" type="button" aria-expanded="false" aria-haspopup="true" data-submenu-toggle>
+            {{label}} {{icon "chevron"}}
+          </button>
+          <ul class="nav__submenu">
+            <li><a href="{{href}}">Tous les services</a></li>
+            {{#each sousMenu}}<li><a href="{{href}}">{{label}}</a></li>{{/each}}
+          </ul>
+          {{else}}
+          <a class="nav__link{{#if actif}} is-active{{/if}}" href="{{href}}"{{#if actif}} aria-current="page"{{/if}}>{{label}}</a>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone" href="{{contact.telephoneLien}}">{{icon "telephone"}} {{contact.telephone}}</a>
+      <a class="btn btn--primary btn--sm" href="{{root}}contact.html">{{site.ctaPrincipal}}</a>
+    </div>
+
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="Ouvrir le menu" data-menu-toggle>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="menu-mobile" hidden>
+  <ul>
+    {{#each nav}}
+    <li>
+      <a class="mobile-menu__link{{#if actif}} is-active{{/if}}" href="{{href}}">{{label}}</a>
+      {{#if sousMenu}}
+      <div class="mobile-menu__sub">
+        {{#each sousMenu}}<a href="{{href}}">{{label}}</a>{{/each}}
+      </div>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+  <div class="mobile-menu__actions">
+    <a class="btn btn--primary btn--block" href="{{root}}contact.html">{{site.ctaPrincipal}}</a>
+    <a class="btn btn--ghost btn--block" href="{{contact.telephoneLien}}">{{icon "telephone"}} {{contact.telephone}}</a>
+  </div>
+</div>

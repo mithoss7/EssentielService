@@ -1,0 +1,106 @@
+---
+priorite: 0.9
+bodyClass: page-service
+---
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb" aria-label="Fil d'Ariane">
+      <li><a href="{{root}}index.html">Accueil</a></li>
+      <li><a href="{{root}}services/index.html">Services</a></li>
+      <li aria-current="page">{{service.titreCourt}}</li>
+    </ol>
+    <div class="page-hero__top">
+      <span class="icon-badge icon-badge--lg" aria-hidden="true">{{icon service.icone}}</span>
+      <h1 class="mt-0" style="margin-bottom:0">{{service.titre}}</h1>
+    </div>
+    <p class="lead">{{service.accroche}}</p>
+    <div class="page-hero__meta">
+      {{#if service.tarif}}<span class="pill pill--light">{{icon "euro"}} À partir de {{service.tarif.affiche}}</span>{{/if}}
+      <span class="pill pill--light">{{icon "pin"}} {{contact.adresse.ville}} et {{contact.zone.rayonKm}} km alentour</span>
+      <a class="btn btn--accent" href="{{root}}contact.html?service={{service.slug}}">{{site.ctaPrincipal}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container layout-sidebar">
+    <article class="flow">
+      <div class="reveal">
+        <span class="eyebrow">La prestation</span>
+        <h2>En quoi consiste ce service ?</h2>
+        <p class="lead">{{service.description}}</p>
+      </div>
+
+      {{#if service.prestations}}
+      <div class="card reveal">
+        <h3>Ce que comprend la prestation</h3>
+        <ul class="checklist checklist--2col">
+          {{#each service.prestations}}
+          <li>{{icon "check-circle"}}<span>{{this}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      {{#if service.pourQui}}
+      <div class="reveal">
+        <h3>Pour qui ?</h3>
+        <ul class="checklist">
+          {{#each service.pourQui}}
+          <li>{{icon "utilisateur"}}<span>{{this}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      {{#if service.note}}
+      <p class="note-box reveal"><strong>Bon à savoir :</strong> {{service.note}}</p>
+      {{/if}}
+
+      <div class="reveal">
+        <h3>Comment se passe la première intervention ?</h3>
+        <p>Après un premier échange par téléphone ou par e-mail, je viens vous rencontrer chez vous, gratuitement, pour comprendre vos attentes et voir les lieux. Nous fixons ensemble les horaires, la fréquence et les détails pratiques. Vous recevez ensuite un devis clair sous 48 h ; l'intervention commence dès que vous le validez.</p>
+      </div>
+    </article>
+
+    <aside class="sidebar">
+      {{#if service.tarif}}
+      <div class="card price-card reveal" data-delay="1">
+        <h3>Tarif indicatif</h3>
+        <div class="price-card__amount">{{service.tarif.montantAffiche}} <small>/ {{service.tarif.unite}}</small></div>
+        {{#if service.tarif.precision}}<p>{{service.tarif.precision}}</p>{{/if}}
+        {{#if tarifs.creditImpot.actif}}<p class="pill pill--aqua mt-2">{{icon "pourcent"}} Éligible au crédit d'impôt 50 %*</p>{{/if}}
+        <a class="link-arrow mt-3" href="{{root}}tarifs.html" style="color:#7FC8BC">Voir tous les tarifs {{icon "fleche"}}</a>
+      </div>
+      {{/if}}
+      <div class="reveal" data-delay="2">{{> contact-card}}</div>
+    </aside>
+  </div>
+</section>
+
+{{#if tarifs.creditImpot.actif}}
+<section class="section section--tight" style="padding-top:0">
+  <div class="container"><p class="text-muted" style="font-size:0.875rem">* {{tarifs.creditImpot.texte}}</p></div>
+</section>
+{{/if}}
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Autres services</span>
+      <h2>Vous pourriez aussi avoir besoin de…</h2>
+    </div>
+    <div class="grid grid--3">
+      {{#each service.autres}}
+      <a class="card service-card reveal" href="{{root}}{{url}}" data-delay="{{@index}}">
+        <span class="icon-badge" aria-hidden="true">{{icon icone}}</span>
+        <h3>{{titre}}</h3>
+        <p>{{accroche}}</p>
+        <span class="link-arrow">Découvrir {{icon "fleche"}}</span>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+{{> cta-band}}

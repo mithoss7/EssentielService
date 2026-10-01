@@ -1,0 +1,13 @@
+<div class="grid services-grid">
+  {{#each services}}
+  <a class="card service-card reveal" href="{{root}}{{url}}" data-delay="{{@index}}">
+    <span class="icon-badge" aria-hidden="true">{{icon icone}}</span>
+    <h3>{{titre}}</h3>
+    <p>{{accroche}}</p>
+    <div class="service-card__footer">
+      {{#if tarif}}<span class="service-card__price"><small>à partir de</small> {{tarif.affiche}}</span>{{/if}}
+      <span class="link-arrow">En savoir plus {{icon "fleche"}}</span>
+    </div>
+  </a>
+  {{/each}}
+</div>

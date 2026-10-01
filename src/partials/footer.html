@@ -1,0 +1,60 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="{{root}}index.html">
+          <span class="brand__mark" aria-hidden="true">{{identite.initiales}}</span>
+          <span class="brand__text">
+            <span class="brand__name">{{identite.nomCommercial}}</span>
+            <span class="brand__tagline">{{identite.slogan}}</span>
+          </span>
+        </a>
+        <p>{{site.description}}</p>
+        {{#if contact.reseauxListe}}
+        <ul class="social" aria-label="Réseaux sociaux">
+          {{#each contact.reseauxListe}}
+          <li><a href="{{url}}" target="_blank" rel="noopener" aria-label="{{label}} (nouvelle fenêtre)" title="{{label}}">{{icon "globe"}}</a></li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </div>
+
+      <div>
+        <h4>Services</h4>
+        <ul>
+          {{#each services}}
+          <li><a href="{{root}}{{url}}">{{titre}}</a></li>
+          {{/each}}
+          <li><a href="{{root}}tarifs.html">Tarifs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li>{{icon "telephone"}}<a href="{{contact.telephoneLien}}">{{contact.telephone}}</a></li>
+          <li>{{icon "mail"}}<a href="{{contact.emailLien}}">{{contact.email}}</a></li>
+          <li>{{icon "pin"}}<span>{{contact.adresse.affichee}}<br>Intervention dans un rayon de {{contact.zone.rayonKm}} km</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Horaires</h4>
+        <ul>
+          {{#each contact.horaires}}
+          <li><strong>{{jours}}</strong><br>{{heures}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {{copyright}} {{identite.nomCommercial}} – {{identite.statut}} – SIRET {{identite.siret}}</p>
+      <ul>
+        <li><a href="{{root}}mentions-legales.html">Mentions légales</a></li>
+        <li><a href="{{root}}mentions-legales.html#donnees">Données personnelles</a></li>
+        <li><a href="{{root}}contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

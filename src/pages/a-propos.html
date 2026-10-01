@@ -1,0 +1,80 @@
+---
+titre: À propos
+description: Qui suis-je ? Parcours, valeurs et garanties d'une professionnelle indépendante des services à domicile, à votre écoute.
+section: a-propos
+priorite: 0.8
+bodyClass: page-a-propos
+---
+<section class="section">
+  <div class="container about-hero">
+    <div class="portrait reveal">
+      {{#if identite.photo}}
+      <img src="{{root}}{{identite.photo}}" alt="Portrait de {{identite.nomComplet}}">
+      {{else}}
+      <span class="portrait__initials" aria-hidden="true">{{identite.initiales}}</span>
+      {{/if}}
+      <div class="portrait__badge">{{icon "pin"}} Basée à {{contact.adresse.ville}}</div>
+    </div>
+    <div class="reveal" data-delay="1">
+      <span class="eyebrow">À propos</span>
+      <h1>{{identite.nomComplet}}</h1>
+      <p class="lead">{{identite.slogan}}</p>
+      {{#each identite.presentation}}
+      <p>{{this}}</p>
+      {{/each}}
+      <div class="actions mt-4">
+        <a class="btn btn--primary" href="{{root}}contact.html">{{site.ctaPrincipal}}</a>
+        <a class="btn btn--ghost" href="{{contact.telephoneLien}}">{{icon "telephone"}} {{contact.telephone}}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="eyebrow">Mes valeurs</span>
+      <h2>Ce qui guide mon travail au quotidien</h2>
+    </div>
+    <div class="grid grid--2">
+      {{#each identite.valeurs}}
+      <div class="card value-card reveal" data-delay="{{@index}}">
+        <span class="icon-badge" aria-hidden="true">{{icon "coeur"}}</span>
+        <div>
+          <h3>{{titre}}</h3>
+          <p>{{texte}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--2">
+      <div class="card reveal">
+        <span class="icon-badge icon-badge--navy mb-2" aria-hidden="true">{{icon "bouclier"}}</span>
+        <h2 style="font-size:1.6rem">Garanties & qualifications</h2>
+        <ul class="checklist mt-2">
+          {{#each identite.garanties}}
+          <li>{{icon "check-circle"}}<span>{{this}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="card reveal" data-delay="1">
+        <span class="icon-badge mb-2" aria-hidden="true">{{icon "pin"}}</span>
+        <h2 style="font-size:1.6rem">Zone d'intervention</h2>
+        <p class="text-muted">J'interviens à {{contact.adresse.ville}} et dans les communes voisines, dans un rayon d'environ {{contact.zone.rayonKm}} km :</p>
+        <ul class="chips mt-2">
+          {{#each contact.zone.villes}}<li>{{this}}</li>{{/each}}
+        </ul>
+        <p class="text-muted mt-3" style="font-size:0.925rem">Votre commune n'est pas dans la liste ? Contactez-moi, je pourrai peut-être me déplacer quand même.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> testimonials}}
+
+{{> cta-band}}

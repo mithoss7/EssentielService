@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{site.langue}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{page.titreComplet}}</title>
+  <meta name="description" content="{{page.description}}">
+  {{#if site.motsCles}}<meta name="keywords" content="{{site.motsCles}}">{{/if}}
+  <meta name="author" content="{{identite.nomComplet}}">
+  <link rel="canonical" href="{{page.url}}">
+  <meta name="theme-color" content="#0F2A44">
+
+  <!-- Partage sur les réseaux sociaux -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="{{identite.nomCommercial}}">
+  <meta property="og:title" content="{{page.titreComplet}}">
+  <meta property="og:description" content="{{page.description}}">
+  <meta property="og:url" content="{{page.url}}">
+  <meta property="og:image" content="{{site.url}}/assets/img/partage.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="{{root}}favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="{{root}}manifest.webmanifest">
+  <link rel="preload" href="{{root}}assets/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{root}}assets/fonts/nunito-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{root}}assets/css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- Données structurées (référencement local) -->
+  <script type="application/ld+json">{{{jsonLd}}}</script>
+</head>
+<body class="{{page.bodyClass}}" style="min-height:100vh;display:flex;flex-direction:column">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  {{#if site.enConstruction}}
+  <div class="construction-banner">Site en cours de construction – certaines informations peuvent évoluer.</div>
+  {{/if}}
+
+  {{> header}}
+
+  <main id="contenu">
+{{{content}}}
+  </main>
+
+  {{> footer}}
+
+  <script src="{{root}}assets/js/main.js" defer></script>
+</body>
+</html>

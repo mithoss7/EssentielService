@@ -1,0 +1,27 @@
+{{#if temoignages}}
+<section class="section section--white" id="avis">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="eyebrow">Ils me font confiance</span>
+      <h2>Ce que disent les familles que j'accompagne</h2>
+      <p>Des avis authentiques, recueillis auprès de mes clients avec leur accord.</p>
+    </div>
+    <div class="grid grid--3">
+      {{#each temoignages}}
+      <article class="card testimonial reveal" data-delay="{{@index}}">
+        {{icon "guillemets" "testimonial__quote"}}
+        {{{stars note}}}
+        <p>« {{texte}} »</p>
+        <div class="testimonial__author">
+          <span class="avatar" aria-hidden="true">{{initiales}}</span>
+          <div>
+            <strong>{{auteur}}</strong>
+            <small>{{ville}} · {{service}}</small>
+          </div>
+        </div>
+      </article>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}

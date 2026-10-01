@@ -1,0 +1,47 @@
+---
+titre: Mes services
+description: Ménage, garde d'enfants, soutien scolaire et accompagnement dans vos déplacements : découvrez toutes les prestations proposées à domicile.
+section: services
+priorite: 0.9
+bodyClass: page-services
+---
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb" aria-label="Fil d'Ariane">
+      <li><a href="{{root}}index.html">Accueil</a></li>
+      <li aria-current="page">Services</li>
+    </ol>
+    <h1>Mes services à domicile</h1>
+    <p class="lead">Une seule interlocutrice pour vous accompagner au quotidien, à {{contact.adresse.ville}} et dans un rayon de {{contact.zone.rayonKm}} km. Chaque prestation est adaptée à vos besoins, ponctuelle ou régulière.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {{> services-grid}}
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="eyebrow">Mes engagements</span>
+      <h2>Ce que vous pouvez attendre de moi, quel que soit le service</h2>
+    </div>
+    <div class="grid grid--4">
+      {{#each identite.valeurs}}
+      <div class="card reveal" data-delay="{{@index}}">
+        <span class="icon-badge mb-2" aria-hidden="true">{{icon "coeur"}}</span>
+        <h3>{{titre}}</h3>
+        <p class="text-muted">{{texte}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">{{> tax-box}}</div>
+</section>
+
+{{> cta-band}}

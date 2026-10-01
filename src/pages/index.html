@@ -1,0 +1,135 @@
+---
+section: accueil
+priorite: 1.0
+frequence: weekly
+bodyClass: page-accueil
+---
+<!-- ===================== BANDEAU D'ACCUEIL ===================== -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="reveal">
+      <span class="eyebrow">{{identite.slogan}}</span>
+      <h1>{{identite.titreAccueil}}</h1>
+      <p class="hero__text">{{identite.sousTitreAccueil}}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="{{root}}contact.html">{{site.ctaPrincipal}}</a>
+        <a class="btn btn--ghost btn--lg" href="{{contact.telephoneLien}}">{{icon "telephone"}} {{contact.telephone}}</a>
+      </div>
+      <ul class="hero__trust">
+        <li>{{icon "check-circle"}} Interlocutrice unique</li>
+        <li>{{icon "check-circle"}} {{identite.anneesExperience}} ans d'expérience</li>
+        <li>{{icon "check-circle"}} {{contact.adresse.ville}} et alentours</li>
+      </ul>
+    </div>
+    {{> hero-illustration}}
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="section section--white" id="services">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="eyebrow">Mes services</span>
+      <h2>Quatre façons de vous simplifier le quotidien</h2>
+      <p>Des prestations sur mesure, à l'heure ou au forfait, ponctuelles ou régulières. Vous choisissez, je m'adapte.</p>
+    </div>
+    {{> services-grid}}
+  </div>
+</section>
+
+<!-- ===================== COMMENT ÇA MARCHE ===================== -->
+<section class="section" id="fonctionnement">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Comment ça marche ?</span>
+      <h2>Trois étapes, et c'est réglé</h2>
+      <p>Pas de plateforme, pas d'intermédiaire : vous échangez directement avec la personne qui viendra chez vous.</p>
+    </div>
+    <div class="steps">
+      {{#each etapes}}
+      <div class="card step reveal" data-delay="{{@index}}">
+        <div class="step__num" aria-hidden="true">{{@number}}</div>
+        <h3>{{titre}}</h3>
+        <p>{{texte}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHIFFRES CLÉS ===================== -->
+{{#if chiffres}}
+<section class="section section--navy">
+  <div class="container">
+    <div class="stats">
+      {{#each chiffres}}
+      <div class="stat reveal" data-delay="{{@index}}">
+        <div class="stat__value">{{valeur}}<span>{{suffixe}}</span></div>
+        <div class="stat__label">{{label}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}
+
+<!-- ===================== POURQUOI MOI ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="about-hero">
+      <div class="portrait reveal">
+        {{#if identite.photo}}
+        <img src="{{root}}{{identite.photo}}" alt="Portrait de {{identite.nomComplet}}" loading="lazy">
+        {{else}}
+        <span class="portrait__initials" aria-hidden="true">{{identite.initiales}}</span>
+        {{/if}}
+        <div class="portrait__badge">{{icon "coeur"}} {{identite.prenom}}, votre interlocutrice unique</div>
+      </div>
+      <div class="reveal" data-delay="1">
+        <span class="eyebrow">Pourquoi me faire confiance</span>
+        <h2>Une professionnelle que vous connaissez, pas un prestataire anonyme</h2>
+        <p class="lead">{{identite.presentation.0}}</p>
+        <ul class="checklist mt-3">
+          {{#each identite.garanties}}
+          <li>{{icon "check"}}<span>{{this}}</span></li>
+          {{/each}}
+        </ul>
+        <div class="actions mt-4">
+          <a class="btn btn--primary" href="{{root}}a-propos.html">Faire connaissance</a>
+          <a class="link-arrow" href="{{root}}tarifs.html">Voir les tarifs {{icon "fleche"}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TÉMOIGNAGES ===================== -->
+{{> testimonials}}
+
+<!-- ===================== ZONE & AVANTAGE FISCAL ===================== -->
+<section class="section">
+  <div class="container flow">
+    <div class="grid grid--2">
+      <div class="card reveal">
+        <span class="icon-badge mb-2" aria-hidden="true">{{icon "pin"}}</span>
+        <h3>Zone d'intervention</h3>
+        <p class="text-muted">Je me déplace à {{contact.adresse.ville}} et dans un rayon d'environ {{contact.zone.rayonKm}} km, notamment :</p>
+        <ul class="chips mt-2">
+          {{#each contact.zone.villes}}<li>{{this}}</li>{{/each}}
+        </ul>
+      </div>
+      <div class="card reveal" data-delay="1">
+        <span class="icon-badge icon-badge--navy mb-2" aria-hidden="true">{{icon "horloge"}}</span>
+        <h3>Disponibilités</h3>
+        <ul class="hours">
+          {{#each contact.horaires}}
+          <li><span>{{jours}}</span><span>{{heures}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    {{> tax-box}}
+  </div>
+</section>
+
+{{> cta-band}}
