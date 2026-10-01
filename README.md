@@ -142,8 +142,10 @@ fichier dans **`src/assets/img/fonds/`** avec le bon nom, puis de relancer `npm 
 - Formats acceptés : `.webp`, `.jpg`, `.jpeg`, `.png`.
 - Taille conseillée : **1920 px de large, moins de 400 Ko** (sinon le site ralentit sur mobile).
 - Sans fichier, la page garde son fond habituel ; le build indique les images manquantes.
-- Un voile coloré est appliqué automatiquement pour que le texte reste lisible (réglable dans
-  `style.css`, section « Images de fond »).
+- La photo reste pleinement visible : seul le texte est posé sur un panneau translucide
+  (classe `.hero-panel`). Réglages dans `style.css`, section « Images de fond » : hauteur du
+  bandeau (`min-height`), opacité du panneau (`rgba(...)`), flou (`backdrop-filter`). Sur l'accueil,
+  l'illustration de la maison est masquée quand une photo est présente.
 - Pour changer la clé d'une page : ligne `fond:` de son front matter.
 
 **Crédits photos** (toutes sous [licence Unsplash](https://unsplash.com/license) : usage libre et

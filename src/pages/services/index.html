@@ -8,12 +8,14 @@ bodyClass: page-services
 ---
 <section class="page-hero{{#if page.fond}} page-hero--image{{/if}}"{{#if page.fond}} style="background-image: url('{{page.fond}}')"{{/if}}>
   <div class="container">
-    <ol class="breadcrumb" aria-label="Fil d'Ariane">
-      <li><a href="{{root}}index.html">Accueil</a></li>
-      <li aria-current="page">Services</li>
-    </ol>
-    <h1>Mes services à domicile</h1>
-    <p class="lead">Une seule interlocutrice pour vous accompagner au quotidien, à {{contact.adresse.ville}} et dans un rayon de {{contact.zone.rayonKm}} km. Chaque prestation est adaptée à vos besoins, ponctuelle ou régulière.</p>
+    <div class="hero-panel">
+      <ol class="breadcrumb" aria-label="Fil d'Ariane">
+        <li><a href="{{root}}index.html">Accueil</a></li>
+        <li aria-current="page">Services</li>
+      </ol>
+      <h1>Mes services à domicile</h1>
+      <p class="lead">Une seule interlocutrice pour vous accompagner au quotidien, à {{contact.adresse.ville}} et dans un rayon de {{contact.zone.rayonKm}} km. Chaque prestation est adaptée à vos besoins, ponctuelle ou régulière.</p>
+    </div>
   </div>
 </section>
 
