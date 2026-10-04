@@ -485,7 +485,7 @@ module.exports = {
     // contact.adresse (rue + code postal + ville), même si afficherRue est
     // false. Pour ne pas exposer un domicile, indiquer ici une adresse de
     // domiciliation déclarée à l'administration.
-    adresseEditeur: "",
+    adresseEditeur: "121 rue Marcel Pagnol, 16600 Ruelle-sur-Touvre",
     // Inscription au registre, telle qu'elle figure sur l'extrait officiel
     // (SIRENE / guichet unique). Ex. : "Immatriculée au RCS d'Angoulême",
     // "Inscrite au répertoire des métiers", ou "" si aucune mention.
