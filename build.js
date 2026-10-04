@@ -317,7 +317,7 @@ function enrichConfig(raw) {
   const prenom = cfg.identite.prenom || '';
   const nom = cfg.identite.nom || '';
   cfg.identite.nomComplet = `${prenom} ${nom}`.trim();
-  cfg.identite.initiales = [prenom, nom].filter(Boolean).map((s) => s.trim()[0].toUpperCase()).join('');
+  cfg.identite.initiales = cfg.identite.initiales || [prenom, nom].filter(Boolean).map((s) => s.trim()[0].toUpperCase()).join('');
   if (!cfg.identite.nomCommercial) cfg.identite.nomCommercial = cfg.identite.nomComplet;
 
   // Téléphone

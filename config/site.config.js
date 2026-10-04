@@ -25,8 +25,10 @@ module.exports = {
    *  1. IDENTITÉ DE LA PRESTATAIRE
    * ------------------------------------------------------------------------ */
   identite: {
-    prenom: "Elisanah",
+    prenom: "Élisanah",
     nom: "Mauricio",
+    // Initiales du logo (monogramme, favicon). "" = calculées depuis prénom et nom.
+    initiales: "EM",
     // Nom affiché dans le logo, le titre du site et les textes. Peut être
     // le nom de la personne ("Claire Martin") ou un nom commercial.
     nomCommercial: "Essentiel Services",
@@ -48,7 +50,7 @@ module.exports = {
     photo: "",
     // Texte de présentation de la page « À propos » (plusieurs paragraphes).
     presentation: [
-      "Je m'appelle Elisanah. Titulaire d'un baccalauréat général et d'une licence de psychologie de l'éducation et du développement de l'enfant, j'ai travaillé quatre ans dans le soutien scolaire, deux ans dans l'aide à la personne, et ponctuellement chez des particuliers pour des prestations de ménage, avec aussi une expérience de l'entretien professionnel. Ces différentes expériences m'ont permis de développer mon sens de l'organisation, mon sérieux et mon autonomie. J'ai choisi de travailler à mon compte pour mettre cette expérience au service de mes clients, avec un service de proximité, sérieux et adapté à leurs besoins.",
+      "Je m'appelle Élisanah. Titulaire d'un baccalauréat général et d'une licence de psychologie de l'éducation et du développement de l'enfant, j'ai travaillé quatre ans dans le soutien scolaire, deux ans dans l'aide à la personne, et ponctuellement chez des particuliers pour des prestations de ménage, avec aussi une expérience de l'entretien professionnel. Ces différentes expériences m'ont permis de développer mon sens de l'organisation, mon sérieux et mon autonomie. J'ai choisi de travailler à mon compte pour mettre cette expérience au service de mes clients, avec un service de proximité, sérieux et adapté à leurs besoins.",
       "Ménage et repassage, garde et soutien scolaire de vos enfants, présence auprès de vos parents âgés : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
       "Au fil de mes expériences dans le soutien scolaire, l'aide à la personne et l'entretien, j'ai découvert que ce que j'aime le plus, c'est me rendre utile. Aujourd'hui, j'ai choisi de travailler à mon compte pour proposer un service simple, sérieux et humain, adapté aux besoins de chacun."
     ],
@@ -471,7 +473,7 @@ module.exports = {
       site: "https://www.ovhcloud.com"
     },
     // Directeur / directrice de la publication (généralement la prestataire).
-    directeurPublication: "Elisanah Mauricio",
+    directeurPublication: "Élisanah Mauricio",
     // Année de mise en ligne (pour le copyright « 2024 – 2026 »).
     anneeCreation: 2026,
     // Numéro de TVA intracommunautaire ("" si non assujettie – franchise en base).
@@ -489,12 +491,19 @@ module.exports = {
     // Inscription au registre, telle qu'elle figure sur l'extrait officiel
     // (SIRENE / guichet unique). Ex. : "Immatriculée au RCS d'Angoulême",
     // "Inscrite au répertoire des métiers", ou "" si aucune mention.
-    registre: "",
+    registre: "Immatriculée au Registre national des entreprises (RNE)",
     // Code APE/NAF de l'activité (optionnel). Ex. : "81.21Z".
-    codeAPE: "",
+    codeAPE: "81.21Z",
     // Médiateur de la consommation (OBLIGATOIRE, art. L.612-1 et L.616-1 du
     // Code de la consommation) : adhérer à un médiateur référencé (liste de
     // la CECMC sur economie.gouv.fr) puis renseigner ses coordonnées.
-    mediateur: { nom: "", adresse: "", site: "", email: "" }
+    // Adhésion CM2C valable jusqu'au 04/10/2029 (attestation d'affiliation) :
+    // penser à la renouveler avant cette date.
+    mediateur: {
+      nom: "CM2C – Centre de la médiation de la consommation de conciliateurs de justice",
+      adresse: "49 rue de Ponthieu, 75008 Paris",
+      site: "https://www.cm2c.net",
+      email: ""
+    }
   }
 };
