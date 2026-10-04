@@ -7,6 +7,7 @@
  *  4. Formulaire de contact : envoi vers le service configuré (Formspree,
  *     FormSubmit…) ou, à défaut, ouverture de la messagerie (mailto:)
  *  5. Pré-sélection du service depuis l'URL (?service=menage)
+ *  6. Simulateur de tarif (page Tarifs)
  */
 
 (function () {
@@ -197,6 +198,97 @@
       for (var i = 0; i < select.options.length; i++) {
         if (select.options[i].value === wanted) { select.selectedIndex = i; break; }
       }
+    }
+  }
+  /* ---------------------------------------------------------------------
+   * 6. Simulateur de tarif (page Tarifs)
+   *    Compare le coût mensuel à l'heure et, si le service en propose,
+   *    le coût avec le forfait le plus adapté au volume d'heures.
+   * ------------------------------------------------------------------- */
+  var simBox = document.getElementById('simulateur');
+  var simData = document.getElementById('simulateur-data');
+  if (simBox && simData) {
+    var services = [];
+    try { services = JSON.parse(simData.textContent || '[]'); } catch (e) { services = []; }
+    var selService = document.getElementById('sim-service');
+    var inDuree = document.getElementById('sim-duree');
+    var inNombre = document.getElementById('sim-nombre');
+    var out = document.getElementById('sim-resultat');
+
+    var euros = function (n) {
+      return (Math.round(n * 100) / 100).toLocaleString('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' €';
+    };
+    var heures = function (n) {
+      var h = Math.floor(n), m = Math.round((n - h) * 60);
+      return h + ' h' + (m ? ' ' + (m < 10 ? '0' : '') + m : '');
+    };
+    var ligne = function (titre, montant, detail, best) {
+      return '<div class="simulateur__ligne' + (best ? ' simulateur__ligne--best' : '') + '"><span>' + titre +
+        '</span><strong>' + montant + '</strong>' + (detail ? '<small>' + detail + '</small>' : '') + '</div>';
+    };
+
+    var calculer = function () {
+      var s = services[selService.selectedIndex];
+      if (!s) return;
+      var duree = Math.max(parseFloat(String(inDuree.value).replace(',', '.')) || 0, 0);
+      var nombre = Math.max(parseInt(inNombre.value, 10) || 0, 0);
+      var avertissement = '';
+      if (duree < s.dureeMin) {
+        avertissement = '<p class="form__help">Durée minimale pour ce service : ' + heures(s.dureeMin) + '. Le calcul utilise cette durée.</p>';
+        duree = s.dureeMin;
+      }
+      var total = duree * nombre;
+      var html = ligne('Volume mensuel', heures(total), '');
+      var aLHeure = total * s.taux;
+      // Meilleure combinaison de forfaits entiers (5, 10, 20 h…), le reste au
+      // tarif horaire, sans acheter plus d'heures que nécessaire.
+      // Calcul par demi-heures (programmation dynamique).
+      var forfaits = s.forfaits || [];
+      var demi = Math.round(total * 2);
+      var cout = [0], choix = [null];
+      for (var u = 1; u <= demi; u++) {
+        cout[u] = cout[u - 1] + s.taux / 2; choix[u] = null;
+        forfaits.forEach(function (f) {
+          var fu = Math.round(f.heures * 2);
+          if (fu <= u && cout[u - fu] + f.prix < cout[u] - 0.001) { cout[u] = cout[u - fu] + f.prix; choix[u] = f; }
+        });
+      }
+      var combinaison = {}, resteHeures = 0, v = demi;
+      while (v > 0) {
+        if (choix[v]) { combinaison[choix[v].heures] = (combinaison[choix[v].heures] || 0) + 1; v -= Math.round(choix[v].heures * 2); }
+        else { resteHeures += 0.5; v -= 1; }
+      }
+      var avecForfaits = Object.keys(combinaison).length > 0;
+      html += ligne('À l\'heure (' + euros(s.taux) + '/h)', euros(aLHeure) + ' / mois', '', !avecForfaits);
+      if (avecForfaits) {
+        var detail = Object.keys(combinaison).sort(function (x, y) { return y - x; }).map(function (h) {
+          var f = forfaits.filter(function (x) { return String(x.heures) === h; })[0];
+          return combinaison[h] + ' forfait' + (combinaison[h] > 1 ? 's' : '') + ' de ' + h + ' h (' + euros(f.prix) + ')';
+        }).join(' + ');
+        if (resteHeures) detail += ' + ' + heures(resteHeures) + ' à l\'heure';
+        html += ligne('Avec des forfaits', euros(cout[demi]) + ' / mois',
+          detail + '. Économie estimée : ' + euros(aLHeure - cout[demi]) + ' par mois.', true);
+      } else if (forfaits.length) {
+        html += '<p class="form__help">Forfaits disponibles à partir de ' + forfaits[0].heures + ' h par mois.</p>';
+      }
+      out.innerHTML = avertissement + html;
+    };
+
+    if (services.length) {
+      services.forEach(function (s) {
+        var o = document.createElement('option');
+        o.textContent = s.titre;
+        selService.appendChild(o);
+      });
+      selService.addEventListener('change', function () {
+        var s = services[selService.selectedIndex];
+        if (s && (parseFloat(inDuree.value) || 0) < s.dureeMin) inDuree.value = s.dureeMin;
+        calculer();
+      });
+      inDuree.addEventListener('input', calculer);
+      inNombre.addEventListener('input', calculer);
+      simBox.hidden = false;
+      calculer();
     }
   }
 })();

@@ -44,6 +44,35 @@ bodyClass: page-tarifs
       <p class="text-muted" style="font-size:0.9rem;margin-top:0.75rem">Prix nets en euros – {{legal.tvaMention}}. Tarifs indicatifs : seul le devis accepté fait foi. <a href="{{root}}conditions-generales.html">Conditions générales de prestation</a>.</p>
     </div>
 
+    <!-- Simulateur de tarif : affiché uniquement si JavaScript est actif -->
+    <div class="card simulateur" id="simulateur" hidden>
+      <span class="icon-badge mb-2" aria-hidden="true">{{icon "euro"}}</span>
+      <h2 style="font-size:1.6rem">Estimer le coût de vos prestations</h2>
+      <p class="text-muted">Choisissez un service, la durée d'une intervention et leur nombre par mois : le simulateur compare le tarif à l'heure et les forfaits.</p>
+      <div class="form mt-3">
+        <div class="form__row">
+          <div>
+            <label for="sim-service">Service</label>
+            <select id="sim-service"></select>
+          </div>
+          <div>
+            <label for="sim-duree">Durée d'une intervention (heures)</label>
+            <input id="sim-duree" type="number" min="1" max="10" step="0.5" value="2" inputmode="decimal">
+          </div>
+        </div>
+        <div class="form__row">
+          <div>
+            <label for="sim-nombre">Nombre d'interventions par mois</label>
+            <input id="sim-nombre" type="number" min="1" max="31" step="1" value="4" inputmode="numeric">
+          </div>
+          <div></div>
+        </div>
+      </div>
+      <div class="simulateur__resultat" id="sim-resultat" aria-live="polite"></div>
+      <p class="form__help mt-2">Estimation indicative, hors frais de déplacement et majorations éventuelles. Seul le devis fait foi. {{legal.tvaMention}}.</p>
+    </div>
+    <script type="application/json" id="simulateur-data">{{{simulateurJson}}}</script>
+
     <div class="grid grid--2">
       <div class="card reveal">
         <span class="icon-badge mb-2" aria-hidden="true">{{icon "check-circle"}}</span>
