@@ -21,14 +21,15 @@ bodyClass: page-legal
   <div class="container prose">
     <p class="meta">Dernière mise à jour : {{dateMiseAJour}}</p>
 
-    <h2 id="editeur">1. Éditeur du site</h2>
+    <h2 id="editeur">1. Éditrice du site</h2>
     <address>
-      <strong>{{identite.nomComplet}}</strong><br>
+      <strong>{{identite.nomEI}}</strong> (nom commercial : {{identite.nomCommercial}})<br>
       {{identite.statut}}<br>
-      {{#if contact.adresse.afficherRue}}{{contact.adresse.rue}}<br>{{/if}}
-      {{contact.adresse.villeComplete}}, France<br>
+      Adresse : {{legal.adresseEditeurAffichee}}, France<br>
       SIRET : {{identite.siret}}<br>
-      {{#if legal.tva}}TVA intracommunautaire : {{legal.tva}}<br>{{else}}TVA non applicable, article 293 B du Code général des impôts<br>{{/if}}
+      {{#if legal.registre}}{{legal.registre}}<br>{{/if}}
+      {{#if legal.codeAPE}}Code APE : {{legal.codeAPE}}<br>{{/if}}
+      {{legal.tvaMention}}<br>
       {{#if identite.numeroSAP}}Déclaration « Services à la personne » n° {{identite.numeroSAP}}<br>{{/if}}
       Téléphone : <a href="{{contact.telephoneLien}}">{{contact.telephone}}</a><br>
       E-mail : <a href="{{contact.emailLien}}">{{contact.email}}</a>
@@ -43,32 +44,51 @@ bodyClass: page-legal
       {{#if legal.hebergeur.site}}<a href="{{legal.hebergeur.site}}" target="_blank" rel="noopener">{{legal.hebergeur.site}}</a>{{/if}}
     </address>
 
-    <h2 id="activite">3. Activité</h2>
-    <p>{{identite.nomComplet}} exerce une activité de services à la personne à domicile : {{#each services}}{{#unless @first}}, {{/unless}}{{titre}}{{/each}}. Les prestations sont réalisées dans le cadre d'un contrat de prestation de services établi sur devis.</p>
+    <h2 id="activite">3. Activité et assurance</h2>
+    <p>{{identite.nomComplet}} exerce une activité de services à la personne à domicile : {{#each services}}{{#unless @first}}, {{/unless}}{{titre}}{{/each}}. Les prestations sont réalisées dans le cadre d'un contrat de prestation de services établi sur devis, soumis aux <a href="{{root}}conditions-generales.html">conditions générales de prestation</a>.</p>
     {{#if legal.assurance.nom}}
-    <p>Assurance responsabilité civile professionnelle souscrite auprès de {{legal.assurance.nom}}{{#if legal.assurance.couverture}}, couverture géographique : {{legal.assurance.couverture}}{{/if}}.</p>
+    <p>Assurance responsabilité civile professionnelle souscrite auprès de {{legal.assurance.nom}}{{#if legal.assurance.adresse}} ({{legal.assurance.adresse}}){{/if}}{{#if legal.assurance.couverture}}, couverture géographique : {{legal.assurance.couverture}}{{/if}}.</p>
     {{/if}}
 
     <h2 id="propriete">4. Propriété intellectuelle</h2>
     <p>L'ensemble des contenus de ce site (textes, illustrations, logo, structure) est la propriété de {{identite.nomComplet}}, sauf mention contraire. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite et constituerait une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
-    <p>Les polices de caractères utilisées (DM Serif Display, Nunito Sans) sont distribuées sous licence SIL Open Font License.</p>
+    <p>Les photographies d'illustration proviennent de la banque d'images <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash</a> (licence Unsplash) ; elles ne représentent pas de clients de {{identite.nomCommercial}}. Les polices de caractères utilisées (DM Serif Display, Nunito Sans) sont distribuées sous licence SIL Open Font License.</p>
 
     <h2 id="donnees">5. Données personnelles (RGPD)</h2>
-    <p>Les informations que vous transmettez via le formulaire de contact (nom, e-mail, téléphone, message) sont utilisées exclusivement pour répondre à votre demande et établir un devis. Elles sont destinées à {{identite.nomComplet}} uniquement et ne sont ni vendues, ni transmises à des tiers, à l'exception du prestataire technique assurant l'acheminement des messages du formulaire.</p>
+    <p><strong>Responsable du traitement :</strong> {{identite.nomEI}}, joignable à l'adresse <a href="{{contact.emailLien}}">{{contact.email}}</a>.</p>
+    <p>Les informations que vous transmettez par le formulaire de contact, par e-mail, par téléphone{{#if contact.whatsapp}} ou par WhatsApp{{/if}} (nom, e-mail, téléphone, message) sont utilisées exclusivement pour répondre à votre demande, établir un devis et, le cas échéant, exécuter et facturer la prestation. Elles ne sont ni vendues, ni utilisées à des fins de prospection, ni transmises à des tiers, à l'exception des prestataires techniques strictement nécessaires :</p>
     <ul>
-      <li><strong>Base légale :</strong> votre consentement et l'exécution de mesures précontractuelles.</li>
-      <li><strong>Durée de conservation :</strong> 3 ans à compter du dernier contact, ou la durée légale de conservation des documents comptables pour les clients.</li>
-      <li><strong>Vos droits :</strong> conformément au Règlement (UE) 2016/679 et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Pour l'exercer, écrivez à <a href="{{contact.emailLien}}">{{contact.email}}</a>.</li>
+      <li>le service de messagerie qui reçoit vos messages{{#if contact.formulaire.endpoint}}, et le service d'acheminement du formulaire{{#if contact.formulaire.prestataire.nom}} ({{contact.formulaire.prestataire.nom}}{{#if contact.formulaire.prestataire.pays}}, {{contact.formulaire.prestataire.pays}}{{/if}}){{/if}}{{/if}} ;</li>
+      {{#if contact.rendezVous.url}}<li>le service de prise de rendez-vous en ligne vers lequel renvoie le lien « Choisir un créneau », soumis à sa propre politique de confidentialité ;</li>{{/if}}
+      {{#if contact.whatsapp}}<li>WhatsApp (Meta) si vous choisissez de me contacter par ce canal : le lien ouvre un service tiers soumis à ses propres conditions et à sa propre politique de confidentialité.</li>{{/if}}
+    </ul>
+    <ul>
+      <li><strong>Base légale :</strong> l'exécution de mesures précontractuelles prises à votre demande (réponse à une demande de devis) et, pour le formulaire, votre consentement (case à cocher).</li>
+      <li><strong>Durée de conservation :</strong> 3 ans à compter du dernier contact pour les demandes sans suite ; pour les clients, la durée légale de conservation des documents comptables et contractuels.</li>
+      <li><strong>Vos droits :</strong> conformément au Règlement (UE) 2016/679 et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et, lorsqu'il s'applique, de portabilité de vos données, ainsi que du droit de définir des directives relatives au sort de vos données après votre décès. Pour les exercer, écrivez à <a href="{{contact.emailLien}}">{{contact.email}}</a> ; une réponse vous sera apportée dans un délai d'un mois.</li>
       <li><strong>Réclamation :</strong> vous pouvez saisir la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>) si vous estimez que vos droits ne sont pas respectés.</li>
     </ul>
+    <p><strong>Données de santé :</strong> merci de ne pas indiquer d'informations médicales (vous ou vos proches) dans le formulaire ou dans vos premiers messages. Les informations utiles à une prestation (allergies d'un enfant, trouble de l'apprentissage, précautions pour une personne âgée) seront recueillies oralement lors du premier rendez-vous, avec votre accord.</p>
+    <p><strong>Informations sur un enfant :</strong> seuls l'âge ou la classe sont demandés dans le formulaire ; ces informations sont fournies par les représentants légaux et utilisées uniquement pour organiser les prestations.</p>
+    <p>Les échanges avec ce site sont chiffrés (HTTPS).</p>
 
     <h2 id="cookies">6. Cookies</h2>
     <p>Ce site n'utilise aucun cookie de suivi, aucun outil de mesure d'audience et ne charge aucune ressource externe (polices, scripts) susceptible de collecter des données de navigation. Aucun bandeau de consentement n'est donc nécessaire.</p>
 
     <h2 id="responsabilite">7. Responsabilité</h2>
-    <p>Les informations publiées sur ce site sont fournies à titre indicatif et peuvent être modifiées à tout moment. Les tarifs affichés sont indicatifs ; seul un devis signé fait foi. {{identite.nomComplet}} ne saurait être tenue responsable des dommages directs ou indirects résultant de l'accès au site ou de l'utilisation des informations qu'il contient.</p>
+    <p>Les informations publiées sur ce site sont fournies à titre indicatif et peuvent être modifiées à tout moment. Les tarifs affichés sont indicatifs ; seul un devis accepté fait foi. {{identite.nomComplet}} ne saurait être tenue responsable des dommages directs ou indirects résultant de l'accès au site ou de l'utilisation des informations qu'il contient.</p>
 
     <h2 id="mediation">8. Médiation de la consommation</h2>
+    {{#if legal.mediateur.nom}}
+    <p>Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige non résolu par une réclamation écrite préalable auprès de {{identite.nomCommercial}}, le consommateur peut recourir gratuitement au médiateur de la consommation suivant :</p>
+    <address>
+      <strong>{{legal.mediateur.nom}}</strong><br>
+      {{#if legal.mediateur.adresse}}{{legal.mediateur.adresse}}<br>{{/if}}
+      {{#if legal.mediateur.email}}E-mail : <a href="mailto:{{legal.mediateur.email}}">{{legal.mediateur.email}}</a><br>{{/if}}
+      {{#if legal.mediateur.site}}Site : <a href="{{legal.mediateur.site}}" target="_blank" rel="noopener">{{legal.mediateur.site}}</a>{{/if}}
+    </address>
+    {{else}}
     <p>Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige non résolu à l'amiable, le consommateur peut recourir gratuitement à un médiateur de la consommation. Les coordonnées du médiateur compétent sont communiquées sur simple demande à <a href="{{contact.emailLien}}">{{contact.email}}</a>.</p>
+    {{/if}}
   </div>
 </section>

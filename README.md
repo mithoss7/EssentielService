@@ -1,7 +1,7 @@
 # Site vitrine – Services à domicile
 
 Site internet complet, statique et sans dépendance, pour une prestataire indépendante
-(ménage, garde d'enfants, soutien scolaire, accompagnement & déplacements).
+(ménage et repassage, garde d'enfants, soutien scolaire, aide aux seniors).
 
 **Toutes les informations personnelles et le contenu éditable sont centralisés dans un seul
 fichier : `config/site.config.js`.** Un script (`build.js`) les injecte dans l'ensemble des
@@ -41,7 +41,7 @@ site-services-domicile/
 ├── src/
 │   ├── layouts/base.html    ← squelette HTML commun (head, header, footer)
 │   ├── partials/            ← blocs réutilisables (header, footer, témoignages, bandeau CTA…)
-│   ├── pages/               ← une page = un fichier (index, à propos, tarifs, contact, mentions légales, 404)
+│   ├── pages/               ← une page = un fichier (index, à propos, tarifs, contact, mentions légales, conditions générales, 404)
 │   ├── templates/service.html ← modèle utilisé pour générer une page par service
 │   ├── static/.htaccess     ← fichiers copiés tels quels à la racine du site
 │   └── assets/
@@ -84,6 +84,13 @@ Quelques règles pratiques :
   (lettres minuscules et tirets, sans accent) et l'icône (`menage`, `enfant`, `ecole`, `voiture`,
   `coeur`, `maison`, `etoile`, `horloge`). La page, le menu, le pied de page, la grille tarifaire
   et le sitemap sont mis à jour automatiquement.
+- Une page service peut contenir : `groupes` (prestations regroupées par thème), `exclusions`
+  (« ce que je ne fais pas »), `tarif.forfaits` (forfaits d'heures dégressifs ; le prix par heure est
+  calculé automatiquement) et `note`.
+- Options utiles : `contact.horairesTelephone`, `contact.conges`, `contact.fraisDeplacement`,
+  `contact.rendezVous.url` (lien de prise de rendez-vous en ligne, bouton masqué si vide),
+  `site.enConstruction` (bandeau) et `site.indexable` (`false` = balise noindex + robots.txt
+  restrictif pendant le lancement progressif ; passer à `true` à la mise en ligne définitive).
 - Pour **retirer** un service, un témoignage, un réseau social : supprimer le bloc ou laisser `""`.
 - Pour la **photo** : déposer `portrait.jpg` dans `src/assets/img/` puis indiquer
   `photo: "assets/img/portrait.jpg"`. Sans photo, un avatar avec les initiales est affiché.
@@ -122,6 +129,49 @@ priorite: 0.8          ← priorité dans sitemap.xml
 Le build produit également : `sitemap.xml`, `robots.txt`, `favicon.svg` (monogramme aux
 initiales), `manifest.webmanifest` et les données structurées *schema.org LocalBusiness*
 (référencement local Google).
+
+---
+
+## 4 bis. Images de fond
+
+Chaque page peut avoir une photo en fond de son bandeau de titre. Il suffit de déposer le
+fichier dans **`src/assets/img/fonds/`** avec le bon nom, puis de relancer `npm run build` :
+
+| Fichier | Page |
+|---|---|
+| `accueil.jpg` | Accueil |
+| `services.jpg` | Liste des services |
+| `menage.jpg`, `garde-enfants.jpg`, `soutien-scolaire.jpg`, `aide-seniors.jpg` | Page de chaque service (nom = `slug` du service) |
+| `a-propos.jpg` | À propos |
+| `tarifs.jpg` | Tarifs |
+| `contact.jpg` | Contact |
+
+- Formats acceptés : `.webp`, `.jpg`, `.jpeg`, `.png`.
+- Taille conseillée : **1920 px de large, moins de 400 Ko** (sinon le site ralentit sur mobile).
+- Sans fichier, la page garde son fond habituel ; le build indique les images manquantes.
+- La photo reste pleinement visible : seul le texte est posé sur un panneau translucide
+  (classe `.hero-panel`). Réglages dans `style.css`, section « Images de fond » : hauteur du
+  bandeau (`min-height`), opacité du panneau (`rgba(...)`), flou (`backdrop-filter`). Sur l'accueil,
+  l'illustration de la maison est masquée quand une photo est présente.
+- Pour changer la clé d'une page : ligne `fond:` de son front matter.
+
+**Crédits photos** (toutes sous [licence Unsplash](https://unsplash.com/license) : usage libre et
+gratuit, y compris commercial ; la mention n'est pas obligatoire, elle est donnée par courtoisie) :
+
+| Fichier | Auteur | Source |
+|---|---|---|
+| `accueil.jpg` | Clay Banks | <https://unsplash.com/photos/7pvC_d2iXSE> |
+| `services.jpg` | Aaron Huber | <https://unsplash.com/photos/G7sE2S4Lab4> |
+| `menage.jpg` | Greg Rosenke | <https://unsplash.com/photos/KMcOLSZuTe0> |
+| `garde-enfants.jpg` | Roman Kravtsov | <https://unsplash.com/photos/zk3LB1psbkY> |
+| `soutien-scolaire.jpg` | Susan Holt Simpson | <https://unsplash.com/photos/GQ327RPuxhI> |
+| `aide-seniors.jpg` | Jaime Maldonado | <https://unsplash.com/photos/0l-73OKmRXc> |
+| `a-propos.jpg` | Emilipothèse | <https://unsplash.com/photos/3k4VzLaQ53s> |
+| `tarifs.jpg` | charlesdeluvio | <https://unsplash.com/photos/GlavtG-umzE> |
+| `contact.jpg` | Quino Al | <https://unsplash.com/photos/8gWEAAXJjtI> |
+
+Retouches : redimensionnement à 1920 px et compression JPEG (qualité 78) ; `tarifs.jpg` recadrée
+en paysage ; `contact.jpg` retournée horizontalement pour dégager la zone de texte à gauche.
 
 ---
 
@@ -205,7 +255,44 @@ navigateur (F12 → icône « appareil mobile »).
 
 ---
 
-## 9. Check-list avant mise en ligne de la cliente
+## 9. Conformité légale (France)
+
+Le site fournit : mentions légales (LCEN, RGPD, médiation), conditions générales de prestation
+(avec modèle de formulaire de rétractation), mention de TVA près des prix, mention « EI ».
+Le build (`node build.js`) affiche des avertissements `OBLIGATOIRE` tant qu'une information
+légale manque dans `config/site.config.js` (section `legal`).
+
+À faire par la prestataire (le site ne peut pas le faire à sa place) :
+
+- [ ] **Médiateur de la consommation** : adhérer à un médiateur référencé (liste CECMC sur
+      economie.gouv.fr), puis renseigner `legal.mediateur` (nom, adresse, site).
+- [ ] **Assurance RC Pro** : souscrire (avec garde d'enfants couverte) puis renseigner `legal.assurance`.
+- [ ] **Adresse de l'éditrice** : vérifier l'adresse publiée (`legal.adresseEditeur`, sinon rue + ville) ;
+      domiciliation possible pour ne pas exposer le domicile. Elle doit correspondre à l'adresse déclarée.
+- [ ] **Concordance avec l'inscription officielle** (extrait SIRENE / guichet unique) : nom, nom
+      commercial, adresse, code APE ; renseigner `legal.registre` et `legal.codeAPE`.
+- [ ] **Déclaration « services à la personne »** sur NOVA (nova.entreprises.gouv.fr) → `identite.numeroSAP`.
+      Seulement après : passer `tarifs.creditImpot.actif` à `true`. L'aide aux actes essentiels des
+      seniors (toilette, lever, habillage) exige une autorisation du Conseil départemental ; la garde
+      des moins de 3 ans, un agrément.
+- [ ] **Modèles de devis / contrat** reprenant les mentions des conditions générales (rétractation
+      14 jours, demande d'exécution anticipée signée, TVA non applicable art. 293 B, « EI », SIRET,
+      assureur, médiateur) ; à remettre avant tout paiement.
+- [ ] **Preuves** des affirmations du site : 8 ans d'expérience, CAP AEPE, PSC1 à jour, extrait de
+      casier vierge, permis et véhicule assuré. Retirer toute ligne qui ne serait pas exacte.
+- [ ] **Hébergeur** : remplacer la valeur par défaut (OVH) par l'hébergeur réel si différent.
+- [ ] **HTTPS** : activer le certificat SSL et décommenter la redirection dans `.htaccess`
+      (les mentions légales annoncent des échanges chiffrés).
+- [ ] **Formulaire** : si un service tiers est branché (Formspree…), renseigner
+      `contact.formulaire.prestataire` (nom, pays).
+- [ ] **Nom commercial** : vérifier l'absence d'antériorité (base INPI, recherche web) avant de
+      réserver le domaine.
+- [ ] Relecture finale des conditions générales (en particulier la clause d'annulation tardive) par
+      un professionnel (juriste, CMA, chambre de commerce) : le texte fourni est un modèle.
+
+---
+
+## 10. Check-list avant mise en ligne de la cliente
 
 - [ ] Toutes les valeurs de `config/site.config.js` remplacées (le build n'affiche plus d'avertissement)
 - [ ] Numéro SIRET et statut exacts ; numéro de déclaration *Services à la personne* si obtenu

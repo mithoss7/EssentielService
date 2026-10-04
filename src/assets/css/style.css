@@ -363,6 +363,7 @@ strong { font-weight: 750; }
   padding: 0.5rem 0.75rem; border-radius: 999px;
 }
 .header-phone:hover { background: var(--navy-100); }
+.nav__link, .header-phone, .header-actions .btn { white-space: nowrap; }
 .header-phone .icon { color: var(--aqua-700); }
 
 .burger {
@@ -416,6 +417,10 @@ body.menu-open { overflow: hidden; }
   .header-actions { display: inline-flex; }
   .burger { display: none; }
   .mobile-menu { display: none; }
+}
+/* Écrans moyens : le numéro reste visible dans le bandeau d'accueil et le pied de page */
+@media (min-width: 960px) and (max-width: 1239px) {
+  .header-phone { display: none; }
 }
 
 /* Bandeau « en construction » */
@@ -600,6 +605,60 @@ body.menu-open { overflow: hidden; }
   pointer-events: none;
 }
 .page-hero .container { position: relative; }
+
+/* Images de fond (src/assets/img/fonds/) : la photo est l'élément central du bandeau.
+   Pas de voile sur toute l'image : seul le texte est posé sur un panneau translucide
+   (.hero-panel), le reste de la photo reste pleinement visible. Réglages : hauteur
+   (min-height), opacité du panneau (rgba), flou (backdrop-filter). */
+.hero--image, .page-hero--image, .section--image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero--image::before, .page-hero--image::before, .page-hero--image::after { display: none; }
+.hero--image .hero__visual { display: none; }
+
+.hero--image, .page-hero--image {
+  display: flex;
+  align-items: center;
+  min-height: clamp(380px, 56vh, 560px);
+}
+.hero--image { min-height: clamp(460px, 72vh, 680px); }
+.hero--image > .container, .page-hero--image > .container { position: relative; }
+
+.hero--image .hero-panel, .page-hero--image .hero-panel, .section--image .hero-panel {
+  max-width: 640px;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(15, 42, 68, 0.28);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.page-hero--image .hero-panel {
+  background: rgba(15, 42, 68, 0.78);
+}
+.hero--image .hero-panel, .section--image .hero-panel {
+  background: rgba(251, 248, 242, 0.86);
+}
+.hero--image .hero__inner { grid-template-columns: 1fr; }
+
+.section--image {
+  position: relative;
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
+.section--image > .container { position: relative; }
+
+/* Mobile : la photo occupe le haut du bandeau, le panneau se pose dessous */
+@media (max-width: 899px) {
+  .hero--image, .page-hero--image, .section--image {
+    display: block;
+    min-height: 0;
+    padding-top: clamp(9rem, 48vw, 14rem);
+    background-position: center top;
+  }
+  .hero--image .hero-panel, .page-hero--image .hero-panel, .section--image .hero-panel { max-width: none; }
+  .section--image .about-hero { gap: 1.5rem; }
+}
 .page-hero h1 { color: var(--white); margin-bottom: 0.75rem; }
 .page-hero .lead { color: rgba(255, 255, 255, 0.8); max-width: 640px; }
 .page-hero__top { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.25rem; }
@@ -626,6 +685,23 @@ body.menu-open { overflow: hidden; }
 .price-card__amount { font-family: var(--font-display); font-size: 2.6rem; color: var(--aqua-300); line-height: 1; margin: 0.5rem 0 0.25rem; }
 .price-card__amount small { font-size: 1.1rem; color: rgba(255, 255, 255, 0.75); font-family: var(--font-body); font-weight: 600; }
 .price-card p { font-size: 0.95rem; }
+
+/* Forfaits dégressifs (carte de prix) */
+.forfaits__title { color: var(--white); font-size: 1rem; margin: 1.1rem 0 0.4rem; }
+.forfaits { list-style: none; margin: 0; padding: 0; }
+.forfaits li {
+  display: grid; grid-template-columns: 3.2rem 1fr auto; gap: 0.5rem; align-items: baseline;
+  padding: 0.45rem 0; border-top: 1px solid rgba(255, 255, 255, 0.14); font-size: 0.95rem;
+}
+.forfaits li strong { color: var(--white); font-weight: 750; }
+.forfaits li small { color: var(--aqua-300); font-weight: 650; }
+
+/* Prestations regroupées par thème et exclusions (pages service) */
+.prestation-groups { display: grid; gap: 1.5rem 2rem; margin-top: 0.75rem; }
+@media (min-width: 700px) { .prestation-groups { grid-template-columns: repeat(2, 1fr); } }
+.prestation-group h4 { margin: 0 0 0.6rem; color: var(--navy-900); }
+.exclusions { margin: 0.5rem 0 0; padding-left: 1.2em; color: var(--muted); font-size: 0.95rem; }
+.exclusions li { margin-bottom: 0.35em; }
 
 .contact-card__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.85rem; }
 .contact-card__list li { display: flex; gap: 0.75rem; align-items: flex-start; }

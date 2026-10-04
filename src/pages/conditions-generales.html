@@ -1,0 +1,99 @@
+---
+titre: Conditions générales de prestation
+description: Conditions générales de prestation de services à domicile : devis, tarifs, paiement, droit de rétractation, annulation, assurance et médiation.
+section: legal
+priorite: 0.3
+frequence: yearly
+bodyClass: page-legal
+---
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb" aria-label="Fil d'Ariane">
+      <li><a href="{{root}}index.html">Accueil</a></li>
+      <li aria-current="page">Conditions générales</li>
+    </ol>
+    <h1>Conditions générales de prestation</h1>
+    <p class="lead">Les règles qui s'appliquent entre {{identite.nomCommercial}} et ses clients. Elles sont remises avec chaque devis.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container prose">
+    <p class="meta">Dernière mise à jour : {{dateMiseAJour}}</p>
+
+    <h2 id="objet">1. Objet</h2>
+    <p>Les présentes conditions régissent les prestations de services à domicile (<em>{{#each services}}{{#unless @first}}, {{/unless}}{{titre}}{{/each}}</em>) fournies par <strong>{{identite.nomEI}}</strong>, {{identite.statut}}, SIRET {{identite.siret}}, {{legal.adresseEditeurAffichee}}, ci-après « la Prestataire », à ses clients, ci-après « le Client ». Les dispositions propres aux consommateurs (articles 5 et 10) ne s'appliquent qu'aux Clients agissant à des fins non professionnelles ; l'article 11 précise les règles applicables aux clients professionnels. Elles complètent le devis, qui précise la nature, la durée, la fréquence et le prix de la prestation.</p>
+
+    <h2 id="devis">2. Devis et formation du contrat</h2>
+    <p>Le devis est gratuit et sans engagement. Il est établi par écrit sous 48 heures après un premier échange (téléphone, e-mail ou rendez-vous au domicile du Client) et reste valable le temps indiqué sur le document. Le contrat est formé lorsque le Client retourne le devis daté et signé, ou l'accepte par écrit (e-mail). Toute modification de la prestation fait l'objet d'un nouveau devis ou d'un avenant écrit.</p>
+
+    <h2 id="prestations">3. Prestations</h2>
+    <p>La Prestataire réalise uniquement les prestations décrites dans le devis. En particulier :</p>
+    <ul>
+      <li><strong>Ménage et repassage :</strong> selon la liste des tâches convenue, pour des particuliers, des locations, des bureaux, des commerces ou des hébergements. Les produits d'entretien et le matériel sont fournis par le Client. Le repassage est facturé à part. La durée minimale d'intervention est de 2 heures. Sont exclus notamment : les travaux en hauteur nécessitant une échelle importante ou un équipement spécifique, le nettoyage après sinistre ou de déchets dangereux ou contaminés, la manipulation de produits chimiques dangereux, les travaux de plomberie ou d'électricité, la réparation d'appareils, le déplacement d'objets extrêmement lourds, le jardinage et le lavage de véhicules.</li>
+      <li><strong>Garde d'enfants :</strong> garde à domicile d'enfants de 3 à 10 ans, 4 enfants au maximum, au domicile des parents et sous leur autorité. Sont exclus : la garde des enfants de moins de 3 ans (qui exige un agrément), la garde de nuit, la garde d'un enfant malade et le transport en voiture. La Prestataire n'administre aucun médicament sans ordonnance et autorisation écrite d'un parent.</li>
+      <li><strong>Soutien scolaire :</strong> aide aux devoirs, révisions et consolidation des acquis pour les enfants de la maternelle au CM2, selon le niveau et les besoins de chaque enfant. La durée minimale d'une séance est de 1 h 30.</li>
+      <li><strong>Aide aux seniors :</strong> entretien du logement et du linge, préparation des repas et courses, aide au courrier et aux petites démarches, présence et compagnie. Sont exclus : l'aide à la toilette, à l'habillage et au lever, les soins médicaux et paramédicaux et le transport en voiture.</li>
+      <li><strong>Forfaits d'heures :</strong> des forfaits dégressifs de 5, 10 ou 20 heures sont proposés ; leurs conditions (utilisation, durée de validité) sont précisées au devis.</li>
+    </ul>
+    <p>La Prestataire n'intervient pas en présence d'animaux.</p>
+
+    <h2 id="tarifs">4. Tarifs et paiement</h2>
+    <p>Les prix sont indiqués en euros, nets de taxe : {{legal.tvaMention}}. Le tarif applicable est celui du devis ; les tarifs publiés sur le site sont indicatifs. Des frais de déplacement sont appliqués au-delà de la zone d'intervention et indiqués au devis.</p>
+    <p>Le paiement s'effectue par virement, chèque ou espèces. Les prestations ponctuelles sont réglées après chaque intervention ; pour les prestations régulières, une facture récapitulative peut être établie en fin de mois, à régler à réception. Aucun acompte n'est demandé pour les prestations habituelles ; un acompte peut être demandé pour une prestation importante ou nécessitant une réservation spécifique. Le paiement en espèces est limité à 1 000 € par opération, conformément à la réglementation. En cas de retard de paiement, la Prestataire peut suspendre les interventions jusqu'au règlement des sommes dues.</p>
+
+    <h2 id="retractation">5. Droit de rétractation (consommateurs)</h2>
+    <p>Lorsque le contrat est conclu à distance (téléphone, e-mail, site) ou hors établissement (notamment au domicile du Client), le Client consommateur dispose d'un délai de <strong>14 jours</strong>, à compter de la conclusion du contrat, pour se rétracter sans avoir à justifier de motif ni à payer de pénalités (articles L.221-18 et suivants du Code de la consommation).</p>
+    <p>Pour exercer ce droit, le Client notifie sa décision à la Prestataire (<a href="{{contact.emailLien}}">{{contact.email}}</a> ou par courrier) au moyen du modèle de formulaire ci-dessous ou de toute déclaration dénuée d'ambiguïté.</p>
+    <p>Si le Client demande expressément que la prestation commence avant la fin du délai de rétractation, par écrit (devis signé comportant cette demande), il devra payer le montant correspondant aux heures déjà réalisées au moment où il a informé la Prestataire de sa rétractation. Aucun paiement ne peut être exigé avant l'expiration d'un délai de 7 jours à compter de la conclusion d'un contrat hors établissement, sauf cas prévus par la loi.</p>
+
+    <h2 id="annulation">6. Annulation ou report d'une intervention</h2>
+    <p>Le Client peut annuler ou reporter une intervention jusqu'à 24 heures avant l'heure prévue, sans frais, par téléphone, SMS ou e-mail. Une première annulation tardive (moins de 24 heures avant) n'entraîne aucun frais. En cas d'annulations tardives répétées, ou d'annulation tardive ayant entraîné un déplacement inutile, 1 heure de prestation peut être facturée.</p>
+    <p>Si le Client est absent à l'heure prévue et que l'intervention ne peut pas être réalisée (par exemple parce qu'aucun accès au lieu n'a été prévu), 1 heure de prestation peut être facturée, sauf cas de force majeure. La Prestataire privilégie toujours l'échange et la recherche d'une solution adaptée avec le Client.</p>
+    <p>En cas d'empêchement, la Prestataire prévient le Client dès que possible et, si elle le peut, propose un remplacement ou un report ; aucune pénalité n'est due par le Client dans ce cas.</p>
+
+    <h2 id="obligations">7. Obligations du Client</h2>
+    <ul>
+      <li>Permettre l'accès au lieu de la prestation aux horaires convenus et mettre à disposition l'eau, l'électricité, les produits et le matériel nécessaires.</li>
+      <li>Signaler à l'avance tout élément utile à la sécurité ou au bon déroulement de la prestation : zones fragiles, consignes particulières, besoins spécifiques de l'enfant.</li>
+      <li>Pour la garde d'enfants, être joignable pendant l'intervention (ou désigner une personne de confiance) et communiquer les coordonnées des personnes à contacter en cas d'urgence, ainsi que les consignes utiles (allergies, autorisations de sortie).</li>
+      <li>Pour l'aide aux seniors, informer la Prestataire des précautions utiles et des personnes à prévenir ; le Client doit être la personne bénéficiaire ou sa famille, ou son représentant légal lorsque la personne est protégée.</li>
+      <li>Pour le soutien scolaire, fournir le matériel scolaire de l'enfant (cahiers, livres, leçons) et informer la Prestataire de ses difficultés et de ses objectifs.</li>
+      <li>Ne pas confier à la Prestataire de tâches étrangères à la prestation convenue ni de tâches nécessitant une qualification particulière.</li>
+    </ul>
+
+    <h2 id="responsabilite">8. Responsabilité et assurance</h2>
+    <p>La Prestataire est responsable des dommages causés par sa faute dans l'exécution de la prestation.{{#if legal.assurance.nom}} Elle est couverte par une assurance de responsabilité civile professionnelle souscrite auprès de {{legal.assurance.nom}}{{#if legal.assurance.adresse}} ({{legal.assurance.adresse}}){{/if}}{{#if legal.assurance.couverture}}, couverture géographique : {{legal.assurance.couverture}}{{/if}}.{{/if}} Tout dommage doit être signalé sans délai, de préférence dans les 48 heures, afin de permettre la déclaration auprès de l'assureur. Le soutien scolaire est une aide au travail de l'enfant : la Prestataire ne garantit pas de résultats scolaires.</p>
+
+    <h2 id="confidentialite">9. Confidentialité et données personnelles</h2>
+    <p>La Prestataire est tenue à la discrétion sur tout ce qu'elle voit ou entend au domicile du Client. Le traitement des données personnelles est décrit dans les <a href="{{root}}mentions-legales.html#donnees">mentions légales</a>.</p>
+
+    <h2 id="reclamations">10. Réclamations et médiation (consommateurs)</h2>
+    <p>Toute réclamation peut être adressée à <a href="{{contact.emailLien}}">{{contact.email}}</a> ; la Prestataire s'engage à répondre dans les meilleurs délais.</p>
+    {{#if legal.mediateur.nom}}
+    <p>À défaut de solution amiable, le Client consommateur peut recourir gratuitement au médiateur de la consommation : <strong>{{legal.mediateur.nom}}</strong>{{#if legal.mediateur.adresse}}, {{legal.mediateur.adresse}}{{/if}}{{#if legal.mediateur.site}}, <a href="{{legal.mediateur.site}}" target="_blank" rel="noopener">{{legal.mediateur.site}}</a>{{/if}}.</p>
+    {{else}}
+    <p>À défaut de solution amiable, le Client consommateur peut recourir gratuitement à un médiateur de la consommation, dont les coordonnées sont communiquées sur simple demande.</p>
+    {{/if}}
+
+    <h2 id="professionnels">11. Clients professionnels</h2>
+    <p>Lorsque le Client est un professionnel (entreprise, commerce, propriétaire de gîtes ou de locations à titre professionnel), le droit de rétractation et la médiation de la consommation ne s'appliquent pas. Les factures sont payables à la date indiquée ; tout retard entraîne de plein droit des pénalités de retard égales à trois fois le taux d'intérêt légal et une indemnité forfaitaire de 40 € pour frais de recouvrement.</p>
+
+    <h2 id="droit">12. Droit applicable et litiges</h2>
+    <p>Le contrat est soumis au droit français. À défaut de résolution amiable, le litige relève des tribunaux compétents ; le Client consommateur peut saisir, à son choix, la juridiction du lieu où il demeure ou celle du lieu où le dommage est survenu.</p>
+
+    <h2 id="formulaire">Annexe – Modèle de formulaire de rétractation</h2>
+    <p><em>(À compléter et à renvoyer uniquement si vous souhaitez vous rétracter du contrat.)</em></p>
+    <blockquote>
+      <p>À l'attention de {{identite.nomEI}}, {{legal.adresseEditeurAffichee}}, {{contact.email}} :</p>
+      <p>Je vous notifie par la présente ma rétractation du contrat portant sur la prestation de services ci-dessous :</p>
+      <ul>
+        <li>Prestation commandée le : ………………………</li>
+        <li>Nom du Client : ………………………</li>
+        <li>Adresse du Client : ………………………</li>
+        <li>Signature du Client (uniquement en cas de notification sur papier) : ………………………</li>
+        <li>Date : ………………………</li>
+      </ul>
+    </blockquote>
+  </div>
+</section>

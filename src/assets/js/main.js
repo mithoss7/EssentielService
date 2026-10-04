@@ -118,6 +118,11 @@
       return select && select.selectedIndex > 0 ? select.options[select.selectedIndex].text : 'Non précisé';
     };
 
+    var optionLabel = function (name) {
+      var el = form.querySelector('[name="' + name + '"]');
+      return el && el.selectedIndex > 0 ? el.options[el.selectedIndex].text : 'non précisé';
+    };
+
     var buildMailto = function (data) {
       var subject = 'Demande de devis – ' + serviceLabel();
       var body = [
@@ -129,7 +134,12 @@
         'Nom : ' + (data.get('nom') || ''),
         'E-mail : ' + (data.get('email') || ''),
         'Téléphone : ' + (data.get('telephone') || 'non renseigné'),
-        'Service souhaité : ' + serviceLabel()
+        'Commune : ' + (data.get('commune') || 'non renseignée'),
+        'Service souhaité : ' + serviceLabel(),
+        'Fréquence : ' + optionLabel('frequence'),
+        'À partir de : ' + (data.get('debut') || 'non précisé'),
+        'Âge ou classe de l\'enfant : ' + (data.get('classe') || 'non précisé'),
+        'Créneau de rappel : ' + optionLabel('creneau')
       ].join('\n');
       return 'mailto:' + mailto + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     };

@@ -1,18 +1,21 @@
 ---
+fond: tarifs
 titre: Tarifs
-description: Tarifs indicatifs des prestations à domicile (ménage, garde d'enfants, soutien scolaire, déplacements). Devis gratuit, paiement CESU accepté, crédit d'impôt.
+description: Tarifs des prestations à domicile (ménage et repassage, garde d'enfants, soutien scolaire, aide aux seniors) et forfaits dégressifs. Devis gratuit et sans engagement.
 section: tarifs
 priorite: 0.8
 bodyClass: page-tarifs
 ---
-<section class="page-hero">
+<section class="page-hero{{#if page.fond}} page-hero--image{{/if}}"{{#if page.fond}} style="background-image: url('{{page.fond}}')"{{/if}}>
   <div class="container">
-    <ol class="breadcrumb" aria-label="Fil d'Ariane">
-      <li><a href="{{root}}index.html">Accueil</a></li>
-      <li aria-current="page">Tarifs</li>
-    </ol>
-    <h1>Des tarifs clairs, sans surprise</h1>
-    <p class="lead">{{tarifs.introduction}}</p>
+    <div class="hero-panel">
+      <ol class="breadcrumb" aria-label="Fil d'Ariane">
+        <li><a href="{{root}}index.html">Accueil</a></li>
+        <li aria-current="page">Tarifs</li>
+      </ol>
+      <h1>Des tarifs clairs, sans surprise</h1>
+      <p class="lead">{{tarifs.introduction}}</p>
+    </div>
   </div>
 </section>
 
@@ -33,11 +36,12 @@ bodyClass: page-tarifs
           <tr>
             <td><a class="price-table__service" href="{{root}}{{url}}"><span class="icon-badge" aria-hidden="true">{{icon icone}}</span>{{titre}}</a></td>
             <td>{{#if tarif}}<span class="price-table__amount">{{tarif.montantAffiche}} <small>/ {{tarif.unite}}</small></span>{{else}}Sur devis{{/if}}</td>
-            <td class="price-table__detail">{{#if tarif.precision}}{{tarif.precision}}{{/if}}{{#if note}}<br>{{note}}{{/if}}</td>
+            <td class="price-table__detail">{{#if tarif.precision}}{{tarif.precision}}{{/if}}{{#if tarif.forfaits}}<br><strong>Forfaits :</strong> {{#each tarif.forfaits}}{{heures}} h = {{prixAffiche}} ({{parHeure}}){{#unless @last}} · {{/unless}}{{/each}}{{/if}}{{#if note}}<br>{{note}}{{/if}}</td>
           </tr>
           {{/each}}
         </tbody>
       </table>
+      <p class="text-muted" style="font-size:0.9rem;margin-top:0.75rem">Prix nets en euros – {{legal.tvaMention}}. Tarifs indicatifs : seul le devis accepté fait foi. <a href="{{root}}conditions-generales.html">Conditions générales de prestation</a>.</p>
     </div>
 
     <div class="grid grid--2">

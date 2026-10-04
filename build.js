@@ -353,6 +353,13 @@ function enrichConfig(raw) {
       const montant = String(service.tarif.montant).replace('.', ',');
       service.tarif.montantAffiche = `${montant} €`;
       service.tarif.affiche = `${montant} €/${service.tarif.unite || 'h'}`;
+      // Forfaits d'heures dégressifs : prix affichés et prix par heure calculé
+      const fmt = (n) => String(Math.round(n * 100) / 100).replace('.', ',');
+      service.tarif.forfaits = (service.tarif.forfaits || []).map((fo) => ({
+        ...fo,
+        prixAffiche: `${fmt(fo.prix)} €`,
+        parHeure: `${fmt(fo.prix / fo.heures)} €/${service.tarif.unite || 'h'}`
+      }));
     }
     return service;
   });
@@ -367,6 +374,15 @@ function enrichConfig(raw) {
     ...t,
     initiales: String(t.auteur || '?').split(/\s+/).map((w) => w[0]).join('').replace(/[^A-Za-zÀ-ÿ]/g, '').slice(0, 2).toUpperCase()
   }));
+
+  // Mentions légales : valeurs dérivées
+  cfg.identite.nomEI = `${cfg.identite.nomComplet} EI`;
+  // Adresse de l'éditrice : legal.adresseEditeur (domiciliation par exemple), sinon
+  // l'adresse de contact telle qu'elle est autorisée à s'afficher (afficherRue).
+  cfg.legal.adresseEditeurAffichee = cfg.legal.adresseEditeur || a.affichee;
+  cfg.legal.tvaMention = cfg.legal.tva
+    ? `TVA intracommunautaire : ${cfg.legal.tva}`
+    : 'TVA non applicable, article 293 B du Code général des impôts';
 
   // Dates
   cfg.anneeCourante = now.getFullYear();
@@ -419,6 +435,16 @@ function checkConfig(cfg) {
   if (!/^https?:\/\//.test(cfg.site.url)) warnings.push('site.url doit commencer par https:// (ex. https://www.mon-domaine.fr).');
   if (cfg.site.description && cfg.site.description.length > 165) warnings.push(`site.description est longue (${cfg.site.description.length} caractères, 160 conseillés).`);
   if (!cfg.contact.formulaire.endpoint) warnings.push('contact.formulaire.endpoint est vide : le formulaire ouvrira la messagerie du visiteur (mailto). Voir README.');
+  const l = cfg.legal || {};
+  if (!(l.mediateur && l.mediateur.nom && l.mediateur.site)) warnings.push('OBLIGATOIRE – legal.mediateur : médiateur de la consommation à désigner et à afficher (art. L.616-1 du Code de la consommation).');
+  if (!(l.assurance && l.assurance.nom)) warnings.push('legal.assurance : assureur RC Pro non renseigné (information due au client, art. R.111-2 du Code de la consommation) ; la mention d\'assurance reste masquée sur le site tant qu\'il est vide.');
+  if (!cfg.legal.adresseEditeur) warnings.push('OBLIGATOIRE – legal.adresseEditeur vide : les mentions légales n\'indiquent que la ville. Renseigner l\'adresse déclarée (domiciliation si le domicile doit rester privé).');
+  if (cfg.site.indexable !== true) warnings.push('site.indexable n\'est pas à true : le site porte une balise noindex et robots.txt interdit l\'exploration (lancement progressif). À activer à la mise en ligne définitive.');
+  if (cfg.site.enConstruction) warnings.push('site.enConstruction est à true : le bandeau « site en construction » est affiché.');
+  if (/ovh/i.test((l.hebergeur && l.hebergeur.nom) || '')) warnings.push('legal.hebergeur : valeur par défaut (OVH). À remplacer par l\'hébergeur réel si différent.');
+  if (!cfg.identite.numeroSAP) warnings.push('identite.numeroSAP vide : activité non déclarée « services à la personne » (le crédit d\'impôt doit rester désactivé).');
+  if (!l.registre) warnings.push('legal.registre vide : reporter la mention d\'immatriculation figurant sur l\'extrait officiel (RCS, répertoire des métiers…) ou la laisser vide si aucune.');
+  if (cfg.contact.formulaire.endpoint && !(cfg.contact.formulaire.prestataire && cfg.contact.formulaire.prestataire.nom)) warnings.push('contact.formulaire.prestataire : nommer le service tiers du formulaire (RGPD).');
   if (!cfg.services.length) warnings.push('Aucun service défini.');
   return warnings;
 }
@@ -467,6 +493,18 @@ function build() {
 
   const pages = []; // { outputPath, url, priority, changefreq }
 
+  // Images de fond : src/assets/img/fonds/<clé>.(webp|jpg|jpeg|png)
+  // La clé vient du front matter (fond: tarifs) ou du slug du service.
+  const FONDS = path.join(SRC, 'assets', 'img', 'fonds');
+  const fondsAttendus = new Map(); // clé -> fichier trouvé ('' si absent)
+  function trouverFond(cle) {
+    if (!fondsAttendus.has(cle)) {
+      const ext = ['webp', 'jpg', 'jpeg', 'png'].find((e) => fs.existsSync(path.join(FONDS, `${cle}.${e}`)));
+      fondsAttendus.set(cle, ext ? `${cle}.${ext}` : '');
+    }
+    return fondsAttendus.get(cle);
+  }
+
   /** Rend une page complète (contenu + layout) et l'écrit dans dist/. */
   function renderPage({ body, meta, outputRel, extra = {} }) {
     const depth = outputRel.split('/').length - 1;
@@ -474,6 +512,8 @@ function build() {
     // front matter (root: /) pour les pages servies à n'importe quelle adresse (404).
     const root = meta.root !== undefined ? String(meta.root) : (depth === 0 ? '' : '../'.repeat(depth));
     const urlPath = outputRel === 'index.html' ? '' : outputRel.replace(/\/index\.html$/, '/');
+    const cleFond = meta.fond || (extra.service ? extra.service.slug : '');
+    const fichierFond = cleFond ? trouverFond(cleFond) : '';
     const page = {
       ...meta,
       root,
@@ -482,7 +522,8 @@ function build() {
       titreComplet: meta.titre ? `${meta.titre} – ${cfg.identite.nomCommercial}` : cfg.site.titre,
       description: meta.description || cfg.site.description,
       isHome: outputRel === 'index.html',
-      section: meta.section || ''
+      section: meta.section || '',
+      fond: fichierFond ? `${root}assets/img/fonds/${fichierFond}` : ''
     };
     const nav = [
       { label: 'Accueil', href: `${root}index.html`, section: 'accueil' },
@@ -539,7 +580,9 @@ function build() {
   write(path.join(DIST, 'sitemap.xml'), sitemap);
 
   // robots.txt
-  write(path.join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${cfg.site.url}/sitemap.xml\n`);
+  write(path.join(DIST, 'robots.txt'), cfg.site.indexable === true
+    ? `User-agent: *\nAllow: /\n\nSitemap: ${cfg.site.url}/sitemap.xml\n`
+    : `User-agent: *\nDisallow: /\n`);
 
   // favicon.svg (monogramme aux couleurs de la charte)
   const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
@@ -565,6 +608,9 @@ function build() {
   // Rapport
   const ms = Date.now() - started;
   console.log(`✔ Site généré dans dist/ (${pages.length} pages, ${ms} ms)`);
+  const fondsManquants = [...fondsAttendus].filter(([, f]) => !f).map(([cle]) => `${cle}.jpg`);
+  console.log(`  Images de fond : ${fondsAttendus.size - fondsManquants.length}/${fondsAttendus.size}` +
+    (fondsManquants.length ? ` (absentes dans src/assets/img/fonds/ : ${fondsManquants.join(', ')})` : ''));
   const warnings = checkConfig(cfg);
   if (warnings.length) {
     console.log('\nAvertissements de configuration :');
