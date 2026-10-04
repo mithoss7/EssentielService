@@ -44,6 +44,22 @@ bodyClass: page-service
       </div>
       {{/if}}
 
+      {{#if service.groupes}}
+      <div class="card reveal">
+        <h3>Ce que comprend la prestation</h3>
+        <div class="prestation-groups">
+          {{#each service.groupes}}
+          <div class="prestation-group">
+            <h4>{{titre}}</h4>
+            <ul class="checklist">
+              {{#each items}}<li>{{icon "check-circle"}}<span>{{this}}</span></li>{{/each}}
+            </ul>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
       {{#if service.pourQui}}
       <div class="reveal">
         <h3>Pour qui ?</h3>
@@ -55,13 +71,22 @@ bodyClass: page-service
       </div>
       {{/if}}
 
+      {{#if service.exclusions}}
+      <div class="reveal">
+        <h3>Ce que je ne fais pas</h3>
+        <ul class="exclusions">
+          {{#each service.exclusions}}<li>{{this}}</li>{{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
       {{#if service.note}}
       <p class="note-box reveal"><strong>Bon à savoir :</strong> {{service.note}}</p>
       {{/if}}
 
       <div class="reveal">
         <h3>Comment se passe la première intervention ?</h3>
-        <p>Après un premier échange par téléphone ou par e-mail, je viens vous rencontrer chez vous, gratuitement, pour comprendre vos attentes et voir les lieux. Nous fixons ensemble les horaires, la fréquence et les détails pratiques. Vous recevez ensuite un devis clair sous 48 h ; l'intervention commence dès que vous le validez.</p>
+        <p>Après un premier échange par téléphone ou par e-mail, je viens vous rencontrer chez vous, gratuitement, pour comprendre vos attentes et préciser ensemble le cadre de la prestation. Nous fixons ensemble les horaires, la fréquence et les détails pratiques. Vous recevez ensuite un devis clair sous 48 h ; l'intervention commence dès que vous le validez.</p>
       </div>
     </article>
 
@@ -71,6 +96,12 @@ bodyClass: page-service
         <h3>Tarif indicatif</h3>
         <div class="price-card__amount">{{service.tarif.montantAffiche}} <small>/ {{service.tarif.unite}}</small></div>
         {{#if service.tarif.precision}}<p>{{service.tarif.precision}}</p>{{/if}}
+        {{#if service.tarif.forfaits}}
+        <h4 class="forfaits__title">Forfaits dégressifs</h4>
+        <ul class="forfaits">
+          {{#each service.tarif.forfaits}}<li><span>{{heures}} h</span><strong>{{prixAffiche}}</strong><small>{{parHeure}}</small></li>{{/each}}
+        </ul>
+        {{/if}}
         <p style="font-size:0.85rem;opacity:0.8">Prix nets – {{legal.tvaMention}}.</p>
         {{#if tarifs.creditImpot.actif}}<p class="pill pill--aqua mt-2">{{icon "pourcent"}} Éligible au crédit d'impôt 50 %*</p>{{/if}}
         <a class="link-arrow mt-3" href="{{root}}tarifs.html" style="color:#7FC8BC">Voir tous les tarifs {{icon "fleche"}}</a>

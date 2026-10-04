@@ -18,7 +18,7 @@ bodyClass: page-accueil
       </div>
       <ul class="hero__trust">
         <li>{{icon "check-circle"}} Interlocutrice unique</li>
-        <li>{{icon "check-circle"}} {{identite.anneesExperience}} ans d'expérience</li>
+        <li>{{icon "check-circle"}} Devis gratuit sous 48 h</li>
         <li>{{icon "check-circle"}} {{contact.adresse.ville}} et alentours</li>
       </ul>
     </div>
@@ -31,7 +31,7 @@ bodyClass: page-accueil
   <div class="container">
     <div class="section-header section-header--center">
       <span class="eyebrow">Mes services</span>
-      <h2>Trois façons de vous simplifier le quotidien</h2>
+      <h2>Des services pour vous simplifier le quotidien</h2>
       <p>Des prestations sur mesure, à l'heure ou au forfait, ponctuelles ou régulières. Vous choisissez, je m'adapte.</p>
     </div>
     {{> services-grid}}
@@ -89,11 +89,12 @@ bodyClass: page-accueil
       <div class="reveal" data-delay="1">
         <span class="eyebrow">Pourquoi me faire confiance</span>
         <h2>Une professionnelle que vous connaissez, pas un prestataire anonyme</h2>
-        <p class="lead">{{identite.presentation.0}}</p>
+        <p class="lead">{{identite.presentation.1}}</p>
         <ul class="checklist mt-3">
           {{#each identite.garanties}}
           <li>{{icon "check"}}<span>{{this}}</span></li>
           {{/each}}
+          {{#if legal.assurance.nom}}<li>{{icon "check"}}<span>Assurance responsabilité civile professionnelle</span></li>{{/if}}
         </ul>
         <div class="actions mt-4">
           <a class="btn btn--primary" href="{{root}}a-propos.html">Faire connaissance</a>
@@ -118,6 +119,7 @@ bodyClass: page-accueil
         <ul class="chips mt-2">
           {{#each contact.zone.villes}}<li>{{this}}</li>{{/each}}
         </ul>
+        {{#if contact.fraisDeplacement}}<p class="text-muted mt-2" style="font-size:0.9rem">{{contact.fraisDeplacement}}</p>{{/if}}
       </div>
       <div class="card reveal" data-delay="1">
         <span class="icon-badge icon-badge--navy mb-2" aria-hidden="true">{{icon "horloge"}}</span>
@@ -127,6 +129,8 @@ bodyClass: page-accueil
           <li><span>{{jours}}</span><span>{{heures}}</span></li>
           {{/each}}
         </ul>
+        {{#if contact.horairesTelephone}}<p class="text-muted mt-2" style="font-size:0.9rem">Au téléphone : {{contact.horairesTelephone}}.</p>{{/if}}
+        {{#if contact.conges}}<p class="text-muted" style="font-size:0.9rem">{{contact.conges}}</p>{{/if}}
       </div>
     </div>
     {{> tax-box}}

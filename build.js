@@ -353,6 +353,13 @@ function enrichConfig(raw) {
       const montant = String(service.tarif.montant).replace('.', ',');
       service.tarif.montantAffiche = `${montant} €`;
       service.tarif.affiche = `${montant} €/${service.tarif.unite || 'h'}`;
+      // Forfaits d'heures dégressifs : prix affichés et prix par heure calculé
+      const fmt = (n) => String(Math.round(n * 100) / 100).replace('.', ',');
+      service.tarif.forfaits = (service.tarif.forfaits || []).map((fo) => ({
+        ...fo,
+        prixAffiche: `${fmt(fo.prix)} €`,
+        parHeure: `${fmt(fo.prix / fo.heures)} €/${service.tarif.unite || 'h'}`
+      }));
     }
     return service;
   });
@@ -370,8 +377,9 @@ function enrichConfig(raw) {
 
   // Mentions légales : valeurs dérivées
   cfg.identite.nomEI = `${cfg.identite.nomComplet} EI`;
-  cfg.legal.adresseEditeurAffichee = cfg.legal.adresseEditeur ||
-    [a.rue, a.villeComplete].filter(Boolean).join(', ');
+  // Adresse de l'éditrice : legal.adresseEditeur (domiciliation par exemple), sinon
+  // l'adresse de contact telle qu'elle est autorisée à s'afficher (afficherRue).
+  cfg.legal.adresseEditeurAffichee = cfg.legal.adresseEditeur || a.affichee;
   cfg.legal.tvaMention = cfg.legal.tva
     ? `TVA intracommunautaire : ${cfg.legal.tva}`
     : 'TVA non applicable, article 293 B du Code général des impôts';
@@ -429,8 +437,10 @@ function checkConfig(cfg) {
   if (!cfg.contact.formulaire.endpoint) warnings.push('contact.formulaire.endpoint est vide : le formulaire ouvrira la messagerie du visiteur (mailto). Voir README.');
   const l = cfg.legal || {};
   if (!(l.mediateur && l.mediateur.nom && l.mediateur.site)) warnings.push('OBLIGATOIRE – legal.mediateur : médiateur de la consommation à désigner et à afficher (art. L.616-1 du Code de la consommation).');
-  if (!(l.assurance && l.assurance.nom)) warnings.push('legal.assurance : assureur RC Pro non renseigné alors que le site annonce une assurance (art. R.111-2 du Code de la consommation).');
-  if (!cfg.legal.adresseEditeur && !cfg.contact.adresse.rue) warnings.push('OBLIGATOIRE – adresse de l\'éditrice absente des mentions légales (legal.adresseEditeur ou contact.adresse.rue).');
+  if (!(l.assurance && l.assurance.nom)) warnings.push('legal.assurance : assureur RC Pro non renseigné (information due au client, art. R.111-2 du Code de la consommation) ; la mention d\'assurance reste masquée sur le site tant qu\'il est vide.');
+  if (!cfg.legal.adresseEditeur) warnings.push('OBLIGATOIRE – legal.adresseEditeur vide : les mentions légales n\'indiquent que la ville. Renseigner l\'adresse déclarée (domiciliation si le domicile doit rester privé).');
+  if (cfg.site.indexable !== true) warnings.push('site.indexable n\'est pas à true : le site porte une balise noindex et robots.txt interdit l\'exploration (lancement progressif). À activer à la mise en ligne définitive.');
+  if (cfg.site.enConstruction) warnings.push('site.enConstruction est à true : le bandeau « site en construction » est affiché.');
   if (/ovh/i.test((l.hebergeur && l.hebergeur.nom) || '')) warnings.push('legal.hebergeur : valeur par défaut (OVH). À remplacer par l\'hébergeur réel si différent.');
   if (!cfg.identite.numeroSAP) warnings.push('identite.numeroSAP vide : activité non déclarée « services à la personne » (le crédit d\'impôt doit rester désactivé).');
   if (!l.registre) warnings.push('legal.registre vide : reporter la mention d\'immatriculation figurant sur l\'extrait officiel (RCS, répertoire des métiers…) ou la laisser vide si aucune.');
@@ -570,7 +580,9 @@ function build() {
   write(path.join(DIST, 'sitemap.xml'), sitemap);
 
   // robots.txt
-  write(path.join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${cfg.site.url}/sitemap.xml\n`);
+  write(path.join(DIST, 'robots.txt'), cfg.site.indexable === true
+    ? `User-agent: *\nAllow: /\n\nSitemap: ${cfg.site.url}/sitemap.xml\n`
+    : `User-agent: *\nDisallow: /\n`);
 
   // favicon.svg (monogramme aux couleurs de la charte)
   const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">

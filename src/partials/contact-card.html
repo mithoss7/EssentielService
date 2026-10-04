@@ -1,11 +1,11 @@
 <div class="card contact-card">
   <h3>Me contacter</h3>
   <ul class="contact-card__list">
-    <li>{{icon "telephone"}}<span><a href="{{contact.telephoneLien}}">{{contact.telephone}}</a><small>Appel ou SMS</small></span></li>
+    <li>{{icon "telephone"}}<span><a href="{{contact.telephoneLien}}">{{contact.telephone}}</a><small>Appel ou SMS{{#if contact.horairesTelephone}} · {{contact.horairesTelephone}}{{/if}}</small></span></li>
     {{#if contact.whatsapp}}
     <li>{{icon "message"}}<span><a href="{{contact.whatsappLien}}" target="_blank" rel="noopener">Écrire sur WhatsApp</a><small>Réponse rapide en journée</small></span></li>
     {{/if}}
-    <li>{{icon "mail"}}<span><a href="{{contact.emailLien}}">{{contact.email}}</a><small>Réponse sous 24 h</small></span></li>
+    <li>{{icon "mail"}}<span><a href="{{contact.emailLien}}">{{contact.email}}</a><small>Réponse sous 48 h</small></span></li>
     <li>{{icon "pin"}}<span><strong>{{contact.adresse.affichee}}</strong><small>Déplacements dans un rayon de {{contact.zone.rayonKm}} km</small></span></li>
   </ul>
   <a class="btn btn--primary btn--block mt-3" href="{{root}}contact.html">{{site.ctaPrincipal}}</a>

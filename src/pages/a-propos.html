@@ -1,7 +1,7 @@
 ---
 fond: a-propos
 titre: À propos
-description: Qui suis-je ? Parcours, valeurs et garanties d'une professionnelle indépendante des services à domicile, à votre écoute.
+description: Qui suis-je ? Parcours, formation et valeurs d'une professionnelle indépendante des services à domicile.
 section: a-propos
 priorite: 0.8
 bodyClass: page-a-propos
@@ -56,11 +56,12 @@ bodyClass: page-a-propos
     <div class="grid grid--2">
       <div class="card reveal">
         <span class="icon-badge icon-badge--navy mb-2" aria-hidden="true">{{icon "bouclier"}}</span>
-        <h2 style="font-size:1.6rem">Garanties & qualifications</h2>
+        <h2 style="font-size:1.6rem">Formation & garanties</h2>
         <ul class="checklist mt-2">
           {{#each identite.garanties}}
           <li>{{icon "check-circle"}}<span>{{this}}</span></li>
           {{/each}}
+          {{#if legal.assurance.nom}}<li>{{icon "check-circle"}}<span>Assurance responsabilité civile professionnelle</span></li>{{/if}}
         </ul>
       </div>
       <div class="card reveal" data-delay="1">
@@ -70,6 +71,7 @@ bodyClass: page-a-propos
         <ul class="chips mt-2">
           {{#each contact.zone.villes}}<li>{{this}}</li>{{/each}}
         </ul>
+        {{#if contact.fraisDeplacement}}<p class="text-muted mt-2" style="font-size:0.925rem">{{contact.fraisDeplacement}}</p>{{/if}}
         <p class="text-muted mt-3" style="font-size:0.925rem">Votre commune n'est pas dans la liste ? Contactez-moi, je pourrai peut-être me déplacer quand même.</p>
       </div>
     </div>

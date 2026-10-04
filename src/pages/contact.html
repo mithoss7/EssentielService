@@ -1,7 +1,7 @@
 ---
 fond: contact
 titre: Contact
-description: Contactez-moi pour un devis gratuit : ménage et repassage, aide aux seniors ou garde d'enfants. Réponse sous 48 h.
+description: Contactez-moi pour un devis gratuit : ménage et repassage, garde d'enfants, soutien scolaire ou aide aux seniors. Réponse sous 48 h.
 section: contact
 priorite: 0.9
 bodyClass: page-contact
@@ -59,9 +59,45 @@ bodyClass: page-contact
           </div>
         </div>
 
+        <div class="form__row">
+          <div>
+            <label for="f-commune">Votre commune</label>
+            <input id="f-commune" name="commune" type="text" autocomplete="address-level2">
+          </div>
+          <div>
+            <label for="f-frequence">Fréquence souhaitée</label>
+            <select id="f-frequence" name="frequence">
+              <option value="">— Choisir —</option>
+              <option value="ponctuelle">Ponctuelle</option>
+              <option value="reguliere">Régulière</option>
+              <option value="a-definir">À définir ensemble</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div>
+            <label for="f-debut">À partir de quand ?</label>
+            <input id="f-debut" name="debut" type="text" placeholder="Ex. : dès que possible, début novembre…">
+          </div>
+          <div>
+            <label for="f-classe">Âge ou classe de l'enfant</label>
+            <input id="f-classe" name="classe" type="text" placeholder="Ex. : 6 ans, CE2">
+          </div>
+        </div>
+
+        <div>
+          <label for="f-creneau">Quand puis-je vous rappeler ?</label>
+          <select id="f-creneau" name="creneau">
+            <option value="">— Peu importe —</option>
+            <option value="matin">Le matin{{#if contact.horairesTelephone}} (9h – 12h){{/if}}</option>
+            <option value="apres-midi">L'après-midi{{#if contact.horairesTelephone}} (15h – 17h){{/if}}</option>
+          </select>
+        </div>
+
         <div>
           <label for="f-message">Votre message <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="f-message" name="message" required placeholder="Ex. : je cherche une garde pour deux enfants (4 et 7 ans) les mardis et jeudis de 16h30 à 19h, à {{contact.adresse.ville}}."></textarea>
+          <textarea id="f-message" name="message" required placeholder="Ex. : je cherche du soutien scolaire pour mon fils de CE2, deux fois par semaine après l'école, à {{contact.adresse.ville}}."></textarea>
           <p class="form__help">Merci de ne pas indiquer d'informations de santé : nous en parlerons de vive voix.</p>
         </div>
 
@@ -80,6 +116,9 @@ bodyClass: page-contact
         <div class="form__status" role="status" aria-live="polite" id="form-status"></div>
 
         <button class="btn btn--primary btn--lg" type="submit">{{icon "envoyer"}} Envoyer ma demande</button>
+        {{#if contact.rendezVous.url}}
+        <p class="form__help">Vous préférez fixer un rendez-vous directement ? <a href="{{contact.rendezVous.url}}" target="_blank" rel="noopener">Choisir un créneau (nouvelle fenêtre)</a>.</p>
+        {{/if}}
         {{#unless contact.formulaire.endpoint}}
         <p class="form__help">Le bouton ouvrira votre logiciel de messagerie avec le message pré-rempli. Vous pouvez aussi m'écrire directement à <a href="{{contact.emailLien}}">{{contact.email}}</a>.</p>
         {{/unless}}
@@ -96,6 +135,8 @@ bodyClass: page-contact
           <li><span>{{jours}}</span><span>{{heures}}</span></li>
           {{/each}}
         </ul>
+        {{#if contact.horairesTelephone}}<p class="text-muted mt-2" style="font-size:0.9rem">Au téléphone : {{contact.horairesTelephone}}.</p>{{/if}}
+        {{#if contact.conges}}<p class="text-muted" style="font-size:0.9rem">{{contact.conges}}</p>{{/if}}
       </div>
 
       <div class="card">
@@ -104,6 +145,7 @@ bodyClass: page-contact
         <ul class="chips">
           {{#each contact.zone.villes}}<li>{{this}}</li>{{/each}}
         </ul>
+        {{#if contact.fraisDeplacement}}<p class="text-muted mt-2" style="font-size:0.9rem">{{contact.fraisDeplacement}}</p>{{/if}}
       </div>
 
       {{#if contact.reseauxListe}}

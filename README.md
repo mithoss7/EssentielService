@@ -1,7 +1,7 @@
 # Site vitrine – Services à domicile
 
 Site internet complet, statique et sans dépendance, pour une prestataire indépendante
-(ménage, garde d'enfants, soutien scolaire, accompagnement & déplacements).
+(ménage et repassage, garde d'enfants, soutien scolaire, aide aux seniors).
 
 **Toutes les informations personnelles et le contenu éditable sont centralisés dans un seul
 fichier : `config/site.config.js`.** Un script (`build.js`) les injecte dans l'ensemble des
@@ -84,6 +84,13 @@ Quelques règles pratiques :
   (lettres minuscules et tirets, sans accent) et l'icône (`menage`, `enfant`, `ecole`, `voiture`,
   `coeur`, `maison`, `etoile`, `horloge`). La page, le menu, le pied de page, la grille tarifaire
   et le sitemap sont mis à jour automatiquement.
+- Une page service peut contenir : `groupes` (prestations regroupées par thème), `exclusions`
+  (« ce que je ne fais pas »), `tarif.forfaits` (forfaits d'heures dégressifs ; le prix par heure est
+  calculé automatiquement) et `note`.
+- Options utiles : `contact.horairesTelephone`, `contact.conges`, `contact.fraisDeplacement`,
+  `contact.rendezVous.url` (lien de prise de rendez-vous en ligne, bouton masqué si vide),
+  `site.enConstruction` (bandeau) et `site.indexable` (`false` = balise noindex + robots.txt
+  restrictif pendant le lancement progressif ; passer à `true` à la mise en ligne définitive).
 - Pour **retirer** un service, un témoignage, un réseau social : supprimer le bloc ou laisser `""`.
 - Pour la **photo** : déposer `portrait.jpg` dans `src/assets/img/` puis indiquer
   `photo: "assets/img/portrait.jpg"`. Sans photo, un avatar avec les initiales est affiché.
@@ -134,7 +141,7 @@ fichier dans **`src/assets/img/fonds/`** avec le bon nom, puis de relancer `npm 
 |---|---|
 | `accueil.jpg` | Accueil |
 | `services.jpg` | Liste des services |
-| `menage.jpg`, `aide-seniors.jpg`, `garde-enfants.jpg` | Page de chaque service (nom = `slug` du service) |
+| `menage.jpg`, `garde-enfants.jpg`, `soutien-scolaire.jpg`, `aide-seniors.jpg` | Page de chaque service (nom = `slug` du service) |
 | `a-propos.jpg` | À propos |
 | `tarifs.jpg` | Tarifs |
 | `contact.jpg` | Contact |
@@ -156,8 +163,9 @@ gratuit, y compris commercial ; la mention n'est pas obligatoire, elle est donn�
 | `accueil.jpg` | Clay Banks | <https://unsplash.com/photos/7pvC_d2iXSE> |
 | `services.jpg` | Aaron Huber | <https://unsplash.com/photos/G7sE2S4Lab4> |
 | `menage.jpg` | Greg Rosenke | <https://unsplash.com/photos/KMcOLSZuTe0> |
+| `garde-enfants.jpg` | Roman Kravtsov | <https://unsplash.com/photos/zk3LB1psbkY> |
+| `soutien-scolaire.jpg` | Susan Holt Simpson | <https://unsplash.com/photos/GQ327RPuxhI> |
 | `aide-seniors.jpg` | Jaime Maldonado | <https://unsplash.com/photos/0l-73OKmRXc> |
-| `garde-enfants.jpg` | Susan Holt Simpson | <https://unsplash.com/photos/GQ327RPuxhI> |
 | `a-propos.jpg` | Emilipothèse | <https://unsplash.com/photos/3k4VzLaQ53s> |
 | `tarifs.jpg` | charlesdeluvio | <https://unsplash.com/photos/GlavtG-umzE> |
 | `contact.jpg` | Quino Al | <https://unsplash.com/photos/8gWEAAXJjtI> |

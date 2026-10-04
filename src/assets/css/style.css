@@ -686,6 +686,23 @@ body.menu-open { overflow: hidden; }
 .price-card__amount small { font-size: 1.1rem; color: rgba(255, 255, 255, 0.75); font-family: var(--font-body); font-weight: 600; }
 .price-card p { font-size: 0.95rem; }
 
+/* Forfaits dégressifs (carte de prix) */
+.forfaits__title { color: var(--white); font-size: 1rem; margin: 1.1rem 0 0.4rem; }
+.forfaits { list-style: none; margin: 0; padding: 0; }
+.forfaits li {
+  display: grid; grid-template-columns: 3.2rem 1fr auto; gap: 0.5rem; align-items: baseline;
+  padding: 0.45rem 0; border-top: 1px solid rgba(255, 255, 255, 0.14); font-size: 0.95rem;
+}
+.forfaits li strong { color: var(--white); font-weight: 750; }
+.forfaits li small { color: var(--aqua-300); font-weight: 650; }
+
+/* Prestations regroupées par thème et exclusions (pages service) */
+.prestation-groups { display: grid; gap: 1.5rem 2rem; margin-top: 0.75rem; }
+@media (min-width: 700px) { .prestation-groups { grid-template-columns: repeat(2, 1fr); } }
+.prestation-group h4 { margin: 0 0 0.6rem; color: var(--navy-900); }
+.exclusions { margin: 0.5rem 0 0; padding-left: 1.2em; color: var(--muted); font-size: 0.95rem; }
+.exclusions li { margin-bottom: 0.35em; }
+
 .contact-card__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.85rem; }
 .contact-card__list li { display: flex; gap: 0.75rem; align-items: flex-start; }
 .contact-card__list .icon { color: var(--aqua-700); margin-top: 0.2em; }
