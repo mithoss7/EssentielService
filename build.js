@@ -414,9 +414,18 @@ function enrichConfig(raw) {
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name: s.titre, description: s.accroche, url: `${cfg.site.url}/${s.url}` }
     })),
-    sameAs: cfg.contact.reseauxListe.map((x) => x.url)
+    sameAs: cfg.contact.reseauxListe.map((x) => x.url),
+    openingHoursSpecification: (cfg.contact.horairesStructures || []).map((h) => ({
+      '@type': 'OpeningHoursSpecification', dayOfWeek: h.jours, opens: h.ouverture, closes: h.fermeture
+    }))
   };
   cfg.jsonLd = JSON.stringify(jsonLd, null, 0).replace(/</g, '\\u003c');
+
+  // Données du simulateur de tarif (page Tarifs)
+  cfg.simulateurJson = JSON.stringify(cfg.services.filter((s) => s.tarif && s.tarif.montant).map((s) => ({
+    slug: s.slug, titre: s.titre, taux: s.tarif.montant, dureeMin: s.dureeMin || 1,
+    forfaits: (s.tarif.forfaits || []).map((fo) => ({ heures: fo.heures, prix: fo.prix }))
+  }))).replace(/</g, '\\u003c');
 
   return cfg;
 }

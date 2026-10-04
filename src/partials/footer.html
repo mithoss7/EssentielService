@@ -44,6 +44,7 @@
           {{#each contact.horaires}}
           <li><strong>{{jours}}</strong><br>{{heures}}</li>
           {{/each}}
+          {{#if contact.horairesTelephone}}<li><strong>Téléphone</strong><br>{{contact.horairesTelephone}}</li>{{/if}}
         </ul>
       </div>
     </div>

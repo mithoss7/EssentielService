@@ -52,6 +52,7 @@ site-services-domicile/
 │       └── fonts/           ← polices auto-hébergées (licence OFL)
 ├── scripts/
 │   ├── check.js             ← contrôle qualité du site généré (liens, titres, images…)
+│   ├── documents.js         ← modèles de devis et de contrat (Word, PDF) depuis la config
 │   └── dev.js               ← build --watch + serveur local
 ├── build.js                 ← générateur (moteur de templates maison, sitemap, robots, favicon)
 ├── serve.js                 ← serveur de prévisualisation
@@ -91,6 +92,12 @@ Quelques règles pratiques :
   `contact.rendezVous.url` (lien de prise de rendez-vous en ligne, bouton masqué si vide),
   `site.enConstruction` (bandeau) et `site.indexable` (`false` = balise noindex + robots.txt
   restrictif pendant le lancement progressif ; passer à `true` à la mise en ligne définitive).
+- Horaires : `contact.horaires` (affichage), `contact.horairesStructures` (mêmes horaires pour
+  Google, données structurées) et `contact.horairesIntervention` (phrase reprise dans les conditions
+  générales et les modèles de contrat). Les trois doivent rester cohérents.
+- `site.annonce` : bandeau d'annonce sous l'en-tête (ex. « Places disponibles en novembre »), `""`
+  pour le masquer. Chaque service peut indiquer `dureeMin` (en heures), utilisée par le simulateur
+  de tarif de la page Tarifs, qui compare le tarif horaire et les combinaisons de forfaits.
 - Pour **retirer** un service, un témoignage, un réseau social : supprimer le bloc ou laisser `""`.
 - Pour la **photo** : déposer `portrait.jpg` dans `src/assets/img/` puis indiquer
   `photo: "assets/img/portrait.jpg"`. Sans photo, un avatar avec les initiales est affiché.
@@ -237,6 +244,24 @@ Icônes et illustration : dessins vectoriels originaux, libres d'utilisation dan
 Pour afficher les logos officiels des réseaux sociaux, télécharger les fichiers depuis les
 pages « brand resources » de chaque plateforme et remplacer l'icône `globe` dans
 `src/partials/footer.html`.
+
+---
+
+## 7 bis. Modèles de devis et de contrat
+
+`documents/` contient un **modèle de devis** et un **modèle de contrat de prestation** (Word et
+PDF), chacun avec le formulaire de rétractation ; le contrat comporte aussi une fiche de
+renseignements (contacts d'urgence, enfants, aide aux seniors, accès au logement). Ils sont générés
+à partir de `config/site.config.js` (tarifs, conditions, mentions légales) : les informations
+encore inconnues (médiateur, assureur, adresse) apparaissent en lignes à compléter.
+
+```bash
+npm install docx                  # une fois (module utilisé uniquement par ce script)
+node scripts/documents.js         # régénère documents/*.docx
+node scripts/documents.js --pdf   # + PDF (LibreOffice requis : soffice)
+```
+
+À relancer après toute modification des tarifs, des conditions ou des mentions légales.
 
 ---
 

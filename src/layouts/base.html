@@ -40,11 +40,17 @@
 
   {{> header}}
 
+  {{#if site.annonce}}
+  <div class="annonce" role="note">{{icon "calendrier"}} <span>{{site.annonce}}</span> <a href="{{root}}contact.html">Me contacter</a></div>
+  {{/if}}
+
   <main id="contenu">
 {{{content}}}
   </main>
 
   {{> footer}}
+
+  <a class="call-fab" href="{{contact.telephoneLien}}" aria-label="Appeler le {{contact.telephone}}">{{icon "telephone"}}<span>Appeler</span></a>
 
   <script src="{{root}}assets/js/main.js" defer></script>
 </body>
