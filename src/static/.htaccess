@@ -14,10 +14,14 @@ AddType image/svg+xml .svg
 AddType font/woff2 .woff2
 AddType application/manifest+json .webmanifest
 
-# Redirection HTTP → HTTPS et www (décommenter après activation du certificat SSL)
-# RewriteEngine On
-# RewriteCond %{HTTPS} off
-# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Redirection vers l'adresse officielle : HTTPS + www (certificat SSL actif)
+# (test sur le port 80, méthode recommandée par OVH sur ses mutualisés)
+# Toute autre adresse (http://, sans www, adresse temporaire OVH) renvoie
+# définitivement (301) vers https://www.essentielservicescharente.fr
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80 [OR]
+RewriteCond %{HTTP_HOST} !^www\.essentielservicescharente\.fr$ [NC]
+RewriteRule ^ https://www.essentielservicescharente.fr%{REQUEST_URI} [L,R=301]
 
 # Compression
 <IfModule mod_deflate.c>

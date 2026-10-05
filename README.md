@@ -306,7 +306,7 @@ légale manque dans `config/site.config.js` (section `legal`).
 - [ ] **Preuves** des affirmations du site : 8 ans d'expérience, CAP AEPE, PSC1 à jour, extrait de
       casier vierge, permis et véhicule assuré. Retirer toute ligne qui ne serait pas exacte.
 - [ ] **Hébergeur** : remplacer la valeur par défaut (OVH) par l'hébergeur réel si différent.
-- [ ] **HTTPS** : activer le certificat SSL et décommenter la redirection dans `.htaccess`
+- [x] **HTTPS** : certificat SSL actif, redirection vers `https://www.` activée dans `.htaccess`
       (les mentions légales annoncent des échanges chiffrés).
 - [ ] **Formulaire** : si un service tiers est branché (Formspree…), renseigner
       `contact.formulaire.prestataire` (nom, pays).
