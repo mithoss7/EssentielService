@@ -450,7 +450,7 @@ function checkConfig(cfg) {
   if (!cfg.legal.adresseEditeur) warnings.push('OBLIGATOIRE – legal.adresseEditeur vide : les mentions légales n\'indiquent que la ville. Renseigner l\'adresse déclarée (domiciliation si le domicile doit rester privé).');
   if (cfg.site.indexable !== true) warnings.push('site.indexable n\'est pas à true : le site porte une balise noindex et robots.txt interdit l\'exploration (lancement progressif). À activer à la mise en ligne définitive.');
   if (cfg.site.enConstruction) warnings.push('site.enConstruction est à true : le bandeau « site en construction » est affiché.');
-  if (/ovh/i.test((l.hebergeur && l.hebergeur.nom) || '')) warnings.push('legal.hebergeur : valeur par défaut (OVH). À remplacer par l\'hébergeur réel si différent.');
+  if (!(l.hebergeur && l.hebergeur.confirme) && /ovh/i.test((l.hebergeur && l.hebergeur.nom) || '')) warnings.push('legal.hebergeur : valeur par défaut (OVH). À remplacer par l\'hébergeur réel si différent.');
   if (!cfg.identite.numeroSAP) warnings.push('identite.numeroSAP vide : activité non déclarée « services à la personne » (le crédit d\'impôt doit rester désactivé).');
   if (!l.registre) warnings.push('legal.registre vide : reporter la mention d\'immatriculation figurant sur l\'extrait officiel (RCS, répertoire des métiers…) ou la laisser vide si aucune.');
   if (cfg.contact.formulaire.endpoint && !(cfg.contact.formulaire.prestataire && cfg.contact.formulaire.prestataire.nom)) warnings.push('contact.formulaire.prestataire : nommer le service tiers du formulaire (RGPD).');
