@@ -184,19 +184,29 @@ en paysage ; `contact.jpg` retournée horizontalement pour dégager la zone de t
 
 ## 5. Formulaire de contact
 
-Le site est 100 % statique (pas de serveur), il ne peut donc pas envoyer d'e-mail seul.
-Deux modes, choisis automatiquement selon `contact.formulaire.endpoint` :
+Trois modes, choisis selon `contact.formulaire.endpoint` :
 
-1. **Endpoint vide (par défaut)** : le bouton « Envoyer » ouvre le logiciel de messagerie du
-   visiteur avec un message pré-rempli (`mailto:`). Simple, mais dépend du poste du visiteur.
-2. **Service de formulaire (recommandé)** : les messages arrivent directement dans la boîte
-   e-mail de la cliente.
-   - [Formspree](https://formspree.io) (gratuit jusqu'à 50 messages/mois) : créer un compte,
-     un formulaire, puis coller l'URL fournie : `endpoint: "https://formspree.io/f/xxxxxxxx"`.
-   - [FormSubmit](https://formsubmit.co) (gratuit, sans compte) :
-     `endpoint: "https://formsubmit.co/ajax/adresse@email.fr"` puis valider l'e-mail de
-     confirmation reçu lors du premier envoi.
-   - Hébergement Netlify : `endpoint: "/"` et ajouter l'attribut `netlify` au `<form>`.
+1. **`"envoi-devis.php"` (mode actuel, hébergement OVH)** : le script
+   `src/static/envoi-devis.php`, copié à la racine du site, reçoit la demande et l'envoie
+   par e-mail à `contact.email` (adresse, nom et domaine injectés depuis la config par
+   `build.js`). Aucun service tiers. Protections : champ anti-robots, envoi en moins de
+   3 s refusé, 5 envois par heure et par adresse IP, validation de l'e-mail, en-têtes
+   protégés contre l'injection.
+   - **Envoi par SMTP authentifié (recommandé par OVH, meilleure délivrabilité)** : créer
+     un fichier `config-smtp.php` et le déposer **dans le dossier parent de `www/`**
+     (`/home/<login>/`, jamais accessible depuis le web, **jamais dans le dépôt**) :
+     ```php
+     <?php return ['utilisateur' => 'contact@essentielservicescharente.fr', 'motDePasse' => '…'];
+     ```
+     L'utilisateur doit être l'adresse `contact.email` (OVH refuse un expéditeur différent).
+   - Sans ce fichier, le script utilise la fonction `mail()` de PHP (risque de spam).
+   - Le script crée `/home/<login>/tmp-formulaire/` pour la limite d'envois.
+2. **Endpoint vide** : le bouton « Envoyer » ouvre le logiciel de messagerie du visiteur
+   avec un message pré-rempli (`mailto:`).
+3. **Service tiers** (hébergement sans PHP) :
+   - [Formspree](https://formspree.io) : `endpoint: "https://formspree.io/f/xxxxxxxx"` ;
+   - [FormSubmit](https://formsubmit.co) : `endpoint: "https://formsubmit.co/ajax/adresse@email.fr"`.
+   Renseigner alors `contact.formulaire.prestataire` (cité dans les mentions légales).
 
 Le formulaire comporte un champ anti-robots invisible (`_gotcha`) et une case de consentement
 RGPD obligatoire.

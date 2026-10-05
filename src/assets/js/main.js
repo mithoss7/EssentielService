@@ -107,6 +107,13 @@
     var endpoint = (form.getAttribute('data-endpoint') || '').trim();
     var mailto = (form.getAttribute('data-mailto') || '').trim();
 
+    // Heure d'affichage du formulaire (anti-robots : envoi trop rapide refusé)
+    var horodatage = document.createElement('input');
+    horodatage.type = 'hidden';
+    horodatage.name = '_t';
+    horodatage.value = String(Date.now());
+    form.appendChild(horodatage);
+
     var showStatus = function (type, message) {
       if (!status) return;
       status.className = 'form__status is-' + type;
@@ -166,6 +173,11 @@
         return;
       }
 
+      // Libellés lisibles des listes déroulantes pour l'e-mail reçu
+      data.set('serviceLibelle', serviceLabel());
+      data.set('frequenceLibelle', optionLabel('frequence'));
+      data.set('creneauLibelle', optionLabel('creneau'));
+
       submitBtn.disabled = true;
       submitBtn.setAttribute('aria-busy', 'true');
       var originalLabel = submitBtn.innerHTML;
@@ -176,11 +188,19 @@
         body: data,
         headers: { Accept: 'application/json' }
       }).then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json().catch(function () { return {}; }).then(function (r) {
+          if (res.ok && r.ok !== false) return;
+          var e = new Error('HTTP ' + res.status);
+          e.serveur = r.erreur; // message prévu par envoi-devis.php
+          throw e;
+        });
+      }).then(function () {
         form.reset();
+        horodatage.value = String(Date.now());
         showStatus('success', 'Merci ! Votre demande a bien été envoyée. Je vous réponds sous 48 h.');
-      }).catch(function () {
-        showStatus('error', 'Oups, l\'envoi a échoué. Vous pouvez réessayer ou m\'écrire directement à ' + mailto + '.');
+      }).catch(function (err) {
+        var detail = err && err.serveur ? err.serveur + ' ' : '';
+        showStatus('error', 'Oups, l\'envoi a échoué. ' + detail + 'Vous pouvez réessayer ou m\'écrire directement à ' + mailto + '.');
       }).then(function () {
         submitBtn.disabled = false;
         submitBtn.removeAttribute('aria-busy');
