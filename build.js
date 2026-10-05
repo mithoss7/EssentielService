@@ -453,7 +453,7 @@ function checkConfig(cfg) {
   if (!(l.hebergeur && l.hebergeur.confirme) && /ovh/i.test((l.hebergeur && l.hebergeur.nom) || '')) warnings.push('legal.hebergeur : valeur par défaut (OVH). À remplacer par l\'hébergeur réel si différent.');
   if (!cfg.identite.numeroSAP) warnings.push('identite.numeroSAP vide : activité non déclarée « services à la personne » (le crédit d\'impôt doit rester désactivé).');
   if (!l.registre) warnings.push('legal.registre vide : reporter la mention d\'immatriculation figurant sur l\'extrait officiel (RCS, répertoire des métiers…) ou la laisser vide si aucune.');
-  if (cfg.contact.formulaire.endpoint && !(cfg.contact.formulaire.prestataire && cfg.contact.formulaire.prestataire.nom)) warnings.push('contact.formulaire.prestataire : nommer le service tiers du formulaire (RGPD).');
+  if (/^https?:/.test(cfg.contact.formulaire.endpoint || '') && !(cfg.contact.formulaire.prestataire && cfg.contact.formulaire.prestataire.nom)) warnings.push('contact.formulaire.prestataire : nommer le service tiers du formulaire (RGPD).');
   if (!cfg.services.length) warnings.push('Aucun service défini.');
   return warnings;
 }
@@ -499,6 +499,17 @@ function build() {
   copyDir(path.join(SRC, 'assets'), path.join(DIST, 'assets'));
   fs.rmSync(path.join(DIST, 'assets', 'icons'), { recursive: true, force: true }); // icônes inlinées, inutile de les copier
   copyDir(path.join(SRC, 'static'), DIST);
+
+  // Scripts PHP : remplace les valeurs %%chemin.de.config%% (chaînes PHP entre apostrophes)
+  for (const f of fs.readdirSync(DIST).filter((n) => n.endsWith('.php'))) {
+    const fichier = path.join(DIST, f);
+    const php = read(fichier).replace(/%%([\w.]+)%%/g, (m, cle) => {
+      const v = cle.split('.').reduce((o, k) => (o == null ? undefined : o[k]), cfg);
+      if (v == null) throw new Error(`${f} : valeur inconnue ${m}`);
+      return String(v).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    });
+    fs.writeFileSync(fichier, php);
+  }
 
   const pages = []; // { outputPath, url, priority, changefreq }
 

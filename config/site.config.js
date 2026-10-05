@@ -137,7 +137,9 @@ module.exports = {
      * de messagerie du visiteur avec le message pré-rempli (mailto:).
      */
     formulaire: {
-      endpoint: "",
+      // "envoi-devis.php" : script PHP fourni (src/static/envoi-devis.php),
+      // exécuté par l'hébergement OVH, qui envoie la demande à contact.email.
+      endpoint: "envoi-devis.php",
       // Si un service tiers est utilisé (endpoint renseigné), l'indiquer ici :
       // il est cité dans les mentions légales (RGPD). Ex. : nom "Formspree",
       // pays "États-Unis (clauses contractuelles types / Data Privacy Framework)".
