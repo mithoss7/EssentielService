@@ -76,7 +76,7 @@ module.exports = {
    *  2. COORDONNÉES
    * ------------------------------------------------------------------------ */
   contact: {
-    email: "elisanahboukila@gmail.com",
+    email: "contact@essentielservicescharente.fr",
     // Numéro tel qu'affiché sur le site.
     telephone: "07 45 37 00 74",
     // Même numéro au format international (utilisé pour les liens cliquables
@@ -470,7 +470,9 @@ module.exports = {
       nom: "OVH SAS",
       adresse: "2 rue Kellermann, 59100 Roubaix, France",
       telephone: "1007",
-      site: "https://www.ovhcloud.com"
+      site: "https://www.ovhcloud.com",
+      // Hébergeur réel confirmé (offre Starter souscrite chez OVH).
+      confirme: true
     },
     // Directeur / directrice de la publication (généralement la prestataire).
     directeurPublication: "Élisanah Mauricio",
