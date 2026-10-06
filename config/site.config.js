@@ -38,7 +38,7 @@ module.exports = {
     titreAccueil: "Un coup de main fiable, chez vous, quand vous en avez besoin",
     // Sous-titre du bandeau d'accueil.
     sousTitreAccueil:
-      "Ménage, garde d'enfants et soutien scolaire : " +
+      "Ménage et soutien scolaire : " +
       "une interlocutrice unique, sérieuse et à l'écoute, près de chez vous.",
     // Statut juridique affiché dans les mentions légales et le pied de page.
     statut: "Entrepreneure individuelle (EI) – micro-entrepreneure",
@@ -51,14 +51,14 @@ module.exports = {
     // Texte de présentation de la page « À propos » (plusieurs paragraphes).
     presentation: [
       "Je m'appelle Élisanah. Titulaire d'un baccalauréat général et d'une licence de psychologie de l'éducation et du développement de l'enfant, j'ai travaillé quatre ans dans le soutien scolaire, deux ans dans l'aide à la personne, et ponctuellement chez des particuliers pour des prestations de ménage, avec aussi une expérience de l'entretien professionnel. Ces différentes expériences m'ont permis de développer mon sens de l'organisation, mon sérieux et mon autonomie. J'ai choisi de travailler à mon compte pour mettre cette expérience au service de mes clients, avec un service de proximité, sérieux et adapté à leurs besoins.",
-      "Ménage, garde et soutien scolaire de vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
+      "Ménage chez vous, soutien scolaire pour vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
       "Au fil de mes expériences dans le soutien scolaire, l'aide à la personne et l'entretien, j'ai découvert que ce que j'aime le plus, c'est me rendre utile. Aujourd'hui, j'ai choisi de travailler à mon compte pour proposer un service simple, sérieux et humain, adapté aux besoins de chacun."
     ],
     // Valeurs affichées sur la page « À propos ».
     valeurs: [
       { titre: "Fiabilité", texte: "Je suis là quand je l'ai dit, et je préviens toujours à l'avance en cas d'imprévu." },
       { titre: "Discrétion", texte: "Votre intimité et vos informations restent chez vous. Toujours." },
-      { titre: "Bienveillance", texte: "Avec les enfants comme avec les aînés, patience et écoute avant tout." },
+      { titre: "Bienveillance", texte: "Avec les enfants comme avec leurs parents, patience et écoute avant tout." },
       { titre: "Transparence", texte: "Des tarifs clairs, annoncés avant toute intervention, sans surprise." }
     ],
     // Diplômes, formations, garanties (liste libre). N'indiquer que ce qui peut
@@ -156,15 +156,15 @@ module.exports = {
     url: "https://www.essentielservicescharente.fr",
     // Titre par défaut (onglet du navigateur, moteurs de recherche).
     // Mots qui comptent le plus pour Google : service + ville, en premier.
-    titre: "Ménage, soutien scolaire et garde d'enfants à Angoulême – Essentiel Services",
+    titre: "Ménage et soutien scolaire à domicile à Angoulême – Essentiel Services",
     // Ville cible du référencement (titres et descriptions des pages de services).
     // Angoulême est la ville la plus recherchée de la zone d'intervention.
     villeReference: "Angoulême",
     // Description pour les moteurs de recherche (150 à 160 caractères).
     description:
-      "Ménage, soutien scolaire et garde d'enfants à domicile à Angoulême et alentours. Devis gratuit et sans engagement, réponse sous 48 h.",
+      "Ménage et soutien scolaire à domicile à Angoulême et alentours. Devis gratuit et sans engagement, réponse sous 48 h.",
     // Mots-clés (optionnel, peu utilisé par Google mais sans inconvénient).
-    motsCles: "ménage, ménage à domicile, femme de ménage, soutien scolaire, aide aux devoirs, garde d'enfants, services à domicile, Angoulême, Charente",
+    motsCles: "ménage, ménage à domicile, femme de ménage, soutien scolaire, aide aux devoirs, cours particuliers, services à domicile, Angoulême, Charente",
     langue: "fr",
     // Texte du bouton d'appel à l'action principal.
     ctaPrincipal: "Demander un devis gratuit",
@@ -172,7 +172,7 @@ module.exports = {
     // "" = pas d'annonce.
     annonce: "Je prends de nouveaux clients : premier rendez-vous gratuit chez vous.",
     // Si true, une bannière signale que le site est en cours de construction.
-    enConstruction: true,
+    enConstruction: false,
     // Indexation par les moteurs de recherche. false = le site reste visible
     // pour qui a le lien mais n'est pas référencé (lancement progressif).
     // Passer à true à la mise en ligne définitive.
@@ -374,6 +374,8 @@ module.exports = {
       note: "Les heures peuvent être utilisées pour les devoirs, les révisions, l'apprentissage des leçons, la lecture, le français, les mathématiques et la consolidation des acquis. Je n'interviens pas en présence d'animaux."
     },
     {
+      // Service désactivé (actif: false) : activité non retenue pour l'instant.
+      actif: false,
       slug: "garde-enfants",
       icone: "enfant",
       titre: "Garde d'enfants",
@@ -433,7 +435,7 @@ module.exports = {
       actif: false,
       titre: "Jusqu'à 50 % de crédit d'impôt",
       texte:
-        "Les prestations de services à la personne réalisées à votre domicile (ménage, garde d'enfants, soutien scolaire) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
+        "Les prestations de services à la personne réalisées à votre domicile (ménage, soutien scolaire) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
     }
   },
 
