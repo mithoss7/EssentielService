@@ -38,7 +38,7 @@ module.exports = {
     titreAccueil: "Un coup de main fiable, chez vous, quand vous en avez besoin",
     // Sous-titre du bandeau d'accueil.
     sousTitreAccueil:
-      "Ménage et repassage, garde d'enfants, soutien scolaire et aide aux seniors : " +
+      "Ménage et repassage, garde d'enfants et soutien scolaire : " +
       "une interlocutrice unique, sérieuse et à l'écoute, près de chez vous.",
     // Statut juridique affiché dans les mentions légales et le pied de page.
     statut: "Entrepreneure individuelle (EI) – micro-entrepreneure",
@@ -51,7 +51,7 @@ module.exports = {
     // Texte de présentation de la page « À propos » (plusieurs paragraphes).
     presentation: [
       "Je m'appelle Élisanah. Titulaire d'un baccalauréat général et d'une licence de psychologie de l'éducation et du développement de l'enfant, j'ai travaillé quatre ans dans le soutien scolaire, deux ans dans l'aide à la personne, et ponctuellement chez des particuliers pour des prestations de ménage, avec aussi une expérience de l'entretien professionnel. Ces différentes expériences m'ont permis de développer mon sens de l'organisation, mon sérieux et mon autonomie. J'ai choisi de travailler à mon compte pour mettre cette expérience au service de mes clients, avec un service de proximité, sérieux et adapté à leurs besoins.",
-      "Ménage et repassage, garde et soutien scolaire de vos enfants, présence auprès de vos parents âgés : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
+      "Ménage et repassage, garde et soutien scolaire de vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
       "Au fil de mes expériences dans le soutien scolaire, l'aide à la personne et l'entretien, j'ai découvert que ce que j'aime le plus, c'est me rendre utile. Aujourd'hui, j'ai choisi de travailler à mon compte pour proposer un service simple, sérieux et humain, adapté aux besoins de chacun."
     ],
     // Valeurs affichées sur la page « À propos ».
@@ -155,12 +155,12 @@ module.exports = {
     // Sert aux balises SEO, au sitemap.xml et aux liens de partage.
     url: "https://www.essentielservicescharente.fr",
     // Titre par défaut (onglet du navigateur, moteurs de recherche).
-    titre: "Essentiel Services – Ménage, aide à domicile, soutien scolaire",
+    titre: "Essentiel Services – Ménage, soutien scolaire, garde d'enfants",
     // Description pour les moteurs de recherche (150 à 160 caractères).
     description:
-      "Ménage et repassage, aide à domicile pour les seniors, soutien scolaire et garde d'enfants à Angoulême et alentours. Devis gratuit sous 48 h.",
+      "Ménage et repassage, soutien scolaire et garde d'enfants à domicile à Angoulême et alentours. Devis gratuit et sans engagement, réponse sous 48 h.",
     // Mots-clés (optionnel, peu utilisé par Google mais sans inconvénient).
-    motsCles: "ménage, ménage à domicile, repassage, aide à domicile, aide aux seniors, soutien scolaire, aide aux devoirs, garde d'enfants, services à domicile, Angoulême, Charente",
+    motsCles: "ménage, ménage à domicile, repassage, soutien scolaire, aide aux devoirs, garde d'enfants, services à domicile, Angoulême, Charente",
     langue: "fr",
     // Texte du bouton d'appel à l'action principal.
     ctaPrincipal: "Demander un devis gratuit",
@@ -283,6 +283,9 @@ module.exports = {
       note: "Intervention minimale de 2 heures. Je n'interviens pas en présence d'animaux. Grands ménages, gîtes et locations saisonnières : devis personnalisé après avoir échangé sur les besoins et les caractéristiques du logement."
     },
     {
+      // Service désactivé (actif: false) : activité non déclarée pour l'instant.
+      // Le repasser à true (ou supprimer la ligne) pour le réafficher partout.
+      actif: false,
       slug: "aide-seniors",
       icone: "coeur",
       titre: "Aide aux seniors",
@@ -429,7 +432,7 @@ module.exports = {
       actif: false,
       titre: "Jusqu'à 50 % de crédit d'impôt",
       texte:
-        "Les prestations de services à la personne réalisées à votre domicile (ménage, repassage, garde d'enfants, soutien scolaire, aide aux seniors) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
+        "Les prestations de services à la personne réalisées à votre domicile (ménage, repassage, garde d'enfants, soutien scolaire) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
     }
   },
 
