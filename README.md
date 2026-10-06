@@ -1,10 +1,10 @@
 # Site vitrine – Services à domicile
 
 Site internet complet, statique et sans dépendance, pour une prestataire indépendante
-(ménage, garde d'enfants, soutien scolaire).
+(ménage, soutien scolaire).
 
 Un service peut être retiré du site sans être supprimé : `actif: false` dans sa fiche
-(c'est le cas de l'aide aux seniors, en attente de déclaration de l'activité).
+(c'est le cas de l'aide aux seniors et de la garde d'enfants, activités non retenues pour l'instant).
 
 **Toutes les informations personnelles et le contenu éditable sont centralisés dans un seul
 fichier : `config/site.config.js`.** Un script (`build.js`) les injecte dans l'ensemble des
@@ -308,7 +308,7 @@ légale manque dans `config/site.config.js` (section `legal`).
 
 - [ ] **Médiateur de la consommation** : adhérer à un médiateur référencé (liste CECMC sur
       economie.gouv.fr), puis renseigner `legal.mediateur` (nom, adresse, site).
-- [ ] **Assurance RC Pro** : souscrire (avec garde d'enfants couverte) puis renseigner `legal.assurance`.
+- [ ] **Assurance RC Pro** : souscrire puis renseigner `legal.assurance`.
 - [ ] **Adresse de l'éditrice** : vérifier l'adresse publiée (`legal.adresseEditeur`, sinon rue + ville) ;
       domiciliation possible pour ne pas exposer le domicile. Elle doit correspondre à l'adresse déclarée.
 - [ ] **Concordance avec l'inscription officielle** (extrait SIRENE / guichet unique) : nom, nom
