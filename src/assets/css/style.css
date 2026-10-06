@@ -969,6 +969,7 @@ body.menu-open { overflow: hidden; }
 .footer-brand p { font-size: 0.95rem; }
 .footer-contact li { display: flex; gap: 0.6rem; align-items: flex-start; }
 .footer-contact .icon { color: var(--aqua-300); margin-top: 0.25em; }
+.footer-contact li > a, .footer-contact li > span { min-width: 0; overflow-wrap: break-word; } /* adresse e-mail longue */
 .site-footer .social { display: flex; grid-auto-flow: column; }
 .site-footer .social a { background: rgba(255, 255, 255, 0.1); color: var(--white); }
 .site-footer .social a:hover { background: var(--aqua-500); color: var(--navy-900); }

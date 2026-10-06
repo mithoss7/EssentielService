@@ -325,6 +325,8 @@ function enrichConfig(raw) {
   cfg.contact.telephoneLien = `tel:${intl || cfg.contact.telephone.replace(/\s/g, '')}`;
   cfg.contact.whatsappLien = `https://wa.me/${intl.replace(/^\+/, '')}`;
   cfg.contact.emailLien = `mailto:${cfg.contact.email}`;
+  // Coupure de ligne autorisée après « @ » (adresse longue dans le pied de page)
+  cfg.contact.emailCoupure = escapeHtml(cfg.contact.email).replace("@", "@<wbr>");
 
   // Adresse
   const a = cfg.contact.adresse;
@@ -345,7 +347,7 @@ function enrichConfig(raw) {
   try { cfg.site.domaine = new URL(cfg.site.url).host; } catch (e) { cfg.site.domaine = cfg.site.url; }
 
   // Services
-  cfg.services = (cfg.services || []).map((s) => {
+  cfg.services = (cfg.services || []).filter((s) => s.actif !== false).map((s) => {
     const service = { ...s };
     service.slug = service.slug || slugify(service.titre);
     service.url = `services/${service.slug}.html`;

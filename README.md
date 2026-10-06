@@ -1,7 +1,10 @@
 # Site vitrine – Services à domicile
 
 Site internet complet, statique et sans dépendance, pour une prestataire indépendante
-(ménage et repassage, garde d'enfants, soutien scolaire, aide aux seniors).
+(ménage et repassage, garde d'enfants, soutien scolaire).
+
+Un service peut être retiré du site sans être supprimé : `actif: false` dans sa fiche
+(c'est le cas de l'aide aux seniors, en attente de déclaration de l'activité).
 
 **Toutes les informations personnelles et le contenu éditable sont centralisés dans un seul
 fichier : `config/site.config.js`.** Un script (`build.js`) les injecte dans l'ensemble des
@@ -261,7 +264,7 @@ pages « brand resources » de chaque plateforme et remplacer l'icône `globe` d
 
 `documents/` contient un **modèle de devis** et un **modèle de contrat de prestation** (Word et
 PDF), chacun avec le formulaire de rétractation ; le contrat comporte aussi une fiche de
-renseignements (contacts d'urgence, enfants, aide aux seniors, accès au logement). Ils sont générés
+renseignements (contacts d'urgence, enfants, accès au logement). Ils sont générés
 à partir de `config/site.config.js` (tarifs, conditions, mentions légales) : les informations
 encore inconnues (médiateur, assureur, adresse) apparaissent en lignes à compléter.
 
