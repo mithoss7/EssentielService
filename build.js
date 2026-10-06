@@ -34,6 +34,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
@@ -505,6 +506,19 @@ function build() {
   fs.rmSync(path.join(DIST, 'assets', 'icons'), { recursive: true, force: true }); // icônes inlinées, inutile de les copier
   copyDir(path.join(SRC, 'static'), DIST);
 
+  // Numéro de version des fichiers (empreinte du contenu) ajouté à leur adresse
+  // (style.css?v=…) : quand un fichier change, les navigateurs chargent aussitôt
+  // la nouvelle version au lieu de celle gardée en cache.
+  const empreintes = new Map();
+  const version = (relDist) => {
+    if (!empreintes.has(relDist)) {
+      const contenu = fs.readFileSync(path.join(DIST, relDist));
+      empreintes.set(relDist, crypto.createHash('md5').update(contenu).digest('hex').slice(0, 8));
+    }
+    return empreintes.get(relDist);
+  };
+  const versions = { css: version('assets/css/style.css'), js: version('assets/js/main.js') };
+
   // Scripts PHP : remplace les valeurs %%chemin.de.config%% (chaînes PHP entre apostrophes)
   for (const f of fs.readdirSync(DIST).filter((n) => n.endsWith('.php'))) {
     const fichier = path.join(DIST, f);
@@ -549,7 +563,7 @@ function build() {
       description: meta.description || cfg.site.description,
       isHome: outputRel === 'index.html',
       section: meta.section || '',
-      fond: fichierFond ? `${root}assets/img/fonds/${fichierFond}` : ''
+      fond: fichierFond ? `${root}assets/img/fonds/${fichierFond}?v=${version(`assets/img/fonds/${fichierFond}`)}` : ''
     };
     const nav = [
       { label: 'Accueil', href: `${root}index.html`, section: 'accueil' },
@@ -559,7 +573,7 @@ function build() {
       { label: 'Contact', href: `${root}contact.html`, section: 'contact' }
     ].map((item) => ({ ...item, actif: item.section === page.section }));
 
-    const context = { ...cfg, page, nav, root, ...extra };
+    const context = { ...cfg, page, nav, root, versions, ...extra };
     const content = renderer.render(body, context);
     const html = renderer.render(layout, { ...context, content });
     write(path.join(DIST, outputRel), html);
