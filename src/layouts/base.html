@@ -8,6 +8,7 @@
   {{#if site.motsCles}}<meta name="keywords" content="{{site.motsCles}}">{{/if}}
   <meta name="author" content="{{identite.nomComplet}}">
   {{#unless site.indexable}}<meta name="robots" content="noindex, nofollow">{{/unless}}
+  {{#if site.indexable}}{{#if page.noindex}}<meta name="robots" content="noindex">{{/if}}{{/if}}
   <link rel="canonical" href="{{page.url}}">
   <meta name="theme-color" content="#0F2A44">
 
@@ -30,6 +31,7 @@
 
   <!-- Données structurées (référencement local) -->
   <script type="application/ld+json">{{{jsonLd}}}</script>
+  {{#if pageJsonLd}}<script type="application/ld+json">{{{pageJsonLd}}}</script>{{/if}}
 </head>
 <body class="{{page.bodyClass}}" style="min-height:100vh;display:flex;flex-direction:column">
   <a class="skip-link" href="#contenu">Aller au contenu</a>

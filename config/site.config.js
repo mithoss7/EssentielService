@@ -155,7 +155,11 @@ module.exports = {
     // Sert aux balises SEO, au sitemap.xml et aux liens de partage.
     url: "https://www.essentielservicescharente.fr",
     // Titre par défaut (onglet du navigateur, moteurs de recherche).
-    titre: "Essentiel Services – Ménage, soutien scolaire, garde d'enfants",
+    // Mots qui comptent le plus pour Google : service + ville, en premier.
+    titre: "Ménage, soutien scolaire et garde d'enfants à Angoulême – Essentiel Services",
+    // Ville cible du référencement (titres et descriptions des pages de services).
+    // Angoulême est la ville la plus recherchée de la zone d'intervention.
+    villeReference: "Angoulême",
     // Description pour les moteurs de recherche (150 à 160 caractères).
     description:
       "Ménage et repassage, soutien scolaire et garde d'enfants à domicile à Angoulême et alentours. Devis gratuit et sans engagement, réponse sous 48 h.",
@@ -172,7 +176,7 @@ module.exports = {
     // Indexation par les moteurs de recherche. false = le site reste visible
     // pour qui a le lien mais n'est pas référencé (lancement progressif).
     // Passer à true à la mise en ligne définitive.
-    indexable: false
+    indexable: true
   },
 
   /* --------------------------------------------------------------------------
