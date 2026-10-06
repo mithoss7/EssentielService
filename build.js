@@ -397,12 +397,15 @@ function enrichConfig(raw) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
+    '@id': `${cfg.site.url}/#entreprise`,
     name: cfg.identite.nomCommercial,
+    founder: { '@type': 'Person', name: cfg.identite.nomComplet },
     description: cfg.site.description,
     url: cfg.site.url,
     telephone: cfg.contact.telephoneInternational,
     email: cfg.contact.email,
-    image: `${cfg.site.url}/favicon.svg`,
+    image: `${cfg.site.url}/assets/img/partage.png`,
+    logo: `${cfg.site.url}/favicon.svg`,
     priceRange: '€€',
     address: {
       '@type': 'PostalAddress',
@@ -541,7 +544,8 @@ function build() {
       root,
       chemin: outputRel,
       url: `${cfg.site.url}/${urlPath}`,
-      titreComplet: meta.titre ? `${meta.titre} – ${cfg.identite.nomCommercial}` : cfg.site.titre,
+      // titreSeo (front matter) : titre plus précis pour Google que le titre affiché
+      titreComplet: (meta.titreSeo || meta.titre) ? `${meta.titreSeo || meta.titre} – ${cfg.identite.nomCommercial}` : cfg.site.titre,
       description: meta.description || cfg.site.description,
       isHome: outputRel === 'index.html',
       section: meta.section || '',
@@ -581,17 +585,56 @@ function build() {
 
   // Pages de services générées depuis la configuration
   const serviceTemplate = parseFrontMatter(read(path.join(SRC, 'templates', 'service.html')));
+  const ville = cfg.site.villeReference || cfg.contact.adresse.ville;
+  // Description Google (160 caractères max.) : service + ville + prix, puis
+  // l'accroche si elle tient, sinon la mention du devis gratuit.
+  const descriptionService = (s) => {
+    const base = `${s.titre.replace(' & ', ' et ')} à domicile à ${ville} et alentours` +
+      `${s.tarif && s.tarif.affiche ? `, dès ${s.tarif.affiche}` : ''}.`;
+    const longue = `${base} ${s.accroche}`;
+    return longue.length <= 160 ? longue : `${base} Devis gratuit et sans engagement, réponse sous 48 h.`;
+  };
+  // Données structurées propres à chaque service : Service + fil d'Ariane
+  const serviceJsonLd = (s) => JSON.stringify([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: s.titre,
+      serviceType: s.titre,
+      description: s.description,
+      url: `${cfg.site.url}/${s.url}`,
+      provider: { '@id': `${cfg.site.url}/#entreprise` },
+      areaServed: (cfg.contact.zone.villes || []).map((v) => ({ '@type': 'City', name: v })),
+      ...(s.tarif && s.tarif.montant ? {
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'EUR',
+          priceSpecification: { '@type': 'UnitPriceSpecification', price: s.tarif.montant, priceCurrency: 'EUR', unitCode: 'HUR' }
+        }
+      } : {})
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${cfg.site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: `${cfg.site.url}/services/` },
+        { '@type': 'ListItem', position: 3, name: s.titre, item: `${cfg.site.url}/${s.url}` }
+      ]
+    }
+  ]).replace(/</g, '\\u003c');
   for (const service of cfg.services) {
     renderPage({
       body: serviceTemplate.body,
       meta: {
         ...serviceTemplate.meta,
         titre: service.titre,
-        description: `${service.accroche} ${cfg.identite.nomCommercial}, ${cfg.contact.adresse.ville} et alentours.`,
+        titreSeo: service.titreSeo || `${service.titre.replace(' & ', ' et ')} à domicile à ${ville}`,
+        description: service.descriptionSeo || descriptionService(service),
         section: 'services'
       },
       outputRel: service.url,
-      extra: { service }
+      extra: { service, pageJsonLd: serviceJsonLd(service) }
     });
   }
 

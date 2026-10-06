@@ -17,7 +17,7 @@ bodyClass: page-service
       <p class="lead">{{service.accroche}}</p>
       <div class="page-hero__meta">
         {{#if service.tarif}}<span class="pill pill--light">{{icon "euro"}} À partir de {{service.tarif.affiche}}</span>{{/if}}
-        <span class="pill pill--light">{{icon "pin"}} {{contact.adresse.ville}} et {{contact.zone.rayonKm}} km alentour</span>
+        <span class="pill pill--light">{{icon "pin"}} {{site.villeReference}}, {{contact.adresse.ville}} et {{contact.zone.rayonKm}} km alentour</span>
         <a class="btn btn--accent" href="{{root}}contact.html?service={{service.slug}}">{{site.ctaPrincipal}}</a>
       </div>
     </div>

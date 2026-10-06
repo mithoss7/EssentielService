@@ -95,6 +95,10 @@ Quelques règles pratiques :
   `contact.rendezVous.url` (lien de prise de rendez-vous en ligne, bouton masqué si vide),
   `site.enConstruction` (bandeau) et `site.indexable` (`false` = balise noindex + robots.txt
   restrictif pendant le lancement progressif ; passer à `true` à la mise en ligne définitive).
+- Référencement : `site.titre` (titre de l'accueil), `site.villeReference` (ville ciblée dans les
+  titres et descriptions des pages de services) ; dans le front matter d'une page, `titreSeo`
+  remplace le titre pour Google et `noindex: true` exclut la page des moteurs de recherche.
+  Par service : `titreSeo` et `descriptionSeo` facultatifs (sinon générés : service + ville + prix).
 - Horaires : `contact.horaires` (affichage), `contact.horairesStructures` (mêmes horaires pour
   Google, données structurées) et `contact.horairesIntervention` (phrase reprise dans les conditions
   générales et les modèles de contrat). Les trois doivent rester cohérents.
