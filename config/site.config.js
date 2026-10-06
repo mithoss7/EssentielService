@@ -38,7 +38,7 @@ module.exports = {
     titreAccueil: "Un coup de main fiable, chez vous, quand vous en avez besoin",
     // Sous-titre du bandeau d'accueil.
     sousTitreAccueil:
-      "Ménage et repassage, garde d'enfants et soutien scolaire : " +
+      "Ménage, garde d'enfants et soutien scolaire : " +
       "une interlocutrice unique, sérieuse et à l'écoute, près de chez vous.",
     // Statut juridique affiché dans les mentions légales et le pied de page.
     statut: "Entrepreneure individuelle (EI) – micro-entrepreneure",
@@ -51,7 +51,7 @@ module.exports = {
     // Texte de présentation de la page « À propos » (plusieurs paragraphes).
     presentation: [
       "Je m'appelle Élisanah. Titulaire d'un baccalauréat général et d'une licence de psychologie de l'éducation et du développement de l'enfant, j'ai travaillé quatre ans dans le soutien scolaire, deux ans dans l'aide à la personne, et ponctuellement chez des particuliers pour des prestations de ménage, avec aussi une expérience de l'entretien professionnel. Ces différentes expériences m'ont permis de développer mon sens de l'organisation, mon sérieux et mon autonomie. J'ai choisi de travailler à mon compte pour mettre cette expérience au service de mes clients, avec un service de proximité, sérieux et adapté à leurs besoins.",
-      "Ménage et repassage, garde et soutien scolaire de vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
+      "Ménage, garde et soutien scolaire de vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
       "Au fil de mes expériences dans le soutien scolaire, l'aide à la personne et l'entretien, j'ai découvert que ce que j'aime le plus, c'est me rendre utile. Aujourd'hui, j'ai choisi de travailler à mon compte pour proposer un service simple, sérieux et humain, adapté aux besoins de chacun."
     ],
     // Valeurs affichées sur la page « À propos ».
@@ -162,9 +162,9 @@ module.exports = {
     villeReference: "Angoulême",
     // Description pour les moteurs de recherche (150 à 160 caractères).
     description:
-      "Ménage et repassage, soutien scolaire et garde d'enfants à domicile à Angoulême et alentours. Devis gratuit et sans engagement, réponse sous 48 h.",
+      "Ménage, soutien scolaire et garde d'enfants à domicile à Angoulême et alentours. Devis gratuit et sans engagement, réponse sous 48 h.",
     // Mots-clés (optionnel, peu utilisé par Google mais sans inconvénient).
-    motsCles: "ménage, ménage à domicile, repassage, soutien scolaire, aide aux devoirs, garde d'enfants, services à domicile, Angoulême, Charente",
+    motsCles: "ménage, ménage à domicile, femme de ménage, soutien scolaire, aide aux devoirs, garde d'enfants, services à domicile, Angoulême, Charente",
     langue: "fr",
     // Texte du bouton d'appel à l'action principal.
     ctaPrincipal: "Demander un devis gratuit",
@@ -191,9 +191,9 @@ module.exports = {
     {
       slug: "menage",
       icone: "menage",
-      titre: "Ménage & repassage",
-      titreCourt: "Ménage & repassage",
-      accroche: "Un intérieur propre et du linge impeccable, entretenus avec soin et régularité.",
+      titre: "Ménage",
+      titreCourt: "Ménage",
+      accroche: "Un intérieur propre et accueillant, entretenu avec soin et régularité.",
       description:
         "Vous manquez de temps ou d'énergie pour l'entretien de votre logement, de votre location ou de vos locaux ? Je prends le relais, à l'heure ou au forfait, ponctuellement ou régulièrement, avec sérieux et discrétion. Chaque intervention est adaptée à vos priorités. Les produits d'entretien et le matériel sont fournis par le client.",
       // Prestations regroupées par thème (liste reprise des réponses, question 2.2).
@@ -243,9 +243,6 @@ module.exports = {
           "Vider les poubelles",
           "Nettoyer les surfaces et miroirs",
           "Réapprovisionner les produits prévus par l'hôtel"
-        ] },
-        { titre: "Repassage", items: [
-          "Repassage du linge, facturé à part"
         ] }
       ],
       // Ce qui n'est pas fait (réponse 2.2, « tâches à ne pas faire »).
@@ -274,7 +271,7 @@ module.exports = {
       ],
       tarif: {
         montant: 22, unite: "h",
-        precision: "Produits et matériel fournis par le client. Repassage facturé à part.",
+        precision: "Produits et matériel fournis par le client.",
         // Forfaits d'heures dégressifs : le prix par heure est calculé automatiquement.
         forfaits: [
           { heures: 5, prix: 105 },
@@ -436,7 +433,7 @@ module.exports = {
       actif: false,
       titre: "Jusqu'à 50 % de crédit d'impôt",
       texte:
-        "Les prestations de services à la personne réalisées à votre domicile (ménage, repassage, garde d'enfants, soutien scolaire) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
+        "Les prestations de services à la personne réalisées à votre domicile (ménage, garde d'enfants, soutien scolaire) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
     }
   },
 

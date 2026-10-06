@@ -1,7 +1,7 @@
 # Site vitrine – Services à domicile
 
 Site internet complet, statique et sans dépendance, pour une prestataire indépendante
-(ménage et repassage, garde d'enfants, soutien scolaire).
+(ménage, garde d'enfants, soutien scolaire).
 
 Un service peut être retiré du site sans être supprimé : `actif: false` dans sa fiche
 (c'est le cas de l'aide aux seniors, en attente de déclaration de l'activité).
