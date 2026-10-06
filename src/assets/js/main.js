@@ -146,9 +146,11 @@
         'Service souhaité : ' + serviceLabel(),
         'Fréquence : ' + optionLabel('frequence'),
         'À partir de : ' + (data.get('debut') || 'non précisé'),
-        'Âge ou classe de l\'enfant : ' + (data.get('classe') || 'non précisé'),
         'Créneau de rappel : ' + optionLabel('creneau')
-      ].join('\n');
+      ];
+      // Âge ou classe : champ affiché seulement pour le soutien scolaire
+      if (data.get('classe')) body.splice(body.length - 1, 0, 'Âge ou classe de l\'enfant : ' + data.get('classe'));
+      body = body.join('\n');
       return 'mailto:' + mailto + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     };
 
@@ -218,6 +220,21 @@
       for (var i = 0; i < select.options.length; i++) {
         if (select.options[i].value === wanted) { select.selectedIndex = i; break; }
       }
+    }
+
+    // Champ « Âge ou classe de l'enfant » : visible seulement pour le service
+    // indiqué dans data-pour-service (sans JavaScript, il reste toujours visible)
+    var champClasse = document.getElementById('champ-classe');
+    if (champClasse && select) {
+      var inputClasse = champClasse.querySelector('input');
+      var majChampClasse = function () {
+        var visible = select.value === champClasse.getAttribute('data-pour-service');
+        champClasse.hidden = !visible;
+        if (inputClasse) inputClasse.disabled = !visible; // non envoyé s'il est masqué
+      };
+      majChampClasse();
+      select.addEventListener('change', majChampClasse);
+      form.addEventListener('reset', function () { setTimeout(majChampClasse, 0); });
     }
   }
   /* ---------------------------------------------------------------------

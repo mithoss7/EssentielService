@@ -82,7 +82,8 @@ $corps = implode("\n", [
   'Service souhaité : ' . ($service ?: $nonPrecise),
   'Fréquence : ' . ($frequence ?: $nonPrecise),
   'À partir de : ' . ($debutPresta ?: $nonPrecise),
-  "Âge ou classe de l'enfant : " . ($classe ?: $nonPrecise),
+  // Âge ou classe : champ affiché seulement pour le soutien scolaire
+  ...($classe !== '' ? ["Âge ou classe de l'enfant : " . $classe] : []),
   'Créneau de rappel : ' . ($creneau ?: 'peu importe'),
   '',
   'Message :',
