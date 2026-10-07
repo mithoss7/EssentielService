@@ -2,7 +2,7 @@
 fond: contact
 titre: Contact
 titreSeo: Contact et devis gratuit à Angoulême
-description: Contactez-moi pour un devis gratuit à Angoulême et alentours : ménage ou soutien scolaire. Réponse sous 48 h.
+description: Contactez-moi pour un devis gratuit à Angoulême et alentours : ménage à domicile, ponctuel ou régulier. Réponse sous 48 h.
 section: contact
 priorite: 0.9
 bodyClass: page-contact
@@ -81,11 +81,13 @@ bodyClass: page-contact
             <label for="f-debut">À partir de quand ?</label>
             <input id="f-debut" name="debut" type="text" placeholder="Ex. : dès que possible, début novembre…">
           </div>
+          {{#if contact.champClasse}}
           <!-- Affiché seulement pour le soutien scolaire (voir main.js) -->
           <div id="champ-classe" data-pour-service="soutien-scolaire">
             <label for="f-classe">Âge ou classe de l'enfant</label>
             <input id="f-classe" name="classe" type="text" placeholder="Ex. : 6 ans, CE2">
           </div>
+          {{/if}}
         </div>
 
         <div>
@@ -99,7 +101,7 @@ bodyClass: page-contact
 
         <div>
           <label for="f-message">Votre message <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="f-message" name="message" required placeholder="Ex. : je cherche du soutien scolaire pour mon fils de CE2, deux fois par semaine après l'école, à {{contact.adresse.ville}}."></textarea>
+          <textarea id="f-message" name="message" required placeholder="Ex. : je cherche une aide pour le ménage de ma maison, 3 heures tous les quinze jours, à {{contact.adresse.ville}}."></textarea>
           <p class="form__help">Merci de ne pas indiquer d'informations de santé : nous en parlerons de vive voix.</p>
         </div>
 
