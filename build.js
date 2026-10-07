@@ -366,6 +366,9 @@ function enrichConfig(raw) {
     }
     return service;
   });
+  // Champ « Âge ou classe de l'enfant » du formulaire : seulement si le soutien scolaire est proposé
+  cfg.contact.champClasse = cfg.services.some((s) => s.slug === 'soutien-scolaire');
+
   cfg.services.forEach((s) => {
     s.autres = cfg.services.filter((o) => o.slug !== s.slug).map((o) => ({
       slug: o.slug, url: o.url, titre: o.titre, titreCourt: o.titreCourt, accroche: o.accroche, icone: o.icone
