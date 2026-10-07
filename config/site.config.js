@@ -363,14 +363,14 @@ module.exports = {
       ],
       tarif: {
         montant: 20, unite: "h",
-        precision: "Séance minimale de 1 h 30.",
+        precision: "Séance minimale de 1 h.",
         forfaits: [
           { heures: 5, prix: 95 },
           { heures: 10, prix: 180 },
           { heures: 20, prix: 340 }
         ]
       },
-      dureeMin: 1.5,
+      dureeMin: 1,
       note: "Les heures peuvent être utilisées pour les devoirs, les révisions, l'apprentissage des leçons, la lecture, le français, les mathématiques et la consolidation des acquis."
     },
     {

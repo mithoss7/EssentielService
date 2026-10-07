@@ -271,7 +271,7 @@ function devis() {
     ...lignesVides(2),
     champ('Date de début', ''),
     champ('Jours et horaires', ''),
-    note(`Interventions ${c.horairesIntervention}. Durée minimale : 2 heures pour le ménage, 1 h 30 pour les autres services.`),
+    note(`Interventions ${c.horairesIntervention}. Durée minimale : 2 heures pour le ménage, 1 heure pour le soutien scolaire.`),
     tableau(w, [
       new TableRow({ children: [enTete('Désignation', w[0]), enTete('Quantité (h ou forfait)', w[1]), enTete('Prix unitaire', w[2]), enTete('Montant', w[3])] }),
       ligneVide(), ligneVide(), ligneVide(),
@@ -319,7 +319,7 @@ function contrat() {
     caseACocher('Contrat à durée indéterminée'),
     caseACocher('Contrat à durée déterminée, jusqu\'au : ………………………'),
     champ('Jours et horaires convenus', ''),
-    p(`Les interventions ont lieu ${c.horairesIntervention}. Durée minimale : 2 heures pour le ménage, 1 h 30 pour les autres services.${c.conges ? ' ' + c.conges : ''} Les dates précises sont communiquées à l'avance ; en cas d'empêchement, la Prestataire prévient le Client dès que possible et, si elle le peut, propose un remplacement ou un report.`),
+    p(`Les interventions ont lieu ${c.horairesIntervention}. Durée minimale : 2 heures pour le ménage, 1 heure pour le soutien scolaire.${c.conges ? ' ' + c.conges : ''} Les dates précises sont communiquées à l'avance ; en cas d'empêchement, la Prestataire prévient le Client dès que possible et, si elle le peut, propose un remplacement ou un report.`),
     article('Article 3 – Prix'),
     champ('Tarif horaire', ''),
     champ('ou forfait (nombre d\'heures et prix)', ''),
