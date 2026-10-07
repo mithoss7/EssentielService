@@ -20,7 +20,7 @@
       </div>
 
       <div>
-        <h4>Services</h4>
+        <h4>{{#if serviceUnique}}Prestation{{else}}Services{{/if}}</h4>
         <ul>
           {{#each services}}
           <li><a href="{{root}}{{url}}">{{titre}}</a></li>

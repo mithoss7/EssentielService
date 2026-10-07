@@ -48,6 +48,9 @@ bodyClass: page-contact
             <label for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label>
             <input id="f-email" name="email" type="email" autocomplete="email" required>
           </div>
+          {{#if serviceUnique}}
+          <input type="hidden" name="service" value="{{servicePrincipal.slug}}" data-libelle="{{servicePrincipal.titre}}">
+          {{else}}
           <div>
             <label for="f-service">Service souhaité</label>
             <select id="f-service" name="service">
@@ -58,6 +61,7 @@ bodyClass: page-contact
               <option value="autre">Autre / plusieurs services</option>
             </select>
           </div>
+          {{/if}}
         </div>
 
         <div class="form__row">

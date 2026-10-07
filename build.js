@@ -369,6 +369,12 @@ function enrichConfig(raw) {
   // Champ « Âge ou classe de l'enfant » du formulaire : seulement si le soutien scolaire est proposé
   cfg.contact.champClasse = cfg.services.some((s) => s.slug === 'soutien-scolaire');
 
+  // Un seul service proposé : le site le présente directement, sans liste ni
+  // page « Services » (menu, accueil, fil d'Ariane, formulaire, simulateur).
+  // Dès qu'un deuxième service est réactivé, la présentation en liste revient.
+  cfg.serviceUnique = cfg.services.length === 1;
+  cfg.servicePrincipal = cfg.services[0] || null;
+
   cfg.services.forEach((s) => {
     s.autres = cfg.services.filter((o) => o.slug !== s.slug).map((o) => ({
       slug: o.slug, url: o.url, titre: o.titre, titreCourt: o.titreCourt, accroche: o.accroche, icone: o.icone
@@ -570,7 +576,9 @@ function build() {
     };
     const nav = [
       { label: 'Accueil', href: `${root}index.html`, section: 'accueil' },
-      { label: 'Services', href: `${root}services/index.html`, section: 'services', sousMenu: cfg.services.map((s) => ({ label: s.titre, href: `${root}${s.url}` })) },
+      cfg.serviceUnique
+        ? { label: cfg.servicePrincipal.titre, href: `${root}${cfg.servicePrincipal.url}`, section: 'services' }
+        : { label: 'Services', href: `${root}services/index.html`, section: 'services', sousMenu: cfg.services.map((s) => ({ label: s.titre, href: `${root}${s.url}` })) },
       { label: 'À propos', href: `${root}a-propos.html`, section: 'a-propos' },
       { label: 'Tarifs', href: `${root}tarifs.html`, section: 'tarifs' },
       { label: 'Contact', href: `${root}contact.html`, section: 'contact' }
@@ -594,6 +602,24 @@ function build() {
       if (entry.isDirectory()) walkPages(abs, r);
       else if (entry.name.endsWith('.html')) {
         const { meta, body } = parseFrontMatter(read(abs));
+        // Page réservée à plusieurs services (liste) : avec un seul service, elle
+        // renvoie vers la page de ce service (et sort du sitemap).
+        if (meta.plusieursServices && cfg.serviceUnique) {
+          const cible = `${cfg.site.url}/${cfg.servicePrincipal.url}`;
+          write(path.join(DIST, r), `<!DOCTYPE html>
+<html lang="${cfg.site.langue}">
+<head>
+  <meta charset="utf-8">
+  <title>${escapeHtml(cfg.servicePrincipal.titre)} – ${escapeHtml(cfg.identite.nomCommercial)}</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="${escapeHtml(cible)}">
+  <meta http-equiv="refresh" content="0; url=${escapeHtml(cible)}">
+</head>
+<body><p><a href="${escapeHtml(cible)}">${escapeHtml(cfg.servicePrincipal.titre)}</a></p></body>
+</html>
+`);
+          continue;
+        }
         renderPage({ body, meta, outputRel: r });
       }
     }
@@ -635,8 +661,8 @@ function build() {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${cfg.site.url}/` },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: `${cfg.site.url}/services/` },
-        { '@type': 'ListItem', position: 3, name: s.titre, item: `${cfg.site.url}/${s.url}` }
+        ...(cfg.serviceUnique ? [] : [{ '@type': 'ListItem', position: 2, name: 'Services', item: `${cfg.site.url}/services/` }]),
+        { '@type': 'ListItem', position: cfg.serviceUnique ? 2 : 3, name: s.titre, item: `${cfg.site.url}/${s.url}` }
       ]
     }
   ]).replace(/</g, '\\u003c');

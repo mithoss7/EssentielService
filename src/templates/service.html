@@ -7,7 +7,7 @@ bodyClass: page-service
     <div class="hero-panel">
       <ol class="breadcrumb" aria-label="Fil d'Ariane">
         <li><a href="{{root}}index.html">Accueil</a></li>
-        <li><a href="{{root}}services/index.html">Services</a></li>
+        {{#unless serviceUnique}}<li><a href="{{root}}services/index.html">Services</a></li>{{/unless}}
         <li aria-current="page">{{service.titreCourt}}</li>
       </ol>
       <div class="page-hero__top">
@@ -118,6 +118,7 @@ bodyClass: page-service
 </section>
 {{/if}}
 
+{{#if service.autres}}
 <section class="section section--white">
   <div class="container">
     <div class="section-header">
@@ -136,5 +137,6 @@ bodyClass: page-service
     </div>
   </div>
 </section>
+{{/if}}
 
 {{> cta-band}}

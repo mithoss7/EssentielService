@@ -29,12 +29,43 @@ bodyClass: page-accueil
 <!-- ===================== SERVICES ===================== -->
 <section class="section section--white" id="services">
   <div class="container">
+    {{#if serviceUnique}}
+    <!-- Un seul service : présentation directe, sans liste -->
+    <div class="section-header section-header--center">
+      <span class="eyebrow">Ma prestation</span>
+      <h2>{{servicePrincipal.titre}} à domicile, à l'heure ou au forfait</h2>
+      <p>{{servicePrincipal.description}}</p>
+    </div>
+    <div class="grid grid--2">
+      {{#if servicePrincipal.pourQui}}
+      <div class="card reveal">
+        <h3>Pour qui ?</h3>
+        <ul class="checklist">
+          {{#each servicePrincipal.pourQui}}
+          <li>{{icon "utilisateur"}}<span>{{this}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+      <div class="card reveal" data-delay="1">
+        <span class="icon-badge mb-2" aria-hidden="true">{{icon servicePrincipal.icone}}</span>
+        <h3>{{servicePrincipal.accroche}}</h3>
+        {{#if servicePrincipal.tarif}}<p class="service-card__price"><small>à partir de</small> {{servicePrincipal.tarif.affiche}}</p>{{/if}}
+        {{#if servicePrincipal.tarif.forfaits}}<p class="text-muted">Forfaits dégressifs : {{#each servicePrincipal.tarif.forfaits}}{{heures}} h{{#unless @last}}, {{/unless}}{{/each}}.</p>{{/if}}
+        <div class="actions mt-3">
+          <a class="btn btn--primary" href="{{root}}{{servicePrincipal.url}}">Le détail de la prestation</a>
+          <a class="link-arrow" href="{{root}}tarifs.html">Voir les tarifs {{icon "fleche"}}</a>
+        </div>
+      </div>
+    </div>
+    {{else}}
     <div class="section-header section-header--center">
       <span class="eyebrow">Mes services</span>
       <h2>Des services pour vous simplifier le quotidien</h2>
       <p>Pour les familles, les propriétaires de locations et les entreprises : des prestations sur mesure, à l'heure ou au forfait, ponctuelles ou régulières. Vous choisissez, je m'adapte.</p>
     </div>
     {{> services-grid}}
+    {{/if}}
   </div>
 </section>
 

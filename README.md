@@ -5,6 +5,10 @@ Site internet complet, statique et sans dépendance, pour une prestataire indép
 
 Un service peut être retiré du site sans être supprimé : `actif: false` dans sa fiche
 (c'est le cas de l'aide aux seniors et de la garde d'enfants, activités non retenues pour l'instant).
+Quand **un seul service** est actif, le site le présente directement : menu « Ménage » au lieu
+de « Services », accueil sans liste, page `services/index.html` remplacée par une redirection,
+formulaire et simulateur sans choix de service. La présentation en liste revient d'elle-même
+dès qu'un deuxième service est réactivé.
 
 **Toutes les informations personnelles et le contenu éditable sont centralisés dans un seul
 fichier : `config/site.config.js`.** Un script (`build.js`) les injecte dans l'ensemble des
