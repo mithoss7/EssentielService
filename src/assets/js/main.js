@@ -123,6 +123,7 @@
 
     var serviceLabel = function () {
       var select = form.querySelector('[name="service"]');
+      if (select && select.tagName !== 'SELECT') return select.getAttribute('data-libelle') || select.value; // service unique
       return select && select.selectedIndex > 0 ? select.options[select.selectedIndex].text : 'Non précisé';
     };
 
@@ -216,7 +217,7 @@
     var params = new URLSearchParams(window.location.search);
     var wanted = params.get('service');
     var select = form.querySelector('[name="service"]');
-    if (wanted && select) {
+    if (wanted && select && select.tagName === 'SELECT') {
       for (var i = 0; i < select.options.length; i++) {
         if (select.options[i].value === wanted) { select.selectedIndex = i; break; }
       }

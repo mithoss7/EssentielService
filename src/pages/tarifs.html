@@ -49,10 +49,10 @@ bodyClass: page-tarifs
     <div class="card simulateur" id="simulateur" hidden>
       <span class="icon-badge mb-2" aria-hidden="true">{{icon "euro"}}</span>
       <h2 style="font-size:1.6rem">Estimer le coût de vos prestations</h2>
-      <p class="text-muted">Choisissez un service, la durée d'une intervention et leur nombre par mois : le simulateur compare le tarif à l'heure et les forfaits.</p>
+      <p class="text-muted">{{#unless serviceUnique}}Choisissez un service, {{else}}Indiquez {{/unless}}la durée d'une intervention et leur nombre par mois : le simulateur compare le tarif à l'heure et les forfaits.</p>
       <div class="form mt-3">
         <div class="form__row">
-          <div>
+          <div{{#if serviceUnique}} hidden{{/if}}>
             <label for="sim-service">Service</label>
             <select id="sim-service"></select>
           </div>
