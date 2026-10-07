@@ -281,7 +281,7 @@ module.exports = {
       },
       // Durée minimale d'une intervention, en heures (simulateur de tarif).
       dureeMin: 2,
-      note: "Intervention minimale de 2 heures. Je n'interviens pas en présence d'animaux. Grands ménages, gîtes et locations saisonnières : devis personnalisé après avoir échangé sur les besoins et les caractéristiques du logement."
+      note: "Intervention minimale de 2 heures. Pour le ménage, je n'interviens pas en présence d'animaux. Grands ménages, gîtes et locations saisonnières : devis personnalisé après avoir échangé sur les besoins et les caractéristiques du logement."
     },
     {
       // Service désactivé (actif: false) : activité non déclarée pour l'instant.
@@ -371,7 +371,7 @@ module.exports = {
         ]
       },
       dureeMin: 1.5,
-      note: "Les heures peuvent être utilisées pour les devoirs, les révisions, l'apprentissage des leçons, la lecture, le français, les mathématiques et la consolidation des acquis. Je n'interviens pas en présence d'animaux."
+      note: "Les heures peuvent être utilisées pour les devoirs, les révisions, l'apprentissage des leçons, la lecture, le français, les mathématiques et la consolidation des acquis."
     },
     {
       // Service désactivé (actif: false) : activité non retenue pour l'instant.
