@@ -38,7 +38,7 @@ module.exports = {
     titreAccueil: "Un coup de main fiable, chez vous, quand vous en avez besoin",
     // Sous-titre du bandeau d'accueil.
     sousTitreAccueil:
-      "Ménage à domicile : " +
+      "Ménage et soutien scolaire : " +
       "une interlocutrice unique, sérieuse et à l'écoute, près de chez vous.",
     // Statut juridique affiché dans les mentions légales et le pied de page.
     statut: "Entrepreneure individuelle (EI) – micro-entrepreneure",
@@ -51,23 +51,23 @@ module.exports = {
     // Texte de présentation de la page « À propos » (plusieurs paragraphes).
     presentation: [
       "Je m'appelle Élisanah. Titulaire d'un baccalauréat général et d'une licence de psychologie de l'éducation et du développement de l'enfant, j'ai travaillé quatre ans dans le soutien scolaire, deux ans dans l'aide à la personne, et ponctuellement chez des particuliers pour des prestations de ménage, avec aussi une expérience de l'entretien professionnel. Ces différentes expériences m'ont permis de développer mon sens de l'organisation, mon sérieux et mon autonomie. J'ai choisi de travailler à mon compte pour mettre cette expérience au service de mes clients, avec un service de proximité, sérieux et adapté à leurs besoins.",
-      "Ménage chez vous, à l'heure ou au forfait : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
+      "Ménage chez vous, soutien scolaire pour vos enfants : je m'adapte à votre rythme et à vos habitudes. Vous avez une interlocutrice unique, que vous connaissez, qui connaît votre maison et vos proches.",
       "Au fil de mes expériences dans le soutien scolaire, l'aide à la personne et l'entretien, j'ai découvert que ce que j'aime le plus, c'est me rendre utile. Aujourd'hui, j'ai choisi de travailler à mon compte pour proposer un service simple, sérieux et humain, adapté aux besoins de chacun."
     ],
     // Valeurs affichées sur la page « À propos ».
     valeurs: [
       { titre: "Fiabilité", texte: "Je suis là quand je l'ai dit, et je préviens toujours à l'avance en cas d'imprévu." },
       { titre: "Discrétion", texte: "Votre intimité et vos informations restent chez vous. Toujours." },
-      { titre: "Bienveillance", texte: "Patience, écoute et respect de vos habitudes, avant tout." },
+      { titre: "Bienveillance", texte: "Avec les enfants comme avec leurs parents, patience et écoute avant tout." },
       { titre: "Transparence", texte: "Des tarifs clairs, annoncés avant toute intervention, sans surprise." }
     ],
     // Diplômes, formations, garanties (liste libre). N'indiquer que ce qui peut
     // être prouvé. L'assurance RC Pro est ajoutée automatiquement à l'affichage
     // dès que legal.assurance.nom est renseigné.
     garanties: [
-      "Expérience du ménage chez les particuliers",
-      "Expérience de l'entretien en milieu professionnel",
-      "Une interlocutrice unique, de la première visite au suivi",
+      "Baccalauréat général",
+      "Licence de psychologie de l'éducation et du développement de l'enfant",
+      "4 ans d'expérience en soutien scolaire",
       "Devis écrit gratuit et sans engagement"
     ]
   },
@@ -156,15 +156,15 @@ module.exports = {
     url: "https://www.essentielservicescharente.fr",
     // Titre par défaut (onglet du navigateur, moteurs de recherche).
     // Mots qui comptent le plus pour Google : service + ville, en premier.
-    titre: "Ménage à domicile à Angoulême – Essentiel Services",
+    titre: "Ménage et soutien scolaire à domicile à Angoulême – Essentiel Services",
     // Ville cible du référencement (titres et descriptions des pages de services).
     // Angoulême est la ville la plus recherchée de la zone d'intervention.
     villeReference: "Angoulême",
     // Description pour les moteurs de recherche (150 à 160 caractères).
     description:
-      "Ménage à domicile à Angoulême et alentours : particuliers, locations, bureaux et commerces. Devis gratuit et sans engagement, réponse sous 48 h.",
+      "Ménage et soutien scolaire à domicile à Angoulême et alentours. Devis gratuit et sans engagement, réponse sous 48 h.",
     // Mots-clés (optionnel, peu utilisé par Google mais sans inconvénient).
-    motsCles: "ménage, ménage à domicile, femme de ménage, aide ménagère, entretien de bureaux, services à domicile, Angoulême, Charente",
+    motsCles: "ménage, ménage à domicile, femme de ménage, soutien scolaire, aide aux devoirs, cours particuliers, services à domicile, Angoulême, Charente",
     langue: "fr",
     // Texte du bouton d'appel à l'action principal.
     ctaPrincipal: "Demander un devis gratuit",
@@ -281,7 +281,7 @@ module.exports = {
       },
       // Durée minimale d'une intervention, en heures (simulateur de tarif).
       dureeMin: 2,
-      note: "Intervention minimale de 2 heures. Je n'interviens pas en présence d'animaux. Grands ménages, gîtes et locations saisonnières : devis personnalisé après avoir échangé sur les besoins et les caractéristiques du logement."
+      note: "Intervention minimale de 2 heures. Pour le ménage, je n'interviens pas en présence d'animaux. Grands ménages, gîtes et locations saisonnières : devis personnalisé après avoir échangé sur les besoins et les caractéristiques du logement."
     },
     {
       // Service désactivé (actif: false) : activité non déclarée pour l'instant.
@@ -321,8 +321,6 @@ module.exports = {
       note: "Le devis est établi avec la famille, qui le signe. Pas d'aide à la toilette, à l'habillage ni au lever, ni de soins médicaux : pour ces besoins, je vous oriente vers les services spécialisés. Je n'interviens pas en présence d'animaux."
     },
     {
-      // Service désactivé temporairement (actif: false) : à réactiver plus tard.
-      actif: false,
       slug: "soutien-scolaire",
       icone: "ecole",
       titre: "Soutien scolaire",
@@ -373,7 +371,7 @@ module.exports = {
         ]
       },
       dureeMin: 1.5,
-      note: "Les heures peuvent être utilisées pour les devoirs, les révisions, l'apprentissage des leçons, la lecture, le français, les mathématiques et la consolidation des acquis. Je n'interviens pas en présence d'animaux."
+      note: "Les heures peuvent être utilisées pour les devoirs, les révisions, l'apprentissage des leçons, la lecture, le français, les mathématiques et la consolidation des acquis."
     },
     {
       // Service désactivé (actif: false) : activité non retenue pour l'instant.
@@ -421,13 +419,13 @@ module.exports = {
     conditions: [
       "Devis gratuit et sans engagement, établi sous 48 h.",
       "Interventions du lundi au vendredi, de 8 h à 18 h, hors congés annuels.",
-      "Forfaits dégressifs de 5, 10 ou 20 heures pour le ménage.",
+      "Forfaits dégressifs de 5, 10 ou 20 heures pour le ménage et le soutien scolaire.",
       "Paiement par virement, chèque ou espèces (dans la limite légale de 1 000 € en espèces).",
       "Règlement après chaque intervention ; pour les prestations régulières, facture récapitulative en fin de mois, à régler à réception.",
       "Pas d'acompte pour les prestations habituelles ; un acompte peut être demandé pour une prestation importante ou nécessitant une réservation spécifique.",
       "Annulation sans frais jusqu'à 24 h avant l'intervention ; une première annulation tardive reste sans frais. En cas d'annulations tardives répétées, ou d'annulation tardive ou d'absence ayant entraîné un déplacement inutile, 1 heure de prestation peut être facturée.",
       "Frais de déplacement au-delà de la zone d'intervention, indiqués sur le devis.",
-      "Majorations éventuelles (jours fériés, interventions urgentes) : indiquées sur le devis.",
+      "Majorations éventuelles (jours fériés, interventions urgentes) et tarif dégressif pour plusieurs enfants : indiqués sur le devis.",
       "Tarifs indicatifs, révisés une fois par an et communiqués à l'avance."
     ],
     // Encart sur le crédit d'impôt « services à la personne ».
@@ -437,7 +435,7 @@ module.exports = {
       actif: false,
       titre: "Jusqu'à 50 % de crédit d'impôt",
       texte:
-        "Les prestations de services à la personne réalisées à votre domicile (ménage) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
+        "Les prestations de services à la personne réalisées à votre domicile (ménage, soutien scolaire) peuvent ouvrir droit à un crédit d'impôt égal à 50 % des sommes versées, dans la limite des plafonds en vigueur. Renseignez-vous auprès de moi ou sur le site officiel du service public."
     }
   },
 
@@ -455,6 +453,7 @@ module.exports = {
    *  7. CHIFFRES CLÉS (page d'accueil)
    * ------------------------------------------------------------------------ */
   chiffres: [
+    { valeur: "4", suffixe: "ans", label: "de soutien scolaire" },
     { valeur: "25", suffixe: "km", label: "de rayon d'intervention" },
     { valeur: "5", suffixe: "j/7", label: "du lundi au vendredi" },
     { valeur: "48", suffixe: "h", label: "pour recevoir votre devis" }
