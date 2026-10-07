@@ -125,10 +125,10 @@ function blocPrestataire() {
 function blocClient() {
   const w = [CONTENT_W / 2, CONTENT_W / 2];
   return tableau(w, [
-    new TableRow({ children: [enTete('Client (signataire)', w[0]), enTete('Bénéficiaire, si différent', w[1])] }),
+    new TableRow({ children: [enTete('Client (signataire)', w[0]), enTete('Bénéficiaire, si différent (parent âgé, enfant)', w[1])] }),
     new TableRow({ children: [
       cellule([champ('Nom et prénom', '', w[0] - 220), champ('Adresse', '', w[0] - 220), champ('', '', w[0] - 220), champ('Téléphone', '', w[0] - 220), champ('E-mail', '', w[0] - 220)], w[0]),
-      cellule([champ('Nom et prénom', '', w[1] - 220), champ('Lien avec le client', '', w[1] - 220), champ('Lieu d\'intervention', '', w[1] - 220), champ('', '', w[1] - 220)], w[1])
+      cellule([champ('Nom et prénom', '', w[1] - 220), champ('Âge ou classe (enfant)', '', w[1] - 220), champ('Lien avec le client', '', w[1] - 220), champ('Lieu d\'intervention', '', w[1] - 220), champ('', '', w[1] - 220)], w[1])
     ] })
   ]);
 }
@@ -277,7 +277,7 @@ function devis() {
       ligneVide(), ligneVide(), ligneVide(),
       ligneTotal('Frais de déplacement (au-delà de la zone d\'intervention)', false),
       ligneTotal('Majorations éventuelles (jours fériés, intervention urgente)', false),
-      ligneTotal('Remise (forfait ou tarif dégressif)', false),
+      ligneTotal('Remise (tarif dégressif, plusieurs enfants)', false),
       ligneTotal(`TOTAL NET À PAYER – ${l.tvaMention}`, true)
     ]),
     new Paragraph({ children: [new PageBreak()] }),
@@ -336,7 +336,8 @@ function contrat() {
     article('Article 6 – Engagements du Client'),
     puce('Permettre l\'accès au lieu d\'intervention aux horaires convenus ; fournir les produits d\'entretien, le matériel, l\'eau et l\'électricité nécessaires.'),
     puce('S\'assurer qu\'aucun animal n\'est présent pendant l\'intervention : la Prestataire n\'intervient pas en présence d\'animaux.'),
-    puce('Signaler toute consigne utile à la sécurité (zones fragiles, consignes particulières).'),
+    puce('Signaler toute consigne utile à la sécurité (zones fragiles, besoins particuliers de l\'enfant).'),
+    puce('Soutien scolaire : fournir le matériel scolaire de l\'enfant et informer la Prestataire de ses difficultés et de ses objectifs.'),
     article('Article 7 – Annulation, absence, report'),
     ...conditionsAnnulation.map(puce),
     article('Article 8 – Résiliation'),
@@ -345,7 +346,7 @@ function contrat() {
     p('Lorsque le contrat est conclu à distance ou au domicile du Client, le Client consommateur dispose d\'un délai de 14 jours à compter de la signature pour se rétracter, sans motif ni pénalité, au moyen du formulaire joint ou de toute déclaration dénuée d\'ambiguïté.'),
     ...blocRetractationAnticipee(),
     article('Article 10 – Responsabilité et assurance'),
-    p('La Prestataire est responsable des dommages causés par sa faute dans l\'exécution de la prestation. Tout dommage doit être signalé sans délai, de préférence dans les 48 heures.'),
+    p('La Prestataire est responsable des dommages causés par sa faute dans l\'exécution de la prestation. Tout dommage doit être signalé sans délai, de préférence dans les 48 heures. Le soutien scolaire est une aide au travail de l\'enfant et ne garantit pas de résultats scolaires.'),
     ...blocMediationAssurance(),
     article('Article 11 – Données personnelles'),
     p('Les informations recueillies (coordonnées, consignes, renseignements de l\'annexe) servent uniquement à l\'exécution du contrat et à la facturation. Elles sont conservées pendant la durée du contrat puis le temps des obligations comptables, et les renseignements de santé éventuels sont détruits à la fin du contrat. Le Client peut exercer ses droits (accès, rectification, effacement…) à l\'adresse ' + c.email + '.'),
@@ -361,6 +362,11 @@ function contrat() {
     article('Personnes à contacter en cas d\'urgence'),
     champ('Nom, lien, téléphone', ''),
     champ('Nom, lien, téléphone', ''),
+    article('Soutien scolaire'),
+    champ('Prénom et classe de chaque enfant', ''),
+    champ('', ''),
+    champ('Matières, difficultés et objectifs', ''),
+    champ('Adulte présent ou joignable pendant la séance', ''),
     article('Accès au logement'),
     champ('Code, clés, consignes d\'accès', ''),
     ...formulaireRetractation()

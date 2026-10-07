@@ -366,9 +366,6 @@ function enrichConfig(raw) {
     }
     return service;
   });
-  // Champ « Âge ou classe de l'enfant » du formulaire : seulement si le soutien scolaire est proposé
-  cfg.contact.champClasse = cfg.services.some((s) => s.slug === 'soutien-scolaire');
-
   // Un seul service proposé : le site le présente directement, sans liste ni
   // page « Services » (menu, accueil, fil d'Ariane, formulaire, simulateur).
   // Dès qu'un deuxième service est réactivé, la présentation en liste revient.
