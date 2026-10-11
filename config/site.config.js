@@ -113,7 +113,7 @@ module.exports = {
     // Plages où le téléphone est décroché (affichées sous le numéro).
     horairesTelephone: "9h – 12h et 15h – 17h",
     // Congés annuels (affichés sous les horaires). "" pour masquer.
-    conges: "Congés annuels : une semaine en juillet, août, septembre et octobre, deux semaines en décembre.",
+    conges: "Congés annuels : une semaine en juillet, en août et en octobre, et deux semaines en décembre.",
     // Frais appliqués hors de la zone d'intervention (affichés sous la zone).
     fraisDeplacement: "Au-delà de cette zone, des frais de déplacement sont indiqués sur le devis.",
     // Prise de rendez-vous en ligne (Calendly, Cal.com, Google Agenda…) :
