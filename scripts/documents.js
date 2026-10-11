@@ -276,7 +276,7 @@ function devis() {
       new TableRow({ children: [enTete('Désignation', w[0]), enTete('Quantité (h ou forfait)', w[1]), enTete('Prix unitaire', w[2]), enTete('Montant', w[3])] }),
       ligneVide(), ligneVide(), ligneVide(),
       ligneTotal('Frais de déplacement (au-delà de la zone d\'intervention)', false),
-      ligneTotal('Majorations éventuelles (jours fériés, intervention urgente)', false),
+      ligneTotal('Majorations éventuelles (intervention urgente)', false),
       ligneTotal('Remise (tarif dégressif, plusieurs enfants)', false),
       ligneTotal(`TOTAL NET À PAYER – ${l.tvaMention}`, true)
     ]),

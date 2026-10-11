@@ -101,7 +101,7 @@ module.exports = {
     },
     horaires: [
       { jours: "Lundi – Vendredi", heures: "8h00 – 18h00" },
-      { jours: "Samedi – Dimanche", heures: "Indisponible" }
+      { jours: "Week-end et jours fériés", heures: "Indisponible" }
     ],
     // Mêmes horaires, lisibles par Google (données structurées) et reportés
     // dans les conditions générales. Jours en anglais (norme schema.org).
@@ -109,7 +109,7 @@ module.exports = {
       { jours: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], ouverture: "08:00", fermeture: "18:00" }
     ],
     // Phrase reprise dans les conditions générales et les modèles de contrat.
-    horairesIntervention: "du lundi au vendredi, de 8 h à 18 h, hors congés annuels",
+    horairesIntervention: "du lundi au vendredi, de 8 h à 18 h, hors jours fériés et congés annuels",
     // Plages où le téléphone est décroché (affichées sous le numéro).
     horairesTelephone: "9h – 12h et 15h – 17h",
     // Congés annuels (affichés sous les horaires). "" pour masquer.
@@ -425,7 +425,7 @@ module.exports = {
       "Pas d'acompte pour les prestations habituelles ; un acompte peut être demandé pour une prestation importante ou nécessitant une réservation spécifique.",
       "Annulation sans frais jusqu'à 24 h avant l'intervention ; une première annulation tardive reste sans frais. En cas d'annulations tardives répétées, ou d'annulation tardive ou d'absence ayant entraîné un déplacement inutile, 1 heure de prestation peut être facturée.",
       "Frais de déplacement au-delà de la zone d'intervention, indiqués sur le devis.",
-      "Majorations éventuelles (jours fériés, interventions urgentes) et tarif dégressif pour plusieurs enfants : indiqués sur le devis.",
+      "Majorations éventuelles (interventions urgentes) et tarif dégressif pour plusieurs enfants : indiqués sur le devis.",
       "Tarifs indicatifs, révisés une fois par an et communiqués à l'avance."
     ],
     // Encart sur le crédit d'impôt « services à la personne ».
